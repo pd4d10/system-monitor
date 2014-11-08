@@ -1,0 +1,11 @@
+{
+  "manifest_version": 2,
+  "name": "CPU Monitor",
+  "version": "0.1",
+  "background": {
+    "scripts": ["eventPage.js"],
+    "persistent": false
+  },
+  "permissions": ["system.cpu"],
+  "browser_action": {}
+}
