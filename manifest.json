@@ -3,9 +3,9 @@
   "name": "CPU Monitor",
   "version": "0.3",
   "background": {
-    "scripts": ["eventPage.js"]
+    "scripts": ["background.js"]
   },
-  "permissions": ["system.cpu"],
+  "permissions": ["system.cpu", "system.memory", "power"],
   "browser_action": {},
   "icons": {
     "16": "16.png",
