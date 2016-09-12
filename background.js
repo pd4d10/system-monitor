@@ -1,6 +1,9 @@
 (function () {
   // Draw browser action icon with HTML5 canvas
   var SIZE = 19 // Icon size
+  var TIMEOUT = 100
+  var STROKE_COLOR = '#1874cd'
+  var FILL_COLOR = '#4876ff'
   var canvas = document.createElement('canvas')
   canvas.width = SIZE
   canvas.height = SIZE
@@ -52,7 +55,7 @@
       })
       c.lineTo(SIZE, SIZE)
       c.lineWidth = 2
-      c.fillStyle = '#4876ff'
+      c.fillStyle = FILL_COLOR
       c.fill()
 
       // Draw border
@@ -63,15 +66,17 @@
       c.lineTo(SIZE, 0)
       c.closePath()
       c.lineWidth = 2
-      c.strokeStyle = '#1874cd'
+      c.strokeStyle = STROKE_COLOR
       c.stroke()
 
       chrome.browserAction.setIcon({
         imageData: c.getImageData(0, 0, SIZE, SIZE)
       })
+
+      setTimeout(draw, TIMEOUT)
     })
   }
 
   // Draw icon
-  setInterval(draw, 1000)
+  setTimeout(draw, TIMEOUT)
 })()
