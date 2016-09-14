@@ -1,7 +1,7 @@
 (function () {
   // Draw browser action icon with HTML5 canvas
   var SIZE = 19 // Icon size
-  var TIMEOUT = 100
+  var TIMEOUT = 1000
   var STROKE_COLOR = '#1874cd'
   var FILL_COLOR = '#4876ff'
   var canvas = document.createElement('canvas')
@@ -17,17 +17,53 @@
   }
 
   // Initialize
+  var initialized = false
   var cpuInfo0
   var numOfProcessors
   var modelName
 
-  chrome.system.cpu.getInfo(function (info) {
-    cpuInfo0 = info
-    numOfProcessors = info.numOfProcessors
-    modelName = info.modelName
-  })
+  /**
+   * draw cpu canvas
+   * @param cpuIdleArray
+   */
+  var drawCanvas = function (cpuIdleArray) {
+    c.clearRect(0, 0, SIZE, SIZE)
+
+    // Draw CPU usage change
+    c.beginPath()
+    c.moveTo(0, SIZE)
+    cpuIdleArray.forEach(function (cpu, i) {
+      c.lineTo(i, cpu * SIZE)
+    })
+    c.lineTo(SIZE, SIZE)
+    c.lineWidth = 2
+    c.fillStyle = FILL_COLOR
+    c.fill()
+
+    // Draw border
+    c.beginPath()
+    c.moveTo(0, 0)
+    c.lineTo(0, SIZE)
+    c.lineTo(SIZE, SIZE)
+    c.lineTo(SIZE, 0)
+    c.closePath()
+    c.lineWidth = 2
+    c.strokeStyle = STROKE_COLOR
+    c.stroke()
+  }
 
   var draw = function () {
+    if (!initialized) {
+      chrome.system.cpu.getInfo(function (info) {
+        cpuInfo0 = info
+        numOfProcessors = info.numOfProcessors
+        modelName = info.modelName
+      })
+      initialized = true
+      setTimeout(draw, TIMEOUT)
+      return
+    }
+
     // Get Idle CPU percent
     chrome.system.cpu.getInfo(function (info) {
       var cpuIdle = 0
@@ -45,29 +81,7 @@
         title: modelName + '\nUsage: ' + (100 - cpuIdle * 100).toFixed(0) + '%'
       })
 
-      c.clearRect(0, 0, SIZE, SIZE)
-
-      // Draw CPU usage change
-      c.beginPath()
-      c.moveTo(0, SIZE)
-      cpuIdleArray.forEach(function (cpu, i) {
-        c.lineTo(i, cpu * SIZE)
-      })
-      c.lineTo(SIZE, SIZE)
-      c.lineWidth = 2
-      c.fillStyle = FILL_COLOR
-      c.fill()
-
-      // Draw border
-      c.beginPath()
-      c.moveTo(0, 0)
-      c.lineTo(0, SIZE)
-      c.lineTo(SIZE, SIZE)
-      c.lineTo(SIZE, 0)
-      c.closePath()
-      c.lineWidth = 2
-      c.strokeStyle = STROKE_COLOR
-      c.stroke()
+      drawCanvas(cpuIdleArray)
 
       chrome.browserAction.setIcon({
         imageData: c.getImageData(0, 0, SIZE, SIZE)
@@ -78,5 +92,5 @@
   }
 
   // Draw icon
-  setTimeout(draw, TIMEOUT)
+  draw()
 })()

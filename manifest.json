@@ -8,8 +8,6 @@
   "permissions": ["system.cpu", "system.memory", "power"],
   "browser_action": {},
   "icons": {
-    "16": "16.png",
-    "48": "48.png",
     "128": "128.png"
   }
 }
