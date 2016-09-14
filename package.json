@@ -1,0 +1,19 @@
+{
+  "name": "cpu-monitor",
+  "version": "1.0.0",
+  "description": "A Chrome extension. Add an icon to extension bar to monitor CPU usage.",
+  "main": "background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pd4d10/cpu-monitor.git"
+  },
+  "author": "pd4d10 <pd4d10@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pd4d10/cpu-monitor/issues"
+  },
+  "homepage": "https://github.com/pd4d10/cpu-monitor#readme"
+}
