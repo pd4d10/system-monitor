@@ -1,10 +1,19 @@
-import { zipWith } from 'lodash'
+import { zipWith, pick } from 'lodash'
 import { compose } from 'redux'
 import { TIMEOUT } from '../config'
 
 const SET_CPU = 'SET_CPU'
 
-const minus = (a, b) => a - b
+const minus = (a, b = {
+  user: 0,
+  kernel: 0,
+  total: 0,
+}) => ({
+  user: a.user - b.user,
+  kernel: a.kernel - b.kernel,
+  total: a.total - b.total,
+})
+
 
 export default function reducer(state = {
   modelName: '',
@@ -15,23 +24,15 @@ export default function reducer(state = {
       return {
         ...state,
         modelName: action.modelName,
-        processors: zipWith(action.processors, state.processors, minus),
+        processors: zipWith(action.processors, state.oldProcessors, minus),
+        oldProcessors: action.processors,
       }
     default:
       return state
   }
 }
 
-const parseCPUProcessInfo = ({
-  usage: {
-    user,
-    kernel,
-    total,
-  }
-}) => ({
-  user: user / total,
-  kernel: kernel / total,
-})
+const parseCPUProcessInfo = ({ usage }) => pick(usage, ['user', 'kernel', 'total'])
 
 export const getCPUInfo = () => dispatch => {
   chrome.system.cpu.getInfo(({
@@ -44,6 +45,6 @@ export const getCPUInfo = () => dispatch => {
       processors: processors.map(parseCPUProcessInfo)
     })
 
-    setTimeout(compose(dispatch, getCPUInfo), TIMEOUT)
+    //setTimeout(compose(dispatch, getCPUInfo), TIMEOUT)
   })
 }

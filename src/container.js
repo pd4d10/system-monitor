@@ -1,35 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getCPUInfo } from './reducer'
-
-const CPU = ({
-  archName,
-  arr
-}) => (
-  <div>
-    <h3>{archName}</h3>
-    <ul>
-      {arr.map(ratio => <li>{ratio}</li>)}
-    </ul>
-  </div>
-)
-
-const DataCPU = connect(
-  state => ({
-    archName: state.archName,
-    arr: state.cpu,
-  })
-)(CPU)
+import { getCPUInfo } from './reducer/cpu'
+import { getMemoryInfo } from './reducer/memory'
+import CPUComponent from './component/cpu'
+import MemoryComponent from './component/memory'
 
 class Root extends Component {
-  componentDidMount() {
-    this.props.dispatch(getCPUInfo())
-  }
-
   render() {
     return (
       <div>
-        <DataCPU />
+        <div onClick={
+        () => {
+          this.props.dispatch(getCPUInfo())
+          this.props.dispatch(getMemoryInfo())
+        }
+        }>trigger</div>
+        <CPUComponent />
+        <MemoryComponent />
       </div>
     )
   }

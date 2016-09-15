@@ -30,6 +30,6 @@ export const getMemoryInfo = () => dispatch => {
       available,
     })
     
-    setTimeout(compose(dispatch, getMemoryInfo), TIMEOUT)
+    //setTimeout(compose(dispatch, getMemoryInfo), TIMEOUT)
   })
 }
