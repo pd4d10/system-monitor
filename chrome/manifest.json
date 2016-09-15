@@ -5,7 +5,12 @@
   "background": {
     "scripts": ["background.js"]
   },
-  "permissions": ["system.cpu", "system.memory", "power"],
+  "permissions": [
+    "system.cpu",
+    "system.memory",
+    "system.storage",
+    "power"
+  ],
   "browser_action": {
     "default_popup": "popup.html"
   },
