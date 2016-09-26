@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
+import style from './cpu.css'
 
-const CPU = ({
+const CPUComponent = ({
   modelName,
   processors,
 }) => (
@@ -35,7 +36,7 @@ const CPU = ({
   </div>
 )
 
-CPU.propTypes = {
+CPUComponent.propTypes = {
   modelName: PropTypes.string.isRequired,
   processors: PropTypes.arrayOf(PropTypes.Object).isRequired,
 }
@@ -50,4 +51,4 @@ const mapStateToProps = ({
   processors,
 })
 
-export default connect(mapStateToProps)(CPU)
+export default connect(mapStateToProps)(CPUComponent)
