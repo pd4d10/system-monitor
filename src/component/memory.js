@@ -1,34 +1,22 @@
-import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
+import React, { Component, PropTypes } from 'react'
 
-const Memory = ({
-  total,
-  available,
-  ratio,
-}) => (
-  <div>
-    {total} / 
-    {available} /
-    {ratio}
-  </div>
-)
+const GEGA = 1024 * 1024 * 102
 
-Memory.propTypes = {
+export default class MemoryComponent extends PureComponent {
+  render() {
+    const { total, available, ratio } = this.props
+
+    return (
+      <div>
+        {total} /
+        {available} /
+        {ratio}
+      </div>
+    )
+  }
+}
+
+MemoryComponent.propTypes = {
   total: PropTypes.number.isRequired,
   available: PropTypes.number.isRequired,
 }
-
-const GEGA = 1024 * 1024 * 1024
-
-const mapStateToProps = ({
-  memory: {
-    total,
-    available,
-  }
-}) => ({
-  total: `${total / GEGA}G`,
-  available: `${available / GEGA}G`,
-  ratio: available / total,
-})
-
-export default connect(mapStateToProps)(Memory)
