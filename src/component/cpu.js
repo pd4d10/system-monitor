@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import style from './cpu.css'
 
 export default class CPUComponent extends PureComponent {
