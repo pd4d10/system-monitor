@@ -75,6 +75,10 @@ export default class Container extends Component {
     return fill(Array(num), {})
   }
 
+  giga(byte) {
+    return byte / (1024 * 1024 * 1024)
+  }
+
   componentDidMount() {
     this.updateStatePeriod()
   }
@@ -88,7 +92,10 @@ export default class Container extends Component {
           modelName={cpu.modelName}
           processors={processors}
         />
-        <MemoryComponent />
+        <MemoryComponent
+          total={this.giga(memory.capacity)}
+          available={this.giga(memory.availableCapacity)}
+        />
       </div>
     )
   }

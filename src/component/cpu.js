@@ -6,28 +6,21 @@ export default class CPUComponent extends PureComponent {
     const { modelName, processors } = this.props
 
     return (
-      <div>
+      <div className={style.cpu}>
         <h3>{modelName}</h3>
         <ul>
           {
             processors.map(({ user, kernel, total }) => {
               const userStyle = {
-                float: 'left',
-                background: '#f00',
                 width: `${user / total * 100}%`,
-                height: '10px',
-                transition: 'width 0.5s'
               }
               const kernelStyle = {
-                float: 'left',
-                background: '#00f',
                 width: `${kernel / total * 100}%`,
-                height: '10px'
               }
               return (
-                <li style={{width: '100px',background: '#0f0'}}>
-                  <div style={userStyle}></div>
-                  <div style={kernelStyle}></div>
+                <li className={style.li}>
+                  <div className={style.user} style={userStyle}></div>
+                  <div className={style.kernel} style={kernelStyle}></div>
                 </li>
               )
             })

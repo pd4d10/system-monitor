@@ -21,6 +21,10 @@ export default {
       { test: /\.css$/, loader: 'style!css?modules!postcss' }
     ],
   },
+  postcss: [
+    require('postcss-cssnext'),
+    require('postcss-browser-reporter'),
+  ],
   plugins: [
     new webpack.HotModuleReplacementPlugin()
   ],

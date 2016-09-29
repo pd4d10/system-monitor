@@ -1,0 +1,28 @@
+.cpu {
+  & h3 {
+    font-size: 20px;
+  }
+  & ul {
+    padding-left: 0;
+  }
+  & li {
+    display: block;
+    width: 100px;
+    overflow: hidden;
+    background: #eee;
+  }
+}
+
+.user {
+                  float: left;
+                background: #f00;
+                height: 10px;
+                transition: width 0.5s;
+}
+
+.kernel {
+                  float: left;
+                background: #00f;
+                height: 10px;
+                transition: width 0.5s;
+}
