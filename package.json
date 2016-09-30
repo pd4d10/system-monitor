@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack -dw",
-    "build": "webpack -p"
+    "build": "rm -r chrome/dist; webpack -p; zip -r extension.zip ./chrome"
   },
   "repository": {
     "type": "git",
