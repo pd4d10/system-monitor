@@ -14,7 +14,7 @@ canvas.height = SIZE
 const context = canvas.getContext('2d')
 
 // color config
-var config = {
+const config = {
   cpu: {
     border: '#1874cd',
     background: '#4876ff',
@@ -26,7 +26,7 @@ var config = {
 }
 
 /**
- * 
+ *
  * @param type
  */
 const getInfo = type => new Promise((resolve, reject) => {
@@ -40,22 +40,22 @@ const getInfo = type => new Promise((resolve, reject) => {
 })
 
 // define an array to storage idle CPU percent
-var cpuIdleArray = Array(SIZE)
-for (var i = 0; i < cpuIdleArray.length; i++) {
+const cpuIdleArray = Array(SIZE)
+for (let i = 0; i < cpuIdleArray.length; i++) {
   cpuIdleArray[i] = 1
 }
 
-var memoryIdleArray = Array(SIZE)
-for (var i = 0; i < memoryIdleArray.length; i++) {
+const memoryIdleArray = Array(SIZE)
+for (let i = 0; i < memoryIdleArray.length; i++) {
   memoryIdleArray[i] = 1
 }
 
 // Initialize
-var initialized = false
-var cpuInfo0
-var memInfo0
-var numOfProcessors
-var modelName
+let initialized = false
+let cpuInfo0
+let memInfo0
+let numOfProcessors
+let modelName
 
 const clear = () => {
   context.clearRect(0, 0, SIZE, SIZE)
@@ -124,8 +124,8 @@ const draw = () => {
 
   Promise.all(['cpu', 'memory'].map(getInfo))
     .then(([info, mem]) => {
-      var cpuIdle = 0
-      for (var i = 0; i < numOfProcessors; i++) {
+      let cpuIdle = 0
+      for (let i = 0; i < numOfProcessors; i++) {
         cpuIdle += (info.processors[i].usage.idle - cpuInfo0.processors[i].usage.idle) /
           (info.processors[i].usage.total - cpuInfo0.processors[i].usage.total) /
           numOfProcessors
@@ -134,9 +134,9 @@ const draw = () => {
       cpuIdleArray.push(cpuIdle)
       cpuIdleArray.shift()
 
-      memInfo0 = mem
-      memoryIdleArray.push(mem.availableCapacity / mem.capacity)
-      memoryIdleArray.shift()
+      // memInfo0 = mem
+      // memoryIdleArray.push(mem.availableCapacity / mem.capacity)
+      // memoryIdleArray.shift()
 
       setTitle({
         title: `${modelName}\nUsage: ${(100 - cpuIdle * 100).toFixed(0)}%`
@@ -145,7 +145,7 @@ const draw = () => {
       clear()
       drawBackground(config.cpu.background, cpuIdleArray)
       drawBorder(config.cpu.border)
-      drawLine(config.memory.border, memoryIdleArray)
+      // drawLine(config.memory.border, memoryIdleArray)
 
       setIcon({
         imageData: context.getImageData(0, 0, SIZE, SIZE)

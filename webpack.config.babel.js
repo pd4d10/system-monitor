@@ -1,14 +1,13 @@
 import webpack from 'webpack'
 
 export default {
-  entry: [
-    // 'webpack-dev-server/client?http://0.0.0.0:3000', // WebpackDevServer host and port
-    // 'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
-    './src',
-  ],
+  entry: {
+    background: ['babel-polyfill', './src/background'],
+    popup: ['babel-polyfill', './src/index'],
+  },
   output: {
     path: './chrome/dist',
-    filename: 'popup.js',
+    filename: '[name].js',
   },
   resolve: ['', '.js', '.json'],
   module: {
