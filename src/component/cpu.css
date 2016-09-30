@@ -5,18 +5,17 @@
 }
 
 .cpu {
-  & h3 {
+  & p {
     font-weight: normal;
     font-size: 14px;
-  }
-  & ul {
-    padding-left: 0;
   }
   & .tip {
     overflow: hidden;
     & li {
+      line-height: 12px;
+      font-size: 14px;
       float: left;
-      line-height: 16px;
+      margin-right: 8px;
       &.user::before {
         background: var(--cpu-user);
       }
@@ -25,8 +24,10 @@
       }
       &::before {
         content: '';
-        width: 16px;
-        height: 16px;
+        vertical-align: top;
+        width: 12px;
+        height: 12px;
+        margin-right: 2px;
         display: inline-block;
       }
     }
@@ -34,7 +35,7 @@
   & .data {
     & li {
       display: block;
-      width: 200px;
+      width: 220px;
       overflow: hidden;
       margin-bottom: 4px;
       border: 1px solid var(--cpu-border);

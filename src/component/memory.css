@@ -3,9 +3,12 @@
   --memory-usage: #198e88;
 }
 
+.tip {
+  font-size: 14px;
+}
 .data {
   display: block;
-  width: 200px;
+  width: 220px;
   overflow: hidden;
   margin-bottom: 4px;
   border: 1px solid var(--memory-border);

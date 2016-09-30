@@ -3,6 +3,7 @@ import { map, zipWith, fill } from 'lodash'
 import { compose, pick } from 'lodash/fp'
 import CPUComponent from './component/cpu'
 import MemoryComponent from './component/memory'
+import style from './container.css'
 
 export default class Container extends Component {
   constructor() {
@@ -76,7 +77,7 @@ export default class Container extends Component {
   }
 
   giga(byte) {
-    return byte / (1024 * 1024 * 1024)
+    return (byte / (1024 * 1024 * 1024)).toFixed(2)
   }
 
   componentDidMount() {
@@ -87,7 +88,7 @@ export default class Container extends Component {
     const { cpu, processors, memory } = this.state
 
     return (
-      <div style={{ width: '220px' }}>
+      <div className={style.container}>
         <CPUComponent
           modelName={cpu.modelName}
           processors={processors}
