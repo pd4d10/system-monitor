@@ -2,7 +2,7 @@
   "name": "cpu-monitor",
   "version": "1.0.0",
   "description": "A Chrome extension. Add an icon to extension bar to monitor CPU usage.",
-  "main": "background.js",
+  "main": "index.js",
   "scripts": {
     "start": "webpack -dw",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -32,10 +32,6 @@
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-hot-loader": "^3.0.0-beta.5",
-    "react-redux": "^4.4.5",
-    "redux": "^3.5.2",
-    "redux-logger": "^2.6.1",
-    "redux-thunk": "^2.1.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1",

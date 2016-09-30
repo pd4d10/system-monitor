@@ -1,28 +1,54 @@
+:root {
+  --cpu-user: #6687e7;
+  --cpu-kernel: #3a5eca;
+  --cpu-border: #b3c3f3;
+}
+
 .cpu {
   & h3 {
-    font-size: 20px;
+    font-weight: normal;
+    font-size: 14px;
   }
   & ul {
     padding-left: 0;
   }
-  & li {
-    display: block;
-    width: 100px;
+  & .tip {
     overflow: hidden;
-    background: #eee;
+    & li {
+      float: left;
+      line-height: 16px;
+      &.user::before {
+        background: var(--cpu-user);
+      }
+      &.kernel::before {
+        background: var(--cpu-kernel);
+      }
+      &::before {
+        content: '';
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+      }
+    }
   }
-}
-
-.user {
-                  float: left;
-                background: #f00;
-                height: 10px;
-                transition: width 0.5s;
-}
-
-.kernel {
-                  float: left;
-                background: #00f;
-                height: 10px;
-                transition: width 0.5s;
+  & .data {
+    & li {
+      display: block;
+      width: 200px;
+      overflow: hidden;
+      margin-bottom: 4px;
+      border: 1px solid var(--cpu-border);
+      & div {
+        float: left;
+        height: 10px;
+        transition: width 0.5s;
+      }
+      & .user {
+        background: var(--cpu-user);
+      }
+      & .kernel {
+        background: var(--cpu-kernel);
+      }
+    }
+  }
 }

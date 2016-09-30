@@ -87,7 +87,7 @@ export default class Container extends Component {
     const { cpu, processors, memory } = this.state
 
     return (
-      <div>
+      <div style={{ width: '220px' }}>
         <CPUComponent
           modelName={cpu.modelName}
           processors={processors}

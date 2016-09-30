@@ -1,0 +1,16 @@
+:root {
+  --memory-border: #8fd8d4;
+  --memory-usage: #198e88;
+}
+
+.data {
+  display: block;
+  width: 200px;
+  overflow: hidden;
+  margin-bottom: 4px;
+  border: 1px solid var(--memory-border);
+  & .usage {
+    height: 10px;
+    background: var(--memory-usage);
+  }
+}
