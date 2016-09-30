@@ -4,8 +4,9 @@
   "description": "A Chrome extension. Add an icon to extension bar to monitor CPU usage.",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack -dw",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack -p"
   },
   "repository": {
     "type": "git",
@@ -20,15 +21,16 @@
   "devDependencies": {
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
+    "babel-polyfill": "^6.16.0",
     "babel-preset-latest": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
     "css-loader": "^0.24.0",
     "lodash": "^4.15.0",
     "postcss": "^5.0.21",
-    "postcss-loader": "^0.11.1",
     "postcss-browser-reporter": "^0.5.0",
     "postcss-cssnext": "^2.5.2",
+    "postcss-loader": "^0.11.1",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-hot-loader": "^3.0.0-beta.5",

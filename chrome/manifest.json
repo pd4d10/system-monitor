@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
   "name": "System Monitor",
-  "version": "0.3",
+  "version": "1.0.0",
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["dist/background.js"]
   },
   "permissions": [
     "system.cpu",
