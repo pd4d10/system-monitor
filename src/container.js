@@ -3,6 +3,7 @@ import { map, zipWith, fill } from 'lodash'
 import { compose, pick } from 'lodash/fp'
 import CPUComponent from './component/cpu'
 import MemoryComponent from './component/memory'
+import StorageComponent from './component/storage'
 import style from './container.css'
 
 export default class Container extends Component {
@@ -17,6 +18,7 @@ export default class Container extends Component {
         capacity: 1,
         availableCapacity: 1
       },
+      storage: []
     }
   }
 
@@ -38,8 +40,8 @@ export default class Container extends Component {
    * set state period
    */
   updateStatePeriod() {
-    Promise.all(map(['cpu', 'memory'], this.getSystemInfo))
-    .then(([cpu, memory]) => {
+    Promise.all(map(['cpu', 'memory', 'storage'], this.getSystemInfo))
+    .then(([cpu, memory, storage]) => {
       const num = cpu.numOfProcessors
       const data = cpu.processors
       const oldData = this.state.cpu.processors || this.getDefaultArray(num)
@@ -49,6 +51,7 @@ export default class Container extends Component {
         cpu,
         memory,
         processors,
+        storage,
       })
     })
 
@@ -85,7 +88,7 @@ export default class Container extends Component {
   }
 
   render() {
-    const { cpu, processors, memory } = this.state
+    const { cpu, processors, memory, storage } = this.state
 
     return (
       <div className={style.container}>
@@ -96,6 +99,9 @@ export default class Container extends Component {
         <MemoryComponent
           total={this.giga(memory.capacity)}
           available={this.giga(memory.availableCapacity)}
+        />
+        <StorageComponent
+          storage={storage}
         />
       </div>
     )
