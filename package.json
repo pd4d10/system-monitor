@@ -1,7 +1,7 @@
 {
-  "name": "cpu-monitor",
+  "name": "system-monitor",
   "version": "1.0.0",
-  "description": "A Chrome extension. Add an icon to extension bar to monitor CPU usage.",
+  "description": "Monitor CPU and memory status in Chrome and Opera.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
