@@ -1,6 +1,6 @@
-import CleanWebpackPlugin from 'clean-webpack-plugin'
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
-export default {
+module.exports = {
   entry: {
     background: ['babel-polyfill', './src/background'],
     popup: ['babel-polyfill', './src/index'],

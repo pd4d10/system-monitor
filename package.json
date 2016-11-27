@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack -dw",
-    "build": "webpack -p; zip -r extension.zip ./chrome",
+    "build": "webpack --config webpack.production.js -p; zip -r extension.zip ./chrome",
     "test": "eslint src && stylelint src/**/*.css"
   },
   "repository": {
