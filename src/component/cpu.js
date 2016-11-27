@@ -24,8 +24,8 @@ export default class CPUComponent extends Component {
               }
               return (
                 <li className={style.li} key={index}>
-                  <div className={style.kernel} style={kernelStyle}></div>
-                  <div className={style.user} style={userStyle}></div>
+                  <div className={style.kernel} style={kernelStyle} />
+                  <div className={style.user} style={userStyle} />
                 </li>
               )
             })

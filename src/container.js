@@ -16,9 +16,9 @@ export default class Container extends Component {
       processors: [],
       memory: {
         capacity: 1,
-        availableCapacity: 1
+        availableCapacity: 1,
       },
-      storage: []
+      storage: [],
     }
   }
 
@@ -68,7 +68,7 @@ export default class Container extends Component {
     return {
       user: a.user - b.user,
       kernel: a.kernel - b.kernel,
-      total: a.total - b.total
+      total: a.total - b.total,
     }
   }
 

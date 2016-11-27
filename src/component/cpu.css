@@ -9,19 +9,24 @@
     font-weight: normal;
     font-size: 14px;
   }
+
   & .tip {
     overflow: hidden;
+
     & li {
       line-height: 12px;
       font-size: 14px;
       float: left;
       margin-right: 8px;
+
       &.user::before {
         background: var(--cpu-user);
       }
+
       &.kernel::before {
         background: var(--cpu-kernel);
       }
+
       &::before {
         content: '';
         vertical-align: top;
@@ -32,6 +37,7 @@
       }
     }
   }
+
   & .data {
     & li {
       display: block;
@@ -39,14 +45,17 @@
       overflow: hidden;
       margin-bottom: 4px;
       border: 1px solid var(--cpu-border);
+
       & div {
         float: left;
         height: 10px;
         transition: width 0.5s;
       }
+
       & .user {
         background: var(--cpu-user);
       }
+
       & .kernel {
         background: var(--cpu-kernel);
       }

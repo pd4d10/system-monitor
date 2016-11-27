@@ -1,4 +1,3 @@
-import webpack from 'webpack'
 import CleanWebpackPlugin from 'clean-webpack-plugin'
 
 export default {
