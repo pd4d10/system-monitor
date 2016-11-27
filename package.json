@@ -1,11 +1,11 @@
 {
   "name": "system-monitor",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Monitor CPU and memory status in Chrome and Opera.",
   "main": "index.js",
   "scripts": {
     "start": "webpack -dw",
-    "build": "webpack --config webpack.production.js -p; zip -r extension.zip ./chrome",
+    "build": "webpack --config webpack.config.production.js -p; zip -r extension.zip ./chrome",
     "test": "eslint src && stylelint src/**/*.css"
   },
   "repository": {

@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "System Monitor",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "background": {
     "scripts": ["dist/background.js"]
   },
