@@ -1,4 +1,5 @@
 import webpack from 'webpack'
+import CleanWebpackPlugin from 'clean-webpack-plugin'
 
 export default {
   entry: {
@@ -17,7 +18,10 @@ export default {
         loader: 'babel',
         exclude: /node_modules/,
       },
-      { test: /\.css$/, loader: 'style!css?modules!postcss' }
+      {
+        test: /\.css$/,
+        loader: 'style!css?modules!postcss',
+      },
     ],
   },
   postcss: [
@@ -25,6 +29,6 @@ export default {
     require('postcss-browser-reporter'),
   ],
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new CleanWebpackPlugin(['chrome/dist']),
   ],
 }

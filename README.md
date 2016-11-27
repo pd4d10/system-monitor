@@ -14,3 +14,7 @@ https://chrome.google.com/webstore/detail/system-monitor/ecmlflnkenbdjfocclindon
 git clone git@github.com:pd4d10/system-monitor.git
 npm start
 ```
+
+## Lisence
+
+MIT

@@ -4,20 +4,19 @@
   "description": "Monitor CPU and memory status in Chrome and Opera.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack -dw",
-    "build": "rm -r chrome/dist; webpack -p; zip -r extension.zip ./chrome"
+    "build": "webpack -p; zip -r extension.zip ./chrome"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pd4d10/cpu-monitor.git"
+    "url": "git+https://github.com/pd4d10/system-monitor.git"
   },
   "author": "pd4d10 <pd4d10@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pd4d10/cpu-monitor/issues"
+    "url": "https://github.com/pd4d10/system-monitor/issues"
   },
-  "homepage": "https://github.com/pd4d10/cpu-monitor#readme",
+  "homepage": "https://github.com/pd4d10/system-monitor#readme",
   "devDependencies": {
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
@@ -25,7 +24,13 @@
     "babel-preset-latest": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
+    "clean-webpack-plugin": "^0.1.14",
     "css-loader": "^0.24.0",
+    "eslint": "^3.11.0",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.1.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.6.0",
     "lodash": "^4.15.0",
     "postcss": "^5.0.21",
     "postcss-browser-reporter": "^0.5.0",
@@ -35,8 +40,28 @@
     "react-dom": "^15.3.1",
     "react-hot-loader": "^3.0.0-beta.5",
     "style-loader": "^0.13.1",
+    "stylelint": "^7.6.0",
+    "stylelint-config-standard": "^14.0.0",
     "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.15.1",
-    "whatwg-fetch": "^1.0.0"
+    "webpack-dev-server": "^1.15.1"
+  },
+  "babel": {
+    "presets": [
+      "stage-0",
+      "latest",
+      "react"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "airbnb",
+    "rules": {
+      "semi": [
+        "error",
+        "never"
+      ]
+    }
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard"
   }
 }
