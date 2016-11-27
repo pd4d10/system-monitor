@@ -3,7 +3,7 @@ import style from './cpu.css'
 
 export default class CPUComponent extends Component {
   render() {
-    const { modelName, processors } = this.props
+    const { modelName, usage } = this.props
 
     return (
       <div className={style.cpu}>
@@ -15,12 +15,12 @@ export default class CPUComponent extends Component {
         </ul>
         <ul className={style.data}>
           {
-            processors.map(({ user, kernel, total }, index) => {
+            usage.map(({ user, kernel, total }, index) => {
               const userStyle = {
-                width: `${user / total * 100}%`,
+                width: `${(user / total) * 100}%`,
               }
               const kernelStyle = {
-                width: `${kernel / total * 100}%`,
+                width: `${(kernel / total) * 100}%`,
               }
               return (
                 <li className={style.li} key={index}>
@@ -38,5 +38,5 @@ export default class CPUComponent extends Component {
 
 CPUComponent.propTypes = {
   modelName: PropTypes.string.isRequired,
-  processors: PropTypes.array.isRequired,
+  usage: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
