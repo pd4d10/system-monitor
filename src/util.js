@@ -27,10 +27,11 @@ function minus(a, b = {
 }
 
 export async function trigger(cb, processorsOld = []) {
-  const [cpu, memory] = await Promise.all([
-    getInfo('cpu'),
-    getInfo('memory'),
-  ])
+  const [cpu, memory, storage] = await Promise.all(map(getInfo)([
+    'cpu',
+    'memory',
+    'storage',
+  ]))
 
   const processors = map(get('usage'))(cpu.processors)
 
@@ -43,7 +44,13 @@ export async function trigger(cb, processorsOld = []) {
       usage: cpuUsage,
     },
     memory,
+    storage,
   })
 
   setTimeout(() => trigger(cb, processors), TIMEOUT)
+}
+
+// convert byte to GB
+export function giga(byte) {
+  return (byte / (1024 * 1024 * 1024)).toFixed(2)
 }

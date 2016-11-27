@@ -1,15 +1,11 @@
 import React, { Component } from 'react'
-import { trigger } from './util'
+import { trigger, giga } from './util'
 import CPUComponent from './component/cpu'
 import MemoryComponent from './component/memory'
 import StorageComponent from './component/storage'
 import style from './container.css'
 
 export default class Container extends Component {
-  static giga(byte) {
-    return (byte / (1024 * 1024 * 1024)).toFixed(2)
-  }
-
   constructor() {
     super()
     this.state = {
@@ -26,12 +22,7 @@ export default class Container extends Component {
   }
 
   componentDidMount() {
-    trigger(({ cpu, memory }) => {
-      this.setState({
-        cpu,
-        memory,
-      })
-    })
+    trigger(this.setState.bind(this))
   }
 
   render() {
@@ -44,8 +35,8 @@ export default class Container extends Component {
           usage={cpu.usage}
         />
         <MemoryComponent
-          total={Container.giga(memory.capacity)}
-          available={Container.giga(memory.availableCapacity)}
+          total={giga(memory.capacity)}
+          available={giga(memory.availableCapacity)}
         />
         <StorageComponent
           storage={storage}

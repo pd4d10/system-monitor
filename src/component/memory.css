@@ -6,12 +6,14 @@
 .tip {
   font-size: 14px;
 }
+
 .data {
   display: block;
   width: 220px;
   overflow: hidden;
   margin-bottom: 4px;
   border: 1px solid var(--memory-border);
+
   & .usage {
     height: 10px;
     background: var(--memory-usage);
