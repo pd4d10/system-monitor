@@ -2,6 +2,9 @@
 
 Monitor CPU and memory status in Chrome and Opera.
 
+![](assets/0.png)
+![](assets/1.png)
+
 ## Install
 
 Install it from Chrome Web Store:
