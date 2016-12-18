@@ -3,7 +3,7 @@
   "name": "System Monitor",
   "version": "1.1.0",
   "background": {
-    "scripts": ["dist/background.js"]
+    "scripts": ["dist/vendor.js", "dist/background.js"]
   },
   "permissions": [
     "system.cpu",

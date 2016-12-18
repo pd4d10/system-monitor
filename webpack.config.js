@@ -1,9 +1,11 @@
+const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
   entry: {
-    background: ['babel-polyfill', './src/background'],
-    popup: ['babel-polyfill', './src/index'],
+    background: ['./src/background'],
+    popup: ['./src/index'],
   },
   output: {
     path: './chrome/dist',
@@ -29,5 +31,7 @@ module.exports = {
   ],
   plugins: [
     new CleanWebpackPlugin(['chrome/dist']),
+    new BundleAnalyzerPlugin(),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
   ],
 }

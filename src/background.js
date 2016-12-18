@@ -1,4 +1,3 @@
-import { fill } from 'lodash'
 import { trigger } from './util'
 
 const SIZE = 19 // Icon size
@@ -22,8 +21,16 @@ const config = {
   },
 }
 
+function fill(count) {
+  const arr = []
+  for (let i = 0; i < count; i += 1) {
+    arr.push(1)
+  }
+  return arr
+}
+
 const { setTitle, setIcon } = chrome.browserAction
-const cpuIdleArray = fill(Array(SIZE), 1)
+const cpuIdleArray = fill(SIZE)
 
 function clear() {
   context.clearRect(0, 0, SIZE, SIZE)

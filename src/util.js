@@ -38,11 +38,10 @@ export async function trigger(cb, processorsOld = []) {
   // calculate CPU usage
   const cpuUsage = zipWith(minus, processors, processorsOld)
 
+  cpu.usage = cpuUsage
+
   cb({
-    cpu: {
-      ...cpu,
-      usage: cpuUsage,
-    },
+    cpu,
     memory,
     storage,
   })
