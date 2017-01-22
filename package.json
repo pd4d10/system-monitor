@@ -1,6 +1,6 @@
 {
   "name": "system-monitor",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Monitor CPU and memory status in Chrome and Opera.",
   "main": "index.js",
   "scripts": {
