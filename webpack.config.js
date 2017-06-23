@@ -1,37 +1,54 @@
+const path = require('path')
 const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
   entry: {
-    background: ['./src/background'],
-    popup: ['./src/index'],
+    background: './src/background',
+    popup: './src/index',
   },
   output: {
-    path: './chrome/dist',
+    path: path.resolve('chrome/dist'),
     filename: '[name].js',
   },
-  resolve: ['', '.js', '.json'],
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.json']
+  },
+  devtool: 'source-map',
   module: {
-    loaders: [
+    rules: [
       {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader',
+      },
+      {
+        enforce: 'pre',
         test: /\.js$/,
-        loader: 'babel',
-        exclude: /node_modules/,
+        loader: 'source-map-loader',
       },
       {
         test: /\.css$/,
-        loader: 'style!css?modules!postcss',
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: loader => [
+                require('postcss-modules')(),
+                require('postcss-cssnext')(),
+                require('postcss-browser-reporter')(),
+              ]
+            }
+          }
+        ]
       },
     ],
   },
-  postcss: [
-    require('postcss-cssnext'),
-    require('postcss-browser-reporter'),
-  ],
   plugins: [
     new CleanWebpackPlugin(['chrome/dist']),
-    new BundleAnalyzerPlugin(),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+    new webpack.optimize.CommonsChunkPlugin('vendor'),
   ],
 }

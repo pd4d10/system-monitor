@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import { trigger, giga } from './util'
 import CPUComponent from './component/cpu'
 import MemoryComponent from './component/memory'
 import StorageComponent from './component/storage'
 import style from './container.css'
 
-export default class Container extends Component {
+export default class Container extends React.Component {
   constructor() {
     super()
     this.state = {

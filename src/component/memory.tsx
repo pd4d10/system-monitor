@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import * as React from 'react'
 import style from './memory.css'
 
 const MemoryComponent = ({ total, available }) => {
@@ -18,8 +18,8 @@ const MemoryComponent = ({ total, available }) => {
 }
 
 MemoryComponent.propTypes = {
-  total: PropTypes.string.isRequired,
-  available: PropTypes.string.isRequired,
+  total: React.PropTypes.string.isRequired,
+  available: React.PropTypes.string.isRequired,
 }
 
 export default MemoryComponent

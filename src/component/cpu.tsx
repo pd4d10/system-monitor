@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import * as React from 'react'
 import style from './cpu.css'
 
 const CPUComponent = ({ modelName, usage }) => (
@@ -32,8 +32,8 @@ const CPUComponent = ({ modelName, usage }) => (
 
 
 CPUComponent.propTypes = {
-  modelName: PropTypes.string.isRequired,
-  usage: PropTypes.arrayOf(PropTypes.object).isRequired,
+  modelName: React.PropTypes.string.isRequired,
+  usage: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
 }
 
 export default CPUComponent
