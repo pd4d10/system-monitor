@@ -21,7 +21,8 @@ const config = {
   },
 }
 
-function fill(count) {
+// 3 => [1, 1, 1]
+function fill(count: number) {
   const arr = []
   for (let i = 0; i < count; i += 1) {
     arr.push(1)
@@ -48,7 +49,7 @@ function drawBorder(color) {
   context.stroke()
 }
 
-function drawBackground(color, arr) {
+function drawBackground(color: string, arr: number[]) {
   context.beginPath()
   context.moveTo(0, SIZE)
   arr.forEach((cpu, i) => {

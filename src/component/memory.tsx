@@ -1,5 +1,5 @@
 import * as React from 'react'
-import style from './memory.css'
+import './memory.less'
 
 const MemoryComponent = ({ total, available }) => {
   const memoryStyle = {
@@ -7,11 +7,11 @@ const MemoryComponent = ({ total, available }) => {
   }
 
   return (
-    <div>
+    <div className="memory">
       <h2>Memory</h2>
-      <p className={style.tip}>{`total: ${total}G / available: ${available}G`}</p>
-      <div className={style.data}>
-        <div className={style.usage} style={memoryStyle} />
+      <p>{`total: ${total}G / available: ${available}G`}</p>
+      <div className="usage">
+        <div style={memoryStyle} />
       </div>
     </div>
   )

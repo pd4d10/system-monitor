@@ -27,22 +27,11 @@ module.exports = {
         loader: 'source-map-loader',
       },
       {
-        test: /\.css$/,
+        test: /\.less$/,
         use: [
           'style-loader',
-          {
-            loader: 'css-loader',
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: loader => [
-                require('postcss-modules')(),
-                require('postcss-cssnext')(),
-                require('postcss-browser-reporter')(),
-              ]
-            }
-          }
+          'css-loader',
+          'less-loader',
         ]
       },
     ],

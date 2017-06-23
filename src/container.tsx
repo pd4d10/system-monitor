@@ -3,22 +3,19 @@ import { trigger, giga } from './util'
 import CPUComponent from './component/cpu'
 import MemoryComponent from './component/memory'
 import StorageComponent from './component/storage'
-import style from './container.css'
+import './container.less'
 
 export default class Container extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      cpu: {
-        modelName: '',
-        usage: [],
-      },
-      memory: {
-        capacity: 1,
-        availableCapacity: 1,
-      },
-      storage: [],
-    }
+  state = {
+    cpu: {
+      modelName: '',
+      usage: [],
+    },
+    memory: {
+      capacity: 1,
+      availableCapacity: 1,
+    },
+    storage: [],
   }
 
   componentDidMount() {
@@ -29,7 +26,7 @@ export default class Container extends React.Component {
     const { cpu, memory, storage } = this.state
 
     return (
-      <div className={style.container}>
+      <div className="container">
         <CPUComponent
           modelName={cpu.modelName}
           usage={cpu.usage}

@@ -1,30 +1,28 @@
-:root {
-  --cpu-user: #6687e7;
-  --cpu-kernel: #3a5eca;
-  --cpu-border: #b3c3f3;
-}
+@user: #6687e7;
+@kernel: #3a5eca;
+@border: #b3c3f3;
 
 .cpu {
-  & p {
+  p {
     font-weight: normal;
     font-size: 14px;
   }
 
-  & .tip {
+  .tips {
     overflow: hidden;
 
-    & li {
+    li {
       line-height: 12px;
       font-size: 14px;
       float: left;
       margin-right: 8px;
 
       &.user::before {
-        background: var(--cpu-user);
+        background: @user;
       }
 
       &.kernel::before {
-        background: var(--cpu-kernel);
+        background: @kernel;
       }
 
       &::before {
@@ -38,26 +36,26 @@
     }
   }
 
-  & .data {
+  .usage {
     & li {
       display: block;
       width: 220px;
       overflow: hidden;
       margin-bottom: 4px;
-      border: 1px solid var(--cpu-border);
+      border: 1px solid @border;
 
-      & div {
+      div {
         float: left;
         height: 10px;
         transition: width 0.5s;
       }
 
-      & .user {
-        background: var(--cpu-user);
+      .user {
+        background: @user;
       }
 
-      & .kernel {
-        background: var(--cpu-kernel);
+      .kernel {
+        background: @kernel;
       }
     }
   }
