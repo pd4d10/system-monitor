@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack -w",
     "build": "webpack --config webpack.config.production.js -p; zip -r extension.zip ./chrome",
-    "test": "eslint src && stylelint src/**/*.css"
+    "test": ""
   },
   "repository": {
     "type": "git",
