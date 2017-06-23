@@ -1,7 +1,12 @@
 import { h } from 'preact'
 import './memory.less'
 
-const MemoryComponent = ({ total, available }) => {
+interface Info {
+  total: number
+  available: number
+}
+
+const MemoryComponent = ({ total, available }: Info) => {
   const memoryStyle = {
     width: `${100 * (1 - (available / total))}%`,
   }

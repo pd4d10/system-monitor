@@ -7,7 +7,7 @@ const BORDER_WIDTH = 2
 const canvas = document.createElement('canvas')
 canvas.width = SIZE
 canvas.height = SIZE
-const context = canvas.getContext('2d')
+const context: CanvasRenderingContext2D = canvas.getContext('2d')
 
 // Color config
 const config = {
@@ -37,7 +37,7 @@ function clear() {
   context.clearRect(0, 0, SIZE, SIZE)
 }
 
-function drawBorder(color) {
+function drawBorder(color: string) {
   context.beginPath()
   context.moveTo(0, 0)
   context.lineTo(0, SIZE)

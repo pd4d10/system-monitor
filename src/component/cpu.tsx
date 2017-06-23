@@ -1,16 +1,27 @@
 import { h } from 'preact'
 import './cpu.less'
 
-const CPUComponent = ({ modelName, usage }) => (
+interface Usage {
+  user: number
+  kernel: number
+  total: number
+}
+
+interface Info {
+  modelName: string
+  usage: Usage[]
+}
+
+const CPUComponent = (info: Info) => (
   <div className="cpu">
     <h2>CPU</h2>
-    <p>{modelName}</p>
+    <p>{info.modelName}</p>
     <ul className="tips">
       <li className="kernel">kernel</li>
       <li className="user">user</li>
     </ul>
     <ul className="usage">
-      {usage.map(({ user, kernel, total }, index) => {
+      {info.usage.map(({ user, kernel, total }, index) => {
         const userStyle = {
           width: `${(user / total) * 100}%`,
         }
@@ -18,7 +29,7 @@ const CPUComponent = ({ modelName, usage }) => (
           width: `${(kernel / total) * 100}%`,
         }
         return (
-          <li key={index}>
+          <li key={index.toString()}>
             <div className="kernel" style={kernelStyle} />
             <div className="user" style={userStyle} />
           </li>
