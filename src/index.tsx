@@ -1,5 +1,4 @@
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+import { h, render } from 'preact'
 import Container from './container'
 
-ReactDOM.render(<Container />, document.getElementById('app'))
+render(<Container />, document.getElementById('app'))

@@ -1,11 +1,11 @@
-import * as React from 'react'
+import { h, Component } from 'preact'
 import { trigger, giga } from './util'
 import CPUComponent from './component/cpu'
 import MemoryComponent from './component/memory'
 import StorageComponent from './component/storage'
 import './container.less'
 
-export default class Container extends React.Component {
+export default class Container extends Component {
   state = {
     cpu: {
       modelName: '',

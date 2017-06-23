@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { h } from 'preact'
 import './memory.less'
 
 const MemoryComponent = ({ total, available }) => {
@@ -15,11 +15,6 @@ const MemoryComponent = ({ total, available }) => {
       </div>
     </div>
   )
-}
-
-MemoryComponent.propTypes = {
-  total: React.PropTypes.string.isRequired,
-  available: React.PropTypes.string.isRequired,
 }
 
 export default MemoryComponent

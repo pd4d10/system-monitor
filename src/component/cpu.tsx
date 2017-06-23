@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { h } from 'preact'
 import './cpu.less'
 
 const CPUComponent = ({ modelName, usage }) => (
@@ -27,11 +27,5 @@ const CPUComponent = ({ modelName, usage }) => (
     </ul>
   </div>
 )
-
-
-CPUComponent.propTypes = {
-  modelName: React.PropTypes.string.isRequired,
-  usage: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-}
 
 export default CPUComponent

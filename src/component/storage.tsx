@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { h } from 'preact'
 import { giga } from '../util'
 
 const StorageComponent = ({ storage }) => (
@@ -11,9 +11,5 @@ const StorageComponent = ({ storage }) => (
     }
   </div>
 )
-
-StorageComponent.propTypes = {
-  storage: React.PropTypes.arrayOf(React.PropTypes.object.isRequired).isRequired,
-}
 
 export default StorageComponent
