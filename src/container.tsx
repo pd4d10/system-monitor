@@ -60,6 +60,11 @@ export default class Container extends Component<undefined, undefined> {
     })
   }
 
+  handleOpen = (e: MouseEvent) => {
+    e.preventDefault()
+    window.open(chrome.runtime.getURL('popup.html?window=1'), undefined, `width=246,height=400`)
+  }
+
   render() {
     const { cpu, memory, storage } = this.state
     return (
@@ -78,6 +83,7 @@ export default class Container extends Component<undefined, undefined> {
         {/*<BatteryComponent
           {...this.state.battery}
         />*/}
+        {location.search === '' && <a href="#" onClick={this.handleOpen}>Open as new window</a>}
       </div>
     )
   }
