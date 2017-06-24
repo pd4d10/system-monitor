@@ -3,7 +3,7 @@ import { trigger, giga } from './util'
 import CPUComponent from './component/cpu'
 import MemoryComponent from './component/memory'
 import StorageComponent from './component/storage'
-import BatteryComponent from './component/battery'
+// import BatteryComponent from './component/battery'
 import './container.less'
 
 export default class Container extends Component<undefined, undefined> {
@@ -32,20 +32,20 @@ export default class Container extends Component<undefined, undefined> {
     // Trigger CPU, memory and storage status update periodly
     trigger(this.setState.bind(this))
     // Battery
-    if (typeof navigator.getBattery !== 'function') {
-      return
-    }
-    this.setState({
-      battery: {
-        ...this.state.battery,
-        isSupported: true,
-      }
-    })
-    this._battery = await navigator.getBattery()
-    this.handleBatteryChange()
-    ;['chargingchange', 'levelchange', 'chargingtimechange', 'dischargingtimechange'].forEach(event => {
-      this._battery.addEventListener(event, this.handleBatteryChange)
-    })
+    // if (typeof navigator.getBattery !== 'function') {
+    //   return
+    // }
+    // this.setState({
+    //   battery: {
+    //     ...this.state.battery,
+    //     isSupported: true,
+    //   }
+    // })
+    // this._battery = await navigator.getBattery()
+    // this.handleBatteryChange()
+    // ;['chargingchange', 'levelchange', 'chargingtimechange', 'dischargingtimechange'].forEach(event => {
+    //   this._battery.addEventListener(event, this.handleBatteryChange)
+    // })
   }
 
   handleBatteryChange = () => {
@@ -75,9 +75,9 @@ export default class Container extends Component<undefined, undefined> {
         <StorageComponent
           storage={storage}
         />
-        <BatteryComponent
+        {/*<BatteryComponent
           {...this.state.battery}
-        />
+        />*/}
       </div>
     )
   }
