@@ -32,6 +32,7 @@ const CPUComponent = (info: Info) => (
             color: '#3a5eca'
           },
           {
+            offset: kernel / total,
             ratio: user / total,
             color: '#6687e7'
           }
