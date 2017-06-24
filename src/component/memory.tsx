@@ -17,7 +17,7 @@ const MemoryComponent = ({ total, available }: Info) => {
   const usages = [
     {
       color: '#198e88',
-      ratio: available / total
+      ratio: 1 - available / total
     }
   ]
 
