@@ -59,7 +59,6 @@ export default class Container extends Component<undefined, undefined> {
 
   render() {
     const { cpu, memory, storage } = this.state
-
     return (
       <div className="container">
         <CPUComponent

@@ -1,4 +1,5 @@
 import { h } from 'preact'
+import Tip from './tip'
 import { giga } from '../util'
 
 const StorageComponent = ({ storage }) => (
@@ -6,7 +7,7 @@ const StorageComponent = ({ storage }) => (
     <h2>Storage</h2>
     {
       storage.map(({ name, capacity, id }) => (
-        <p style={{fontSize: '14px'}} key={id}>{`${name || 'Unknown'} / ${giga(capacity)}G`}</p>
+        <Tip key={id}>{`${name || 'Unknown'} / ${giga(capacity)}G`}</Tip>
       ))
     }
   </div>

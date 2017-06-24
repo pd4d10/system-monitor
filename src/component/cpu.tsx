@@ -1,4 +1,6 @@
 import { h } from 'preact'
+import Bar from './bar'
+import Tip from './tip'
 import './cpu.less'
 
 interface Usage {
@@ -12,27 +14,30 @@ interface Info {
   usage: Usage[]
 }
 
+const borderColor = '#b3c3f3'
+
 const CPUComponent = (info: Info) => (
   <div className="cpu">
     <h2>CPU</h2>
-    <p>{info.modelName}</p>
+    <Tip>{info.modelName}</Tip>
     <ul className="tips">
       <li className="kernel">kernel</li>
       <li className="user">user</li>
     </ul>
     <ul className="usage">
       {info.usage.map(({ user, kernel, total }, index) => {
-        const userStyle = {
-          width: `${(user / total) * 100}%`,
-        }
-        const kernelStyle = {
-          width: `${(kernel / total) * 100}%`,
-        }
+        const usages = [
+          {
+            ratio: kernel / total,
+            color: '#3a5eca'
+          },
+          {
+            ratio: user / total,
+            color: '#6687e7'
+          }
+        ]
         return (
-          <li key={index.toString()}>
-            <div className="kernel" style={kernelStyle} />
-            <div className="user" style={userStyle} />
-          </li>
+          <Bar borderColor={borderColor} usages={usages} />
         )
       })}
     </ul>

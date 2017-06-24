@@ -1,23 +1,31 @@
 import { h } from 'preact'
-import './memory.less'
+import Bar from './bar'
+import Tip from './tip'
 
 interface Info {
   total: number
   available: number
 }
 
+const borderColor = '#8fd8d4'
+
 const MemoryComponent = ({ total, available }: Info) => {
   const memoryStyle = {
     width: `${100 * (1 - (available / total))}%`,
   }
 
+  const usages = [
+    {
+      color: '#198e88',
+      ratio: available / total
+    }
+  ]
+
   return (
     <div className="memory">
       <h2>Memory</h2>
-      <p>{`total: ${total}G / available: ${available}G`}</p>
-      <div className="usage">
-        <div style={memoryStyle} />
-      </div>
+      <Tip>{`total: ${total}G / available: ${available}G`}</Tip>
+      <Bar borderColor={borderColor} usages={usages} />
     </div>
   )
 }

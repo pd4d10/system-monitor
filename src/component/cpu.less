@@ -3,11 +3,6 @@
 @border: #b3c3f3;
 
 .cpu {
-  p {
-    font-weight: normal;
-    font-size: 14px;
-  }
-
   .tips {
     overflow: hidden;
 
@@ -32,30 +27,6 @@
         height: 12px;
         margin-right: 2px;
         display: inline-block;
-      }
-    }
-  }
-
-  .usage {
-    & li {
-      display: block;
-      width: 220px;
-      overflow: hidden;
-      margin-bottom: 4px;
-      border: 1px solid @border;
-
-      div {
-        float: left;
-        height: 10px;
-        transition: width 0.5s;
-      }
-
-      .user {
-        background: @user;
-      }
-
-      .kernel {
-        background: @kernel;
       }
     }
   }

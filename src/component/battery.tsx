@@ -1,5 +1,4 @@
 import { h } from 'preact'
-// import './cpu.less'
 
 interface Info {
   isSupported: boolean
@@ -9,13 +8,14 @@ interface Info {
   dischargingTime: number
 }
 
-const BatteryComponent = (info: Info) => info.isSupported && (
+const BatteryComponent = (info: Info) => info.isSupported ? (
   <div className="battery">
+    <div>{JSON.stringify(info)}</div>
     <div>{info.isCharging}</div>
     <div>{info.level}</div>
     <div>{info.chargingtime}</div>
     <div>{info.dischargingTime}</div>
   </div>
-)
+) : null
 
 export default BatteryComponent
