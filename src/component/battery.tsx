@@ -1,4 +1,5 @@
 import { h } from 'preact'
+import Bar from './bar'
 
 interface Info {
   isSupported: boolean
@@ -10,11 +11,13 @@ interface Info {
 
 const BatteryComponent = (info: Info) => info.isSupported ? (
   <div className="battery">
-    <div>{JSON.stringify(info)}</div>
-    <div>{info.isCharging}</div>
-    <div>{info.level}</div>
-    <div>{info.chargingtime}</div>
-    <div>{info.dischargingTime}</div>
+    <h2>Battery</h2>
+    <Bar usages={[
+      {
+        color: '#f00',
+        ratio: info.level
+      }
+    ]} borderColor='#f00' />
   </div>
 ) : null
 

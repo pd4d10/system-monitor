@@ -31,31 +31,34 @@ export default class Container extends Component<undefined, undefined> {
   async componentDidMount() {
     // Trigger CPU, memory and storage status update periodly
     trigger(this.setState.bind(this))
-     // Battery
+    // Battery
     if (typeof navigator.getBattery !== 'function') {
       return
     }
-    this.setBattery('isSupported', true)
-    this._battery = await navigator.getBattery()
-    this._battery.addEventListener('chargingchange', this.handleChargingChange)
-    this._battery.addEventListener('levelchange', this.handleLevelChange)
-    this._battery.addEventListener('chargingtimechange', this.handleChargingTimeChange)
-    this._battery.addEventListener('dischargingtimechange', this.handleDischargingTimeChange);
-  }
-
-  setBattery = (key: string, value) => {
     this.setState({
       battery: {
         ...this.state.battery,
-        [key]: value,
+        isSupported: true,
       }
+    })
+    this._battery = await navigator.getBattery()
+    this.handleBatteryChange()
+    ;['chargingchange', 'levelchange', 'chargingtimechange', 'dischargingtimechange'].forEach(event => {
+      this._battery.addEventListener(event, this.handleBatteryChange)
     })
   }
 
-  handleChargingChange = () => this.setBattery('isCharging', this._battery.charging)
-  handleLevelChange = () => this.setBattery('level', this._battery.level)
-  handleChargingTimeChange = () => this.setBattery('chargingTime', this._battery.chargingTime)
-  handleDischargingTimeChange = () => this.setBattery('dischargingTime', this._battery.dischargingTime)
+  handleBatteryChange = () => {
+    this.setState({
+      battery: {
+        ...this.state.battery,
+        isCharging: this._battery.charging,
+        level: this._battery.level,
+        chargingTime: this._battery.chargingTime,
+        dischargingTime: this._battery.dischargingTime,
+      }
+    })
+  }
 
   render() {
     const { cpu, memory, storage } = this.state
