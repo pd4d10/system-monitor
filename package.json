@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack -w",
-    "build": "webpack --config webpack.config.production.js -p; zip -r extension.zip ./chrome",
+    "build": "webpack --config webpack.config.production.js -p",
+    "package": "cp LICENSE chrome; zip -r extension.zip ./chrome; rm chrome/LICENSE",
     "test": ""
   },
   "repository": {
