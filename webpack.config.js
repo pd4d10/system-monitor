@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -28,16 +29,19 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'less-loader',
-        ]
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [
+            "css-loader",
+            "less-loader"
+          ]
+        })
       },
     ],
   },
   plugins: [
     new CleanWebpackPlugin(['chrome/dist']),
+    new ExtractTextPlugin("style.css"),
     new webpack.optimize.CommonsChunkPlugin('vendor'),
   ],
 }
