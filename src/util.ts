@@ -1,4 +1,4 @@
-import { map, get, zipWith } from 'lodash/fp'
+import * as zipWith from 'lodash/zipWith'
 
 const TIMEOUT = 1000
 
@@ -28,16 +28,16 @@ function minus(a, b = {
 
 //  chrome.system.cpu.CpuInfo | chrome.system.memory.MemoryInfo | chrome.system.storage.StorageUnitInfo[]
 export async function trigger(cb, processorsOld = []) {
-  const [cpu, memory, storage] = await Promise.all(map(getInfo)([
+  const [cpu, memory, storage] = await Promise.all([
     'cpu',
     'memory',
     'storage',
-  ]))
+  ].map(getInfo)
 
-  const processors = map(get('usage'))(cpu.processors)
+  const processors = cpu.processors.map(({ usage }) => usage)
 
   // calculate CPU usage
-  const cpuUsage = zipWith(minus, processors, processorsOld)
+  const cpuUsage = zipWith(processors, processorsOld, minus)
 
   cpu.usage = cpuUsage
 
