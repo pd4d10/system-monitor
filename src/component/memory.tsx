@@ -24,7 +24,7 @@ const MemoryComponent = ({ total, available }: Info) => {
   return (
     <div className="memory">
       <h2>Memory</h2>
-      <Tip>{`total: ${total}G / available: ${available}G`}</Tip>
+      <Tip>Available: {available}GB/{total}GB</Tip>
       <Bar borderColor={borderColor} usages={usages} />
     </div>
   )

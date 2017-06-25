@@ -83,7 +83,7 @@ export default class Container extends Component<undefined, undefined> {
         {/*<BatteryComponent
           {...this.state.battery}
         />*/}
-        {location.search === '' && <a href="#" onClick={this.handleOpen}>Open as new window</a>}
+        {location.search === '' && <a href="#" style={{ outline: 'none' }} onClick={this.handleOpen}>Open as new window</a>}
       </div>
     )
   }
