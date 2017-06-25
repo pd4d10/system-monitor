@@ -7,7 +7,7 @@ const StorageComponent = ({ storage }) => (
     <h2>Storage</h2>
     {
       storage.map(({ name, capacity, id }) => (
-        <Tip key={id}>{`${name || 'Unknown'} / ${giga(capacity)}G`}</Tip>
+        <Tip key={id}>{`${name || 'Unknown'} / ${giga(capacity)}GB`}</Tip>
       ))
     }
   </div>

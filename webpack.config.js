@@ -7,6 +7,7 @@ module.exports = {
   entry: {
     background: './src/background',
     popup: './src/index',
+    sentry: './src/sentry',
   },
   output: {
     path: path.resolve('chrome/dist'),
@@ -42,6 +43,5 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['chrome/dist']),
     new ExtractTextPlugin("style.css"),
-    new webpack.optimize.CommonsChunkPlugin('vendor'),
   ],
 }

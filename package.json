@@ -20,7 +20,8 @@
   "homepage": "https://github.com/pd4d10/system-monitor#readme",
   "dependencies": {
     "lodash": "^4.17.2",
-    "preact": "^8.1.0"
+    "preact": "^8.1.0",
+    "raven-js": "^3.16.0"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.47",
