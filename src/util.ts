@@ -32,7 +32,7 @@ export async function trigger(cb, processorsOld = []) {
     'cpu',
     'memory',
     'storage',
-  ].map(getInfo)
+  ].map(getInfo))
 
   const processors = cpu.processors.map(({ usage }) => usage)
 
