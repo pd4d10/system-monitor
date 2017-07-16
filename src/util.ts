@@ -1,56 +1,74 @@
-import * as zipWith from 'lodash/zipWith'
+import { zipWith } from 'lodash'
 
 const TIMEOUT = 1000
 
-function getInfo(type: 'cpu' | 'memory' | 'storage') {
-  return new Promise((resolve, reject) => {
-    try {
-      chrome.system[type].getInfo(resolve)
-    } catch (err) {
-      reject(err)
-    }
-  })
-}
+type CpuInfo = chrome.system.cpu.CpuInfo
+type ProcessorUsage = chrome.system.cpu.ProcessorUsage
+export type MemoryInfo = chrome.system.memory.MemoryInfo
+type StorageUnitInfo = chrome.system.storage.StorageUnitInfo
 
-function minus(a, b = {
-  user: 0,
-  kernel: 0,
-  idle: 0,
-  total: 0,
-}) {
-  return {
-    user: a.user - b.user,
-    kernel: a.kernel - b.kernel,
-    idle: a.idle - b.idle,
-    total: a.total - b.total,
+export interface ParsedCpuInfo {
+    modelName: string
+    usage: ProcessorUsage[]
   }
+
+// Convert byte to GB
+export function toGiga(byte: number) {
+  return (byte / (1024 * 1024 * 1024)).toFixed(2)
 }
 
-//  chrome.system.cpu.CpuInfo | chrome.system.memory.MemoryInfo | chrome.system.storage.StorageUnitInfo[]
-export async function trigger(cb, processorsOld = []) {
-  const [cpu, memory, storage] = await Promise.all([
-    'cpu',
-    'memory',
-    'storage',
-  ].map(getInfo))
+function minus(
+  usage: ProcessorUsage,
+  oldUsage: ProcessorUsage = {
+    user: 0,
+    kernel: 0,
+    idle: 0,
+    total: 0,
+  }
+) {
+  const data: ProcessorUsage = {
+    user: usage.user - oldUsage.user,
+    kernel: usage.kernel - oldUsage.kernel,
+    idle: usage.idle - oldUsage.idle,
+    total: usage.total - oldUsage.total,
+  }
+  return data
+}
 
+export interface State {
+  cpu: ParsedCpuInfo
+  memory: MemoryInfo
+  storage: StorageUnitInfo[]
+}
+
+export async function trigger(
+  cb: (data: State) => void,
+  processorsOld: ProcessorUsage[] = []
+) {
+  const cpuP = new Promise<CpuInfo>(resolve =>
+    chrome.system.cpu.getInfo(resolve)
+  )
+  const memoryP = new Promise<MemoryInfo>(resolve =>
+    chrome.system.memory.getInfo(resolve)
+  )
+  const storageP = new Promise<StorageUnitInfo[]>(resolve =>
+    chrome.system.storage.getInfo(resolve)
+  )
+
+  const [cpu, memory, storage] = await Promise.all([cpuP, memoryP, storageP])
   const processors = cpu.processors.map(({ usage }) => usage)
 
-  // calculate CPU usage
-  const cpuUsage = zipWith(processors, processorsOld, minus)
-
-  cpu.usage = cpuUsage
-
-  cb({
-    cpu,
+  const cpuUsage = zipWith<ProcessorUsage>(processors, processorsOld, minus)
+  const data: State = {
+    cpu: {
+      modelName: cpu.modelName,
+      usage: cpuUsage,
+    },
     memory,
     storage,
-  })
+  }
+
+  cb(data)
 
   setTimeout(() => trigger(cb, processors), TIMEOUT)
-}
-
-// convert byte to GB
-export function giga(byte: number) {
-  return (byte / (1024 * 1024 * 1024)).toFixed(2)
 }

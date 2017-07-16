@@ -1,5 +1,6 @@
 {
   "name": "system-monitor",
+  "private": true,
   "version": "1.3.0",
   "description": "Monitor CPU and memory status in Chrome and Opera.",
   "main": "index.js",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@types/chrome": "^0.0.47",
+    "@types/lodash": "^4.14.69",
     "awesome-typescript-loader": "^3.1.3",
     "clean-webpack-plugin": "^0.1.14",
     "css-loader": "^0.28.4",

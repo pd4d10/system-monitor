@@ -61,10 +61,8 @@ function drawBackground(color: string, arr: number[]) {
   context.fill()
 }
 
-function draw({
-  cpu: { modelName, numOfProcessors, usage },
-}) {
-  const idle = usage.reduce((a, b) => a + (b.idle / b.total), 0) / numOfProcessors
+function draw({ cpu: { modelName, numOfProcessors, usage } }) {
+  const idle = usage.reduce((a, b) => a + b.idle / b.total, 0) / numOfProcessors
   cpuIdleArray.push(idle)
   cpuIdleArray.shift()
 

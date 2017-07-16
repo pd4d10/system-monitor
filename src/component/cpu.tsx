@@ -1,22 +1,10 @@
 import { h } from 'preact'
+import { ParsedCpuInfo } from '../util'
 import Bar from './bar'
 import Tip from './tip'
 import './cpu.less'
 
-interface Usage {
-  user: number
-  kernel: number
-  total: number
-}
-
-interface Info {
-  modelName: string
-  usage: Usage[]
-}
-
-const borderColor = '#b3c3f3'
-
-const CPUComponent = (info: Info) => (
+const CPUComponent = (info: ParsedCpuInfo) => (
   <div className="cpu">
     <h2>CPU</h2>
     <Tip>{info.modelName}</Tip>
@@ -38,7 +26,7 @@ const CPUComponent = (info: Info) => (
           }
         ]
         return (
-          <Bar borderColor={borderColor} usages={usages} />
+          <Bar borderColor="#b3c3f3" usages={usages} />
         )
       })}
     </ul>
