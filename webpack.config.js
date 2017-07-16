@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -14,9 +14,9 @@ module.exports = {
     filename: '[name].js',
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.json']
+    extensions: ['.ts', '.tsx', '.js', '.json'],
   },
-  devtool: 'source-map',
+  // devtool: 'source-map',
   module: {
     rules: [
       {
@@ -31,17 +31,14 @@ module.exports = {
       {
         test: /\.less$/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            "css-loader",
-            "less-loader"
-          ]
-        })
+          fallback: 'style-loader',
+          use: ['css-loader', 'less-loader'],
+        }),
       },
     ],
   },
   plugins: [
     new CleanWebpackPlugin(['chrome/dist']),
-    new ExtractTextPlugin("style.css"),
+    new ExtractTextPlugin('style.css'),
   ],
 }
