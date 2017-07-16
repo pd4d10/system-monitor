@@ -1,4 +1,5 @@
 import zipWith from 'lodash-es/zipWith'
+import mergeWith from 'lodash-es/mergeWith'
 
 const TIMEOUT = 1000
 
@@ -41,6 +42,20 @@ export interface State {
   storage: StorageUnitInfo[]
 }
 
+function getCpuUsage(
+  processors: ProcessorUsage[],
+  processorsOld: ProcessorUsage[]
+) {
+  return zipWith<
+    ProcessorUsage
+  >(
+    processors,
+    processorsOld,
+    (usage: ProcessorUsage, oldUsage: ProcessorUsage) =>
+      mergeWith(usage, oldUsage, (a, b) => a - b)
+  )
+}
+
 export async function trigger(
   cb: (data: State) => void,
   processorsOld: ProcessorUsage[] = []
@@ -58,7 +73,7 @@ export async function trigger(
   const [cpu, memory, storage] = await Promise.all([cpuP, memoryP, storageP])
   const processors = cpu.processors.map(({ usage }) => usage)
 
-  const cpuUsage = zipWith<ProcessorUsage>(processors, processorsOld, minus)
+  const cpuUsage = getCpuUsage(processors, processorsOld)
   const data: State = {
     cpu: {
       modelName: cpu.modelName,
