@@ -9,16 +9,20 @@ interface Info {
   dischargingTime: number
 }
 
-const BatteryComponent = (info: Info) => info.isSupported ? (
-  <div className="battery">
-    <h2>Battery</h2>
-    <Bar usages={[
-      {
-        color: '#f00',
-        ratio: info.level
-      }
-    ]} borderColor='#f00' />
-  </div>
-) : null
+const BatteryComponent = (info: Info) =>
+  info.isSupported
+    ? <div className="battery">
+        <h2>Battery</h2>
+        <Bar
+          usages={[
+            {
+              color: '#f00',
+              ratio: info.level,
+            },
+          ]}
+          borderColor="#f00"
+        />
+      </div>
+    : null
 
 export default BatteryComponent

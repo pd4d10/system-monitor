@@ -8,7 +8,7 @@
     "start": "webpack -w",
     "build": "webpack --config webpack.config.production.js -p",
     "package": "cp LICENSE chrome; zip -r extension.zip ./chrome; rm chrome/LICENSE",
-    "precommit": "prettier --write --no-semi --single-quote --trailing-comma es5 src/**/*.ts",
+    "precommit": "prettier --write --no-semi --single-quote --trailing-comma es5 src/**/*.{ts,tsx}",
     "test": ""
   },
   "repository": {

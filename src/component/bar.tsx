@@ -31,15 +31,16 @@ const getChildSyle = ({ ratio, offset, color }: Usage) => ({
   transition: 'transform 0.5s',
   backgroundColor: color,
   transformOrigin: 'left top',
-  transform: `${typeof offset === 'undefined' ? '' : `translateX(${offset * width}px) `}scaleX(${ratio})`
+  transform: `${typeof offset === 'undefined'
+    ? ''
+    : `translateX(${offset * width}px) `}scaleX(${ratio})`,
 })
 
-const Bar = (info: Info) => (
+const Bar = (info: Info) =>
   <div style={getContainerStyle(info.borderColor)}>
-    {info.usages.map((usage, index) => (
+    {info.usages.map((usage, index) =>
       <div key={index.toString()} style={getChildSyle(usage)} />
-    ))}
+    )}
   </div>
-)
 
 export default Bar

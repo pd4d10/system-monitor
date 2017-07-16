@@ -1,6 +1,6 @@
-import { h } from 'preact';
-import Tip from './tip';
-import { toGiga, StorageUnitInfo } from '../util';
+import { h } from 'preact'
+import Tip from './tip'
+import { toGiga, StorageUnitInfo } from '../util'
 
 const StorageComponent = ({ storage }: { storage: StorageUnitInfo[] }) =>
   <div>
@@ -8,6 +8,6 @@ const StorageComponent = ({ storage }: { storage: StorageUnitInfo[] }) =>
     {storage.map(({ name, capacity, id }) =>
       <Tip key={id}>{`${name || 'Unknown'} / ${toGiga(capacity)}GB`}</Tip>
     )}
-  </div>;
+  </div>
 
-export default StorageComponent;
+export default StorageComponent
