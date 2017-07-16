@@ -8,9 +8,9 @@ export type MemoryInfo = chrome.system.memory.MemoryInfo
 export type StorageUnitInfo = chrome.system.storage.StorageUnitInfo
 
 export interface ParsedCpuInfo {
-    modelName: string
-    usage: ProcessorUsage[]
-  }
+  modelName: string
+  usage: ProcessorUsage[]
+}
 
 // Convert byte to GB
 export function toGiga(byte: number) {

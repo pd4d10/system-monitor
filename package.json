@@ -8,6 +8,7 @@
     "start": "webpack -w",
     "build": "webpack --config webpack.config.production.js -p",
     "package": "cp LICENSE chrome; zip -r extension.zip ./chrome; rm chrome/LICENSE",
+    "precommit": "prettier --write --no-semi --single-quote --trailing-comma es5 src/**/*.ts",
     "test": ""
   },
   "repository": {
@@ -31,9 +32,11 @@
     "awesome-typescript-loader": "^3.1.3",
     "clean-webpack-plugin": "^0.1.14",
     "css-loader": "^0.28.4",
-    "extract-text-webpack-plugin": "^2.1.2",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "husky": "^0.14.3",
     "less": "^2.7.2",
     "less-loader": "^4.0.4",
+    "prettier": "^1.5.3",
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.13.1",
     "typescript": "^2.3.4",
