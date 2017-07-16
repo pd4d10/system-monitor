@@ -18,16 +18,6 @@
   version "0.0.28"
   resolved "https://registry.yarnpkg.com/@types/filewriter/-/filewriter-0.0.28.tgz#c054e8af4d9dd75db4e63abc76f885168714d4b3"
 
-"@types/lodash-es@^4.14.5":
-  version "4.14.5"
-  resolved "https://registry.yarnpkg.com/@types/lodash-es/-/lodash-es-4.14.5.tgz#57c11845eaf6a7d2a9095e9533fed4980f3d5784"
-  dependencies:
-    "@types/lodash" "*"
-
-"@types/lodash@*":
-  version "4.14.69"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.69.tgz#2bbd48c1565e02506f48ed8d1e8e53ea493fd0e6"
-
 abbrev@1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.0.tgz#d0554c2256636e2f56e7c2e5ad183f859428d81f"
@@ -1817,10 +1807,6 @@ loader-utils@~0.2.2:
     emojis-list "^2.0.0"
     json5 "^0.5.0"
     object-assign "^4.0.1"
-
-lodash-es@^4.17.4:
-  version "4.17.4"
-  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.4.tgz#dcc1d7552e150a0640073ba9cb31d70f032950e7"
 
 lodash.camelcase@^4.3.0:
   version "4.3.0"

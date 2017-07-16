@@ -1,6 +1,3 @@
-import zipWith from 'lodash-es/zipWith'
-import mergeWith from 'lodash-es/mergeWith'
-
 const TIMEOUT = 1000
 
 type CpuInfo = chrome.system.cpu.CpuInfo
@@ -18,24 +15,6 @@ export function toGiga(byte: number) {
   return (byte / (1024 * 1024 * 1024)).toFixed(2)
 }
 
-function minus(
-  usage: ProcessorUsage,
-  oldUsage: ProcessorUsage = {
-    user: 0,
-    kernel: 0,
-    idle: 0,
-    total: 0,
-  }
-) {
-  const data: ProcessorUsage = {
-    user: usage.user - oldUsage.user,
-    kernel: usage.kernel - oldUsage.kernel,
-    idle: usage.idle - oldUsage.idle,
-    total: usage.total - oldUsage.total,
-  }
-  return data
-}
-
 export interface State {
   cpu: ParsedCpuInfo
   memory: MemoryInfo
@@ -46,14 +25,22 @@ function getCpuUsage(
   processors: ProcessorUsage[],
   processorsOld: ProcessorUsage[]
 ) {
-  return zipWith<
-    ProcessorUsage
-  >(
-    processors,
-    processorsOld,
-    (usage: ProcessorUsage, oldUsage: ProcessorUsage) =>
-      mergeWith(usage, oldUsage, (a, b) => a - b)
-  )
+  const usage: ProcessorUsage[] = []
+  for (let i = 0; i < processors.length; i++) {
+    const processor = processors[i]
+    const processorOld = processorsOld[i]
+    usage.push(
+      processorOld
+        ? {
+            user: processor.user - processorOld.user,
+            kernel: processor.kernel - processorOld.kernel,
+            idle: processor.idle - processorOld.idle,
+            total: processor.total - processorOld.total,
+          }
+        : processor
+    )
+  }
+  return usage
 }
 
 export async function trigger(
@@ -84,6 +71,5 @@ export async function trigger(
   }
 
   cb(data)
-
   setTimeout(() => trigger(cb, processors), TIMEOUT)
 }
