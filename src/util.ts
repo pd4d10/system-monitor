@@ -1,4 +1,4 @@
-import { zipWith } from 'lodash'
+import zipWith from 'lodash-es/zipWith'
 
 const TIMEOUT = 1000
 
