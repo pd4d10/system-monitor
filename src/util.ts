@@ -5,7 +5,7 @@ const TIMEOUT = 1000
 type CpuInfo = chrome.system.cpu.CpuInfo
 type ProcessorUsage = chrome.system.cpu.ProcessorUsage
 export type MemoryInfo = chrome.system.memory.MemoryInfo
-type StorageUnitInfo = chrome.system.storage.StorageUnitInfo
+export type StorageUnitInfo = chrome.system.storage.StorageUnitInfo
 
 export interface ParsedCpuInfo {
     modelName: string

@@ -5,8 +5,8 @@ const style = {
   margin: '4px 0',
 }
 
-const Tip = (props) => (
-  <p style={style} {...props} />
+const Tip = (props: any) => (
+  <p style={style}>{props.children}</p>
 )
 
 export default Tip

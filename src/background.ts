@@ -7,7 +7,7 @@ const BORDER_WIDTH = 2
 const canvas = document.createElement('canvas')
 canvas.width = SIZE
 canvas.height = SIZE
-const context: CanvasRenderingContext2D = canvas.getContext('2d')
+const context = canvas.getContext('2d') as CanvasRenderingContext2D
 
 // Color config
 const config = {
@@ -61,8 +61,8 @@ function drawBackground(color: string, arr: number[]) {
   context.fill()
 }
 
-function draw({ cpu: { modelName, numOfProcessors, usage } }) {
-  const idle = usage.reduce((a, b) => a + b.idle / b.total, 0) / numOfProcessors
+trigger(({ cpu: { modelName, usage } }) => {
+  const idle = usage.reduce((a, b) => a + b.idle / b.total, 0) / usage.length
   cpuIdleArray.push(idle)
   cpuIdleArray.shift()
 
@@ -75,6 +75,4 @@ function draw({ cpu: { modelName, numOfProcessors, usage } }) {
   drawBorder(config.cpu.border)
 
   setIcon({ imageData: context.getImageData(0, 0, SIZE, SIZE) })
-}
-
-trigger(draw)
+})

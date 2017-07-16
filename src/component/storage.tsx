@@ -1,8 +1,8 @@
 import { h } from 'preact';
 import Tip from './tip';
-import { toGiga, StorageInfo } from '../util';
+import { toGiga, StorageUnitInfo } from '../util';
 
-const StorageComponent = ({ storage }: StorageInfo) =>
+const StorageComponent = ({ storage }: { storage: StorageUnitInfo[] }) =>
   <div>
     <h2>Storage</h2>
     {storage.map(({ name, capacity, id }) =>

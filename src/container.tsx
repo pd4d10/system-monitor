@@ -6,7 +6,7 @@ import StorageComponent from './component/storage';
 // import BatteryComponent from './component/battery'
 import './container.less';
 
-export default class Container extends Component<undefined, State> {
+export default class Container extends Component<{}, State> {
   state = {
     cpu: {
       modelName: '',
