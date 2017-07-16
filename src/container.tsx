@@ -62,10 +62,11 @@ export default class Container extends Component<{}, State> {
 
   handleOpen = (e: MouseEvent) => {
     e.preventDefault();
+    const { clientWidth, clientHeight } = document.documentElement
     window.open(
       chrome.runtime.getURL('popup.html?window=1'),
       undefined,
-      `width=246,height=400`
+      `width=${clientWidth},height=${clientHeight + 24}`
     );
   };
 
