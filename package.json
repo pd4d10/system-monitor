@@ -5,8 +5,9 @@
   "description": "Monitor CPU and memory status in Chrome and Opera.",
   "main": "index.js",
   "scripts": {
-    "start": "webpack -w",
-    "build": "webpack --config webpack.config.production.js -p",
+    "start": "npm run icon; webpack -w",
+    "build": "npm run icon; webpack --config webpack.config.production.js -p",
+    "icon": "node scripts/icon.js",
     "package": "cp LICENSE chrome; zip -r extension.zip ./chrome; rm chrome/LICENSE",
     "precommit": "prettier --write --no-semi --single-quote --trailing-comma es5 src/**/*.{ts,tsx}",
     "test": ""
@@ -37,6 +38,7 @@
     "prettier": "^1.5.3",
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.13.1",
+    "svg2png": "^4.1.1",
     "typescript": "^2.3.4",
     "webpack": "^3.0.0",
     "webpack-bundle-analyzer": "^2.1.1",
