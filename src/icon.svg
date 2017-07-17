@@ -4,18 +4,20 @@
     height="256"
     fill="none"
     stroke="#4876ff"
-    stroke-width="30"
+    stroke-width="48"
   />
   <polyline
-    points="0, 128
+    points="
+    0, 128
     80, 128
-    109, 56
+    109, 64
     128, 128
-    147, 200
+    147, 192
     176, 128
-    256, 128"
+    256, 128
+    "
     fill="none"
     stroke="#4876ff"
-    stroke-width="16"
+    stroke-width="24"
   />
 </svg>
