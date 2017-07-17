@@ -10,8 +10,7 @@
   "permissions": [
     "system.cpu",
     "system.memory",
-    "system.storage",
-    "power"
+    "system.storage"
   ],
   "browser_action": {
     "default_popup": "popup.html"

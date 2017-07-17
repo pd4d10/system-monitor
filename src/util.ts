@@ -15,7 +15,7 @@ export function toGiga(byte: number) {
   return (byte / (1024 * 1024 * 1024)).toFixed(2)
 }
 
-export interface State {
+export interface TriggerData {
   cpu: ParsedCpuInfo
   memory: MemoryInfo
   storage: StorageUnitInfo[]
@@ -44,7 +44,7 @@ function getCpuUsage(
 }
 
 export async function trigger(
-  cb: (data: State) => void,
+  cb: (data: TriggerData) => void,
   processorsOld: ProcessorUsage[] = []
 ) {
   const cpuP = new Promise<CpuInfo>(resolve =>
@@ -61,7 +61,7 @@ export async function trigger(
   const processors = cpu.processors.map(({ usage }) => usage)
 
   const cpuUsage = getCpuUsage(processors, processorsOld)
-  const data: State = {
+  const data: TriggerData = {
     cpu: {
       modelName: cpu.modelName,
       usage: cpuUsage,
