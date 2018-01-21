@@ -28,8 +28,8 @@
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.38",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.38",
+    "@babel/plugin-transform-react-jsx": "^7.0.0-beta.38",
     "@babel/preset-env": "^7.0.0-beta.38",
-    "@babel/preset-react": "^7.0.0-beta.38",
     "@types/chrome": "^0.0.47",
     "babel-loader": "^8.0.0-beta.0",
     "clean-webpack-plugin": "^0.1.14",

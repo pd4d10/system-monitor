@@ -334,23 +334,7 @@
     "@babel/helper-call-delegate" "7.0.0-beta.38"
     "@babel/helper-get-function-arity" "7.0.0-beta.38"
 
-"@babel/plugin-transform-react-display-name@7.0.0-beta.38":
-  version "7.0.0-beta.38"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-display-name/-/plugin-transform-react-display-name-7.0.0-beta.38.tgz#95b406c30fd6569f90e15003b2b9296c38d0b77e"
-
-"@babel/plugin-transform-react-jsx-self@7.0.0-beta.38":
-  version "7.0.0-beta.38"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx-self/-/plugin-transform-react-jsx-self-7.0.0-beta.38.tgz#1cd41178d16373a64280de0d62355c96e8fbe6af"
-  dependencies:
-    "@babel/plugin-syntax-jsx" "7.0.0-beta.38"
-
-"@babel/plugin-transform-react-jsx-source@7.0.0-beta.38":
-  version "7.0.0-beta.38"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx-source/-/plugin-transform-react-jsx-source-7.0.0-beta.38.tgz#05e4420dc2b6368f22ce83b29fb86a08ad22fadf"
-  dependencies:
-    "@babel/plugin-syntax-jsx" "7.0.0-beta.38"
-
-"@babel/plugin-transform-react-jsx@7.0.0-beta.38":
+"@babel/plugin-transform-react-jsx@^7.0.0-beta.38":
   version "7.0.0-beta.38"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx/-/plugin-transform-react-jsx-7.0.0-beta.38.tgz#6abd97c2dde5a007f0fba77d4c4bd7b2a68e7316"
   dependencies:
@@ -436,16 +420,6 @@
     browserslist "^2.4.0"
     invariant "^2.2.2"
     semver "^5.3.0"
-
-"@babel/preset-react@^7.0.0-beta.38":
-  version "7.0.0-beta.38"
-  resolved "https://registry.yarnpkg.com/@babel/preset-react/-/preset-react-7.0.0-beta.38.tgz#eb42433a72314f14f28be7fe2b092c9a9a3294cb"
-  dependencies:
-    "@babel/plugin-syntax-jsx" "7.0.0-beta.38"
-    "@babel/plugin-transform-react-display-name" "7.0.0-beta.38"
-    "@babel/plugin-transform-react-jsx" "7.0.0-beta.38"
-    "@babel/plugin-transform-react-jsx-self" "7.0.0-beta.38"
-    "@babel/plugin-transform-react-jsx-source" "7.0.0-beta.38"
 
 "@babel/template@7.0.0-beta.38":
   version "7.0.0-beta.38"
