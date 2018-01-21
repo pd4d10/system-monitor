@@ -1,15 +1,11 @@
 import { h } from 'preact'
-import { ParsedCpuInfo } from '../util'
 import Bar from './bar'
 import Tip from './tip'
 import './cpu.less'
-
-const CPUComponent = (info: ParsedCpuInfo) =>
+const CPUComponent = info => (
   <div className="cpu">
     <h2>CPU</h2>
-    <Tip>
-      {info.modelName}
-    </Tip>
+    <Tip>{info.modelName}</Tip>
     <ul className="tips">
       <li className="kernel">kernel</li>
       <li className="user">user</li>
@@ -31,5 +27,5 @@ const CPUComponent = (info: ParsedCpuInfo) =>
       })}
     </ul>
   </div>
-
+)
 export default CPUComponent

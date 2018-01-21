@@ -1,19 +1,6 @@
 import { h } from 'preact'
-
-interface Usage {
-  color: string
-  offset?: number
-  ratio: number
-}
-
-interface Info {
-  borderColor: string
-  usages: Usage[]
-}
-
 const width = 220
-
-const getContainerStyle = (color: string) => ({
+const getContainerStyle = color => ({
   display: 'block',
   width: `${width}px`,
   height: '10px',
@@ -21,8 +8,7 @@ const getContainerStyle = (color: string) => ({
   border: `1px solid ${color}`,
   position: 'relative',
 })
-
-const getChildSyle = ({ ratio, offset, color }: Usage) => ({
+const getChildSyle = ({ ratio, offset, color }) => ({
   position: 'absolute',
   left: 0,
   top: 0,
@@ -31,16 +17,15 @@ const getChildSyle = ({ ratio, offset, color }: Usage) => ({
   transition: 'transform 0.5s',
   backgroundColor: color,
   transformOrigin: 'left top',
-  transform: `${typeof offset === 'undefined'
-    ? ''
-    : `translateX(${offset * width}px) `}scaleX(${ratio})`,
+  transform: `${
+    typeof offset === 'undefined' ? '' : `translateX(${offset * width}px) `
+  }scaleX(${ratio})`,
 })
-
-const Bar = (info: Info) =>
+const Bar = info => (
   <div style={getContainerStyle(info.borderColor)}>
-    {info.usages.map((usage, index) =>
+    {info.usages.map((usage, index) => (
       <div key={index.toString()} style={getChildSyle(usage)} />
-    )}
+    ))}
   </div>
-
+)
 export default Bar

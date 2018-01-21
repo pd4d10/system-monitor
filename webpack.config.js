@@ -14,19 +14,14 @@ module.exports = {
     filename: '[name].js',
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.json'],
+    extensions: ['.js', '.json'],
   },
-  // devtool: 'source-map',
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader',
-      },
-      {
-        enforce: 'pre',
         test: /\.js$/,
-        loader: 'source-map-loader',
+        loader: 'babel-loader',
+        exclude: /node_modules/,
       },
       {
         test: /\.less$/,

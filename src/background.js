@@ -1,14 +1,11 @@
 import { trigger } from './util'
-
 const SIZE = 19 // Icon size
 const BORDER_WIDTH = 2
-
 // Draw browser action icon with HTML5 canvas
 const canvas = document.createElement('canvas')
 canvas.width = SIZE
 canvas.height = SIZE
-const context = canvas.getContext('2d') as CanvasRenderingContext2D
-
+const context = canvas.getContext('2d')
 // Color config
 const config = {
   cpu: {
@@ -20,24 +17,20 @@ const config = {
     background: '#66cdaa',
   },
 }
-
 // 3 => [1, 1, 1]
-function fill(count: number) {
+function fill(count) {
   const arr = []
   for (let i = 0; i < count; i += 1) {
     arr.push(1)
   }
   return arr
 }
-
 const { setTitle, setIcon } = chrome.browserAction
 const cpuIdleArray = fill(SIZE)
-
 function clear() {
   context.clearRect(0, 0, SIZE, SIZE)
 }
-
-function drawBorder(color: string) {
+function drawBorder(color) {
   context.beginPath()
   context.moveTo(0, 0)
   context.lineTo(0, SIZE)
@@ -48,8 +41,7 @@ function drawBorder(color: string) {
   context.strokeStyle = color
   context.stroke()
 }
-
-function drawBackground(color: string, arr: number[]) {
+function drawBackground(color, arr) {
   context.beginPath()
   context.moveTo(0, SIZE)
   arr.forEach((cpu, i) => {
@@ -60,19 +52,15 @@ function drawBackground(color: string, arr: number[]) {
   context.fillStyle = color
   context.fill()
 }
-
 trigger(({ cpu: { modelName, usage } }) => {
   const idle = usage.reduce((a, b) => a + b.idle / b.total, 0) / usage.length
   cpuIdleArray.push(idle)
   cpuIdleArray.shift()
-
   setTitle({
     title: `${modelName}\nUsage: ${(100 * (1 - idle)).toFixed(0)}%`,
   })
-
   clear()
   drawBackground(config.cpu.background, cpuIdleArray)
   drawBorder(config.cpu.border)
-
   setIcon({ imageData: context.getImageData(0, 0, SIZE, SIZE) })
 })
