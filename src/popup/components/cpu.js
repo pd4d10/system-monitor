@@ -42,16 +42,16 @@ const CpuComponent = info => (
     {info.usage.map(({ user, kernel, total }, index) => (
       <Bar
         key={index}
-        borderColor="#b3c3f3"
+        borderColor={colors.border}
         usages={[
           {
             ratio: kernel / total,
-            color: '#3a5eca',
+            color: colors.kernel,
           },
           {
             offset: kernel / total,
             ratio: user / total,
-            color: '#6687e7',
+            color: colors.user,
           },
         ]}
       />

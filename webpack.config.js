@@ -7,6 +7,7 @@ module.exports = {
     background: './src/background',
     popup: './src/popup',
     sentry: './src/sentry',
+    options: './src/options',
   },
   output: {
     path: path.resolve('chrome/dist'),

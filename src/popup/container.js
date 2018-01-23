@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { trigger } from './util'
-import CpuComponent from './component/cpu'
-import MemoryComponent from './component/memory'
-import StorageComponent from './component/storage'
-import BatteryComponent from './component/battery'
+import { trigger } from '../utils'
+import CpuComponent from './components/cpu'
+import MemoryComponent from './components/memory'
+import StorageComponent from './components/storage'
+import BatteryComponent from './components/battery'
 import { lifecycle, compose, withState, withStateHandlers } from 'recompose'
 
 const Container = ({ cpu, memory, storage, battery }) => (

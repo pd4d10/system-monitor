@@ -1,11 +1,14 @@
-import { trigger } from './util'
+import { trigger } from './utils'
+
 const SIZE = 19 // Icon size
 const BORDER_WIDTH = 2
+
 // Draw browser action icon with HTML5 canvas
 const canvas = document.createElement('canvas')
 canvas.width = SIZE
 canvas.height = SIZE
-const context = canvas.getContext('2d')
+const ctx = canvas.getContext('2d')
+
 // Color config
 const config = {
   cpu: {
@@ -17,6 +20,7 @@ const config = {
     background: '#66cdaa',
   },
 }
+
 // 3 => [1, 1, 1]
 function fill(count) {
   const arr = []
@@ -25,42 +29,47 @@ function fill(count) {
   }
   return arr
 }
-const { setTitle, setIcon } = chrome.browserAction
 const cpuIdleArray = fill(SIZE)
+
 function clear() {
-  context.clearRect(0, 0, SIZE, SIZE)
+  ctx.clearRect(0, 0, SIZE, SIZE)
 }
+
 function drawBorder(color) {
-  context.beginPath()
-  context.moveTo(0, 0)
-  context.lineTo(0, SIZE)
-  context.lineTo(SIZE, SIZE)
-  context.lineTo(SIZE, 0)
-  context.closePath()
-  context.lineWidth = BORDER_WIDTH
-  context.strokeStyle = color
-  context.stroke()
+  ctx.beginPath()
+  ctx.moveTo(0, 0)
+  ctx.lineTo(0, SIZE)
+  ctx.lineTo(SIZE, SIZE)
+  ctx.lineTo(SIZE, 0)
+  ctx.closePath()
+  ctx.lineWidth = BORDER_WIDTH
+  ctx.strokeStyle = color
+  ctx.stroke()
 }
+
 function drawBackground(color, arr) {
-  context.beginPath()
-  context.moveTo(0, SIZE)
+  ctx.beginPath()
+  ctx.moveTo(0, SIZE)
   arr.forEach((cpu, i) => {
-    context.lineTo(i, cpu * SIZE)
+    ctx.lineTo(i, cpu * SIZE)
   })
-  context.lineTo(SIZE, SIZE)
-  context.lineWidth = 2
-  context.fillStyle = color
-  context.fill()
+  ctx.lineTo(SIZE, SIZE)
+  ctx.lineWidth = 2
+  ctx.fillStyle = color
+  ctx.fill()
 }
+
 trigger(({ cpu: { modelName, usage } }) => {
   const idle = usage.reduce((a, b) => a + b.idle / b.total, 0) / usage.length
   cpuIdleArray.push(idle)
   cpuIdleArray.shift()
-  setTitle({
+  chrome.browserAction.setTitle({
     title: `${modelName}\nUsage: ${(100 * (1 - idle)).toFixed(0)}%`,
   })
   clear()
   drawBackground(config.cpu.background, cpuIdleArray)
   drawBorder(config.cpu.border)
-  setIcon({ imageData: context.getImageData(0, 0, SIZE, SIZE) })
+  chrome.browserAction.setIcon({
+    imageData: ctx.getImageData(0, 0, SIZE, SIZE),
+  })
 })
