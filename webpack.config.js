@@ -1,12 +1,11 @@
 const path = require('path')
 const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: {
     background: './src/background',
-    popup: './src/index',
+    popup: './src/popup',
     sentry: './src/sentry',
   },
   output: {
@@ -14,7 +13,7 @@ module.exports = {
     filename: '[name].js',
   },
   resolve: {
-    extensions: ['.js', '.json'],
+    extensions: ['.js'],
   },
   module: {
     rules: [
@@ -23,17 +22,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
-      {
-        test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'less-loader'],
-        }),
-      },
     ],
   },
-  plugins: [
-    new CleanWebpackPlugin(['chrome/dist']),
-    new ExtractTextPlugin('style.css'),
-  ],
+  plugins: [new CleanWebpackPlugin(['chrome/dist'])],
 }

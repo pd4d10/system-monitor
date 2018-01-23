@@ -1,10 +1,11 @@
-import { h } from 'preact'
+import React from 'react'
 import Bar from './bar'
-import Tip from './tip'
+import { Tip, Title } from './styled'
+
 const BatteryComponent = info =>
   info.isSupported ? (
-    <div className="battery">
-      <h2>Battery</h2>
+    <div>
+      <Title>Battery</Title>
       <Tip>
         {(info.level * 100).toFixed(2)}% ({info.isCharging
           ? 'Charging'
@@ -21,4 +22,5 @@ const BatteryComponent = info =>
       />
     </div>
   ) : null
+
 export default BatteryComponent

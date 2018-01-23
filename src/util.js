@@ -1,8 +1,10 @@
 const TIMEOUT = 1000
+
 // Convert byte to GB
 export function toGiga(byte) {
   return (byte / (1024 * 1024 * 1024)).toFixed(2)
 }
+
 function getCpuUsage(processors, processorsOld) {
   const usage = []
   for (let i = 0; i < processors.length; i++) {
@@ -21,13 +23,13 @@ function getCpuUsage(processors, processorsOld) {
   }
   return usage
 }
+
 export async function trigger(cb, processorsOld = []) {
-  const cpuP = new Promise(resolve => chrome.system.cpu.getInfo(resolve))
-  const memoryP = new Promise(resolve => chrome.system.memory.getInfo(resolve))
-  const storageP = new Promise(resolve =>
-    chrome.system.storage.getInfo(resolve),
+  const [cpu, memory, storage] = await Promise.all(
+    ['cpu', 'memory', 'storage'].map(
+      item => new Promise(r => chrome.system[item].getInfo(r)),
+    ),
   )
-  const [cpu, memory, storage] = await Promise.all([cpuP, memoryP, storageP])
   const processors = cpu.processors.map(({ usage }) => usage)
   const cpuUsage = getCpuUsage(processors, processorsOld)
   const data = {

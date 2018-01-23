@@ -1,5 +1,7 @@
-import { h } from 'preact'
+import React from 'react'
+
 const width = 220
+
 const getContainerStyle = color => ({
   display: 'block',
   width: `${width}px`,
@@ -8,6 +10,7 @@ const getContainerStyle = color => ({
   border: `1px solid ${color}`,
   position: 'relative',
 })
+
 const getChildSyle = ({ ratio, offset, color }) => ({
   position: 'absolute',
   left: 0,
@@ -21,6 +24,7 @@ const getChildSyle = ({ ratio, offset, color }) => ({
     typeof offset === 'undefined' ? '' : `translateX(${offset * width}px) `
   }scaleX(${ratio})`,
 })
+
 const Bar = info => (
   <div style={getContainerStyle(info.borderColor)}>
     {info.usages.map((usage, index) => (
@@ -28,4 +32,5 @@ const Bar = info => (
     ))}
   </div>
 )
+
 export default Bar

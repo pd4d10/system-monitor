@@ -8,8 +8,7 @@
     "build": "npm run icon; webpack --config webpack.config.production.js -p",
     "icon": "node scripts/icon.js",
     "package": "cp LICENSE chrome; zip -r extension.zip ./chrome; rm chrome/LICENSE",
-    "precommit": "prettier --write --no-semi --single-quote --trailing-comma es5 src/**/*.{ts,tsx}",
-    "test": ""
+    "test": "echo test"
   },
   "repository": {
     "type": "git",
@@ -22,23 +21,19 @@
   },
   "homepage": "https://github.com/pd4d10/system-monitor#readme",
   "dependencies": {
-    "preact": "^8.1.0",
-    "raven-js": "^3.16.0"
+    "raven-js": "^3.16.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "recompose": "^0.26.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.38",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.38",
-    "@babel/plugin-transform-react-jsx": "^7.0.0-beta.38",
     "@babel/preset-env": "^7.0.0-beta.38",
+    "@babel/preset-react": "^7.0.0-beta.38",
     "@types/chrome": "^0.0.47",
     "babel-loader": "^8.0.0-beta.0",
     "clean-webpack-plugin": "^0.1.14",
-    "css-loader": "^0.28.4",
-    "extract-text-webpack-plugin": "^3.0.0",
-    "less": "^2.7.2",
-    "less-loader": "^4.0.4",
-    "prettier": "^1.5.3",
-    "style-loader": "^0.13.1",
     "svg2png": "^4.1.1",
     "webpack": "^3.10.0",
     "webpack-bundle-analyzer": "^2.1.1",

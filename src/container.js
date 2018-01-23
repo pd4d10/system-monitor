@@ -1,14 +1,40 @@
-import { h, Component } from 'preact'
+import React, { Component } from 'react'
 import { trigger } from './util'
-import CPUComponent from './component/cpu'
+import CpuComponent from './component/cpu'
 import MemoryComponent from './component/memory'
 import StorageComponent from './component/storage'
 import BatteryComponent from './component/battery'
-import './container.less'
-export default class Container extends Component {
-  constructor() {
-    super(...arguments)
-    this.state = {
+import { lifecycle, compose, withState, withStateHandlers } from 'recompose'
+
+const Container = ({ cpu, memory, storage, battery }) => (
+  <div style={{ width: 230 }}>
+    <CpuComponent {...cpu} />
+    <MemoryComponent {...memory} />
+    <BatteryComponent {...battery} />
+    <StorageComponent storage={storage} />
+    {location.search === '' && (
+      <a
+        href="#"
+        style={{ outline: 'none' }}
+        onClick={e => {
+          e.preventDefault()
+          const { clientWidth, clientHeight } = document.documentElement
+          window.open(
+            chrome.runtime.getURL('popup.html?window=1'),
+            undefined,
+            `width=${clientWidth},height=${clientHeight + 24}`,
+          )
+        }}
+      >
+        Open as new window
+      </a>
+    )}
+  </div>
+)
+
+export default compose(
+  lifecycle({
+    state: {
       cpu: {
         modelName: '',
         usage: [],
@@ -25,66 +51,46 @@ export default class Container extends Component {
         chargingtime: 0,
         dischargingTime: 0,
       },
-    }
-    this.handleBatteryChange = () => {
-      this.setState({
-        battery: {
-          ...this.state.battery,
-          isCharging: this._battery.charging,
-          level: this._battery.level,
-          chargingTime: this._battery.chargingTime,
-          dischargingTime: this._battery.dischargingTime,
-        },
-      })
-    }
-    this.handleOpen = e => {
-      e.preventDefault()
-      const { clientWidth, clientHeight } = document.documentElement
-      window.open(
-        chrome.runtime.getURL('popup.html?window=1'),
-        undefined,
-        `width=${clientWidth},height=${clientHeight + 24}`,
-      )
-    }
-  }
-  async componentDidMount() {
-    // Trigger CPU, memory and storage status update periodly
-    trigger(this.setState.bind(this))
-    // Battery
-    if (typeof navigator.getBattery !== 'function') {
-      return
-    }
-    this.setState({
-      battery: {
-        ...this.state.battery,
-        isSupported: true,
-      },
-    })
-    this._battery = await navigator.getBattery()
-    this.handleBatteryChange()
-    ;[
-      'chargingchange',
-      'levelchange',
-      'chargingtimechange',
-      'dischargingtimechange',
-    ].forEach(event => {
-      this._battery.addEventListener(event, this.handleBatteryChange)
-    })
-  }
-  render() {
-    const { cpu, memory, storage } = this.state
-    return (
-      <div className="container">
-        <CPUComponent {...cpu} />
-        <MemoryComponent {...memory} />
-        <BatteryComponent {...this.state.battery} />
-        <StorageComponent storage={storage} />
-        {location.search === '' && (
-          <a href="#" style={{ outline: 'none' }} onClick={this.handleOpen}>
-            Open as new window
-          </a>
-        )}
-      </div>
-    )
-  }
-}
+    },
+    componentDidMount() {
+      console.log(this.state)
+      // Trigger CPU, memory and storage status update periodly
+      trigger(this.setState.bind(this))
+
+      // Battery
+      if (typeof navigator.getBattery === 'function') {
+        ;(async () => {
+          this.setState({
+            battery: {
+              ...this.state.battery,
+              isSupported: true,
+            },
+          })
+          const _battery = await navigator.getBattery()
+
+          const handleBatteryChange = () => {
+            this.setState({
+              battery: {
+                ...this.state.battery,
+                isCharging: _battery.charging,
+                level: _battery.level,
+                chargingTime: _battery.chargingTime,
+                dischargingTime: _battery.dischargingTime,
+              },
+            })
+          }
+
+          handleBatteryChange()
+          ;[
+            'chargingchange',
+            'levelchange',
+            'chargingtimechange',
+            'dischargingtimechange',
+          ].forEach(event => {
+            _battery.addEventListener(event, handleBatteryChange)
+          })
+        })()
+      }
+    },
+  }),
+)(Container)

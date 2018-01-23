@@ -1,12 +1,14 @@
-import { h } from 'preact'
-import Tip from './tip'
+import React from 'react'
+import { Tip, Title } from './styled'
 import { toGiga } from '../util'
+
 const StorageComponent = ({ storage }) => (
   <div>
-    <h2>Storage</h2>
+    <Title>Storage</Title>
     {storage.map(({ name, capacity, id }) => (
       <Tip key={id}>{`${name || 'Unknown'} / ${toGiga(capacity)}GB`}</Tip>
     ))}
   </div>
 )
+
 export default StorageComponent
