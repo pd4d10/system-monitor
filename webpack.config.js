@@ -1,12 +1,13 @@
 const path = require('path')
 const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+  watch: true,
   entry: {
     background: './src/background',
     popup: './src/popup',
-    sentry: './src/sentry',
     options: './src/options',
   },
   output: {
@@ -25,5 +26,17 @@ module.exports = {
       },
     ],
   },
-  plugins: [new CleanWebpackPlugin(['chrome/dist'])],
+  plugins: [
+    new CleanWebpackPlugin(['chrome/dist']),
+    new HtmlWebpackPlugin({
+      title: 'System Monitor',
+      filename: 'popup.html',
+      chunks: ['popup'],
+    }),
+    new HtmlWebpackPlugin({
+      title: 'System Monitor',
+      filename: 'options.html',
+      chunks: ['options'],
+    }),
+  ],
 }
