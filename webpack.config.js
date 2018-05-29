@@ -4,7 +4,9 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+  mode: 'development',
   watch: true,
+  devtool: 'cheap-source-map',
   entry: {
     background: './src/background',
     popup: './src/popup',
