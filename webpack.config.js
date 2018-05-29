@@ -8,7 +8,7 @@ module.exports = {
   watch: true,
   devtool: 'cheap-source-map',
   entry: {
-    background: './src/background',
+    'background.js': './src/background',
     popup: './src/popup',
     options: './src/options',
   },
