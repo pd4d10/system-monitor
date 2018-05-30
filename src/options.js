@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-class Option extends React.Component {
+class Options extends React.Component {
   state = {
     ready: false,
     popup: {},
@@ -64,4 +64,4 @@ class Option extends React.Component {
 
 const root = document.createElement('div')
 document.body.appendChild(root)
-render(<Option />, root)
+render(<Options />, root)
