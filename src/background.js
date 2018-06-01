@@ -59,7 +59,7 @@ function drawBackground(color, arr) {
   ctx.fill()
 }
 
-trigger(({ cpu: { modelName, usage } }) => {
+trigger(true, ({ cpu: { modelName, usage } }) => {
   const idle = usage.reduce((a, b) => a + b.idle / b.total, 0) / usage.length
   cpuIdleArray.push(idle)
   cpuIdleArray.shift()

@@ -6,91 +6,93 @@ import StorageComponent from './components/storage'
 import BatteryComponent from './components/battery'
 import { lifecycle, compose, withState, withStateHandlers } from 'recompose'
 
-const Container = ({ cpu, memory, storage, battery }) => (
-  <div style={{ width: 230 }}>
-    <CpuComponent {...cpu} />
-    <MemoryComponent {...memory} />
-    <BatteryComponent {...battery} />
-    <StorageComponent storage={storage} />
-    {location.search === '' && (
-      <a
-        href="#"
-        style={{ outline: 'none' }}
-        onClick={e => {
-          e.preventDefault()
-          const { clientWidth, clientHeight } = document.documentElement
-          window.open(
-            chrome.runtime.getURL('popup.html?window=1'),
-            undefined,
-            `width=${clientWidth},height=${clientHeight + 24}`,
-          )
-        }}
-      >
-        Open as new window
-      </a>
-    )}
-  </div>
-)
-
-export default compose(
-  lifecycle({
-    state: {
-      cpu: {
-        modelName: '',
-        usage: [],
-      },
-      memory: {
-        capacity: 1,
-        availableCapacity: 1,
-      },
-      storage: [],
-      battery: {
-        isSupported: false,
-        isCharging: false,
-        level: 0,
-        chargingtime: 0,
-        dischargingTime: 0,
-      },
+export default class Container extends Component {
+  state = {
+    cpu: {
+      modelName: '',
+      usage: [],
     },
-    componentDidMount() {
-      console.log(this.state)
-      // Trigger CPU, memory and storage status update periodly
-      trigger(this.setState.bind(this))
+    memory: {
+      capacity: 1,
+      availableCapacity: 1,
+    },
+    storage: [],
+    battery: {
+      isSupported: false,
+      isCharging: false,
+      level: 0,
+      chargingtime: 0,
+      dischargingTime: 0,
+    },
+  }
 
-      // Battery
-      if (typeof navigator.getBattery === 'function') {
-        ;(async () => {
+  componentDidMount() {
+    // console.log(this.state)
+    // Trigger CPU, memory and storage status update periodly
+    trigger(false, this.setState.bind(this))
+
+    // Battery
+    if (typeof navigator.getBattery === 'function') {
+      ;(async () => {
+        this.setState({
+          battery: {
+            ...this.state.battery,
+            isSupported: true,
+          },
+        })
+        const _battery = await navigator.getBattery()
+
+        const handleBatteryChange = () => {
           this.setState({
             battery: {
               ...this.state.battery,
-              isSupported: true,
+              isCharging: _battery.charging,
+              level: _battery.level,
+              chargingTime: _battery.chargingTime,
+              dischargingTime: _battery.dischargingTime,
             },
           })
-          const _battery = await navigator.getBattery()
+        }
 
-          const handleBatteryChange = () => {
-            this.setState({
-              battery: {
-                ...this.state.battery,
-                isCharging: _battery.charging,
-                level: _battery.level,
-                chargingTime: _battery.chargingTime,
-                dischargingTime: _battery.dischargingTime,
-              },
-            })
-          }
+        handleBatteryChange()
+        ;[
+          'chargingchange',
+          'levelchange',
+          'chargingtimechange',
+          'dischargingtimechange',
+        ].forEach(event => {
+          _battery.addEventListener(event, handleBatteryChange)
+        })
+      })()
+    }
+  }
 
-          handleBatteryChange()
-          ;[
-            'chargingchange',
-            'levelchange',
-            'chargingtimechange',
-            'dischargingtimechange',
-          ].forEach(event => {
-            _battery.addEventListener(event, handleBatteryChange)
-          })
-        })()
-      }
-    },
-  }),
-)(Container)
+  render() {
+    const { cpu, memory, storage, battery } = this.state
+    return (
+      <div style={{ width: 230 }}>
+        <CpuComponent {...cpu} />
+        <MemoryComponent {...memory} />
+        <BatteryComponent {...battery} />
+        <StorageComponent storage={storage} />
+        {location.search === '' && (
+          <a
+            href="#"
+            style={{ outline: 'none' }}
+            onClick={e => {
+              e.preventDefault()
+              const { clientWidth, clientHeight } = document.documentElement
+              window.open(
+                chrome.runtime.getURL('popup.html?window=1'),
+                undefined,
+                `width=${clientWidth},height=${clientHeight + 24}`,
+              )
+            }}
+          >
+            Open as new window
+          </a>
+        )}
+      </div>
+    )
+  }
+}

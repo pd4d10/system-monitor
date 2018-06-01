@@ -24,22 +24,28 @@ function getCpuUsage(processors, processorsOld) {
   return usage
 }
 
-export async function trigger(cb, processorsOld = []) {
-  const [cpu, memory, storage] = await Promise.all(
-    ['cpu', 'memory', 'storage'].map(
-      item => new Promise(r => chrome.system[item].getInfo(r)),
-    ),
-  )
+export async function trigger(onlyCpu, cb, processorsOld = []) {
+  let cpu
+  let memory
+  let storage
+  if (onlyCpu) {
+    cpu = await new Promise(r => chrome.system.cpu.getInfo(r))
+  } else {
+    ;[cpu, memory, storage] = await Promise.all(
+      ['cpu', 'memory', 'storage'].map(
+        item => new Promise(r => chrome.system[item].getInfo(r)),
+      ),
+    )
+  }
   const processors = cpu.processors.map(({ usage }) => usage)
-  const cpuUsage = getCpuUsage(processors, processorsOld)
   const data = {
     cpu: {
       modelName: cpu.modelName,
-      usage: cpuUsage,
+      usage: getCpuUsage(processors, processorsOld),
     },
     memory,
     storage,
   }
   cb(data)
-  setTimeout(() => trigger(cb, processors), TIMEOUT)
+  setTimeout(() => trigger(onlyCpu, cb, processors), TIMEOUT)
 }
