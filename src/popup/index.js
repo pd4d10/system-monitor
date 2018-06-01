@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { render } from 'react-dom'
 import { getSystemInfo, storage } from '../utils'
 import CpuComponent from './cpu'
@@ -86,21 +86,33 @@ class Container extends Component {
           state.supportBatteryAPI && <BatteryComponent {...state.battery} />}
         {state.status.storage && <StorageComponent {...state.storage} />}
         {location.search === '' && (
-          <a
-            href="#"
-            style={{ outline: 'none' }}
-            onClick={e => {
-              e.preventDefault()
-              const { clientWidth, clientHeight } = document.documentElement
-              window.open(
-                chrome.runtime.getURL('popup.html?window=1'),
-                undefined,
-                `width=${clientWidth},height=${clientHeight + 24}`,
-              )
-            }}
-          >
-            Open as new window
-          </a>
+          <div style={{ lineHeight: 1.5, marginTop: 8 }}>
+            <a
+              href="#"
+              style={{ outline: 'none', display: 'block' }}
+              onClick={e => {
+                e.preventDefault()
+                const { clientWidth, clientHeight } = document.documentElement
+                window.open(
+                  chrome.runtime.getURL('popup.html?window=1'),
+                  undefined,
+                  `width=${clientWidth},height=${clientHeight + 24}`,
+                )
+              }}
+            >
+              Open as new window
+            </a>
+            <a
+              href="#"
+              style={{ outline: 'none', display: 'block' }}
+              onClick={e => {
+                e.preventDefault()
+                chrome.runtime.openOptionsPage()
+              }}
+            >
+              Settings
+            </a>
+          </div>
         )}
       </div>
     )
