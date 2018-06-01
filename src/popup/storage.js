@@ -1,6 +1,6 @@
 import React from 'react'
 import { Tip, Title } from './styled'
-import { toGiga } from '../../utils'
+import { toGiga } from '../utils'
 
 const StorageComponent = ({ storage }) => (
   <div>

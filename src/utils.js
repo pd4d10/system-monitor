@@ -24,28 +24,53 @@ function getCpuUsage(processors, processorsOld) {
   return usage
 }
 
-export async function trigger(onlyCpu, cb, processorsOld = []) {
-  let cpu
-  let memory
-  let storage
-  if (onlyCpu) {
-    cpu = await new Promise(r => chrome.system.cpu.getInfo(r))
-  } else {
-    ;[cpu, memory, storage] = await Promise.all(
-      ['cpu', 'memory', 'storage'].map(
-        item => new Promise(r => chrome.system[item].getInfo(r)),
-      ),
-    )
-  }
-  const processors = cpu.processors.map(({ usage }) => usage)
-  const data = {
-    cpu: {
+export async function getSystemInfo(status, cb, processorsOld = []) {
+  const [cpu, memory, storage] = await Promise.all(
+    ['cpu', 'memory', 'storage'].map(item => {
+      if (status[item]) {
+        return new Promise(resolve => {
+          chrome.system[item].getInfo(resolve)
+        })
+      } else {
+        return Promise.resolve(null)
+      }
+    }),
+  )
+
+  const data = {}
+  let processors
+  if (cpu) {
+    processors = cpu.processors.map(({ usage }) => usage)
+    data.cpu = {
       modelName: cpu.modelName,
       usage: getCpuUsage(processors, processorsOld),
-    },
-    memory,
-    storage,
+    }
   }
+  if (memory) data.memory = memory
+  if (storage) data.storage = { storage }
+
   cb(data)
-  setTimeout(() => trigger(onlyCpu, cb, processors), TIMEOUT)
+  setTimeout(() => getSystemInfo(status, cb, processors), TIMEOUT)
+}
+
+export const storage = {
+  getPopupStatus() {
+    return new Promise(resolve => {
+      chrome.storage.sync.get(res => {
+        if (!res.popup) res.popup = {}
+        const {
+          cpu = true,
+          memory = true,
+          battery = true,
+          storage = true,
+        } = res.popup
+        resolve({ cpu, memory, battery, storage })
+      })
+    })
+  },
+  setPopupStatus(popup) {
+    return new Promise(resolve => {
+      chrome.storage.sync.set({ popup }, resolve)
+    })
+  },
 }

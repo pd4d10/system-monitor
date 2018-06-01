@@ -2,7 +2,28 @@ import React from 'react'
 
 const width = 220
 
-const Bar = info => (
+export const Tip = ({ children }) => (
+  <p
+    style={{
+      fontSize: 14,
+      margin: '4px 0',
+    }}
+  >
+    {children}
+  </p>
+)
+
+export const Title = ({ children }) => (
+  <h2
+    style={{
+      margin: '8px 0',
+    }}
+  >
+    {children}
+  </h2>
+)
+
+export const Bar = info => (
   <div
     style={{
       display: 'block',
@@ -35,5 +56,3 @@ const Bar = info => (
     ))}
   </div>
 )
-
-export default Bar

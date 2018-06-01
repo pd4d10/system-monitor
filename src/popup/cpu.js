@@ -1,6 +1,5 @@
 import React from 'react'
-import Bar from './bar'
-import { Tip, Title } from './styled'
+import { Tip, Title, Bar } from './styled'
 
 const colors = {
   kernel: '#3a5eca',

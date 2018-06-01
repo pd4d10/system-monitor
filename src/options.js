@@ -1,5 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { storage } from './utils'
 
 class Options extends React.Component {
   state = {
@@ -8,47 +9,51 @@ class Options extends React.Component {
   }
 
   setParams = params => {
-    const result = { popup: { ...this.state.popup, ...params } }
-    this.setState(result, () => {
-      chrome.storage.sync.set({ popup: params })
+    const result = { ...this.state.popup, ...params }
+    this.setState({ popup: result }, () => {
+      storage.setPopupStatus(result)
     })
   }
 
   componentDidMount() {
-    chrome.storage.sync.get(res => {
-      if (!res.popup) {
-        this.setParams({
-          cpu: true,
-          memory: true,
-          battery: true,
-          storage: true,
-        })
-      } else {
-        this.setState(res.popup)
-      }
-      this.setState({ ready: true })
+    storage.getPopupStatus().then(popup => {
+      this.setState({ popup, ready: true })
     })
   }
 
+  textMap = {
+    cpu: 'CPU',
+  }
+
   render() {
-    const items = ['cpu', 'memory', 'battery', 'storage']
     return (
       this.state.ready && (
-        <React.Fragment>
-          <div>
-            {items.map(item => (
-              <div>
+        <div style={{ lineHeight: 1.8 }}>
+          <h2>Popup settings</h2>
+          <div style={{ marginTop: 12, marginBottom: 12 }}>
+            {['cpu', 'memory', 'battery', 'storage'].map(item => (
+              <div key={item}>
                 <input
+                  id={item}
                   type="checkbox"
-                  value={this.state.popup[item]}
+                  checked={this.state.popup[item]}
                   onChange={e => {
-                    this.setParams({ [item]: e.target.value })
+                    this.setParams({ [item]: e.target.checked })
                   }}
                 />
-                Show {item}
+                <label
+                  style={{
+                    userSelect: 'none',
+                    marginLeft: 2,
+                  }}
+                  htmlFor={item}
+                >
+                  Show {this.textMap[item] || item}
+                </label>
               </div>
             ))}
           </div>
+          <hr />
           <footer>
             <a href="https://github.com/pd4d10/system-monitor">Source code</a>
             <br />
@@ -56,7 +61,7 @@ class Options extends React.Component {
               Submit an issue
             </a>
           </footer>
-        </React.Fragment>
+        </div>
       )
     )
   }

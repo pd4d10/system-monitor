@@ -1,7 +1,6 @@
 import React from 'react'
-import Bar from './bar'
-import { Tip, Title } from './styled'
-import { toGiga } from '../../utils'
+import { Tip, Title, Bar } from './styled'
+import { toGiga } from '../utils'
 
 const MemoryComponent = ({ capacity, availableCapacity }) => {
   const memoryStyle = {
