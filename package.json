@@ -2,11 +2,11 @@
   "name": "system-monitor",
   "private": true,
   "version": "1.4.0",
-  "description": "Monitor CPU and memory status",
+  "description": "Monitor system status like CPU, memory, battery",
   "scripts": {
     "start": "extension-scripts start",
     "build": "extension-scripts build",
-    "package": "cp LICENSE chrome; zip -r extension.zip ./chrome; rm chrome/LICENSE"
+    "package": "extension-scripts package"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "@types/chrome": "^0.0.47"
+    "@types/chrome": "^0.0.47",
+    "extension-scripts": "^0.0.2"
   }
 }

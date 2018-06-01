@@ -2,8 +2,9 @@
   "manifest_version": 2,
   "name": "System Monitor",
   "version": "1.4.0",
-  "description": "Monitor CPU and memory status",
+  "description": "Monitor system status like CPU, memory, battery",
   "homepage_url": "https://github.com/pd4d10/system-monitor",
+  "offline_enabled": true,
   "background": {
     "scripts": ["background.js"]
   },
