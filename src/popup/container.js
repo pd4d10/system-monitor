@@ -4,7 +4,6 @@ import CpuComponent from './components/cpu'
 import MemoryComponent from './components/memory'
 import StorageComponent from './components/storage'
 import BatteryComponent from './components/battery'
-import { lifecycle, compose, withState, withStateHandlers } from 'recompose'
 
 export default class Container extends Component {
   state = {
