@@ -4,9 +4,11 @@
   "version": "1.4.0",
   "description": "Monitor system status like CPU, memory, battery",
   "scripts": {
-    "start": "extension-scripts start",
-    "build": "extension-scripts build",
-    "package": "extension-scripts package"
+    "start": "webpack",
+    "build": "webpack --config webpack.config.production.js",
+    "icon": "node scripts/icon.js",
+    "package": "cp LICENSE chrome; zip -r extension.zip ./chrome; rm chrome/LICENSE",
+    "test": "echo test"
   },
   "repository": {
     "type": "git",
@@ -23,7 +25,18 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "@types/chrome": "^0.0.47",
-    "extension-scripts": "^0.0.2"
+    "@babel/core": "^7.0.0-beta.38",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.47",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.38",
+    "@babel/preset-react": "^7.0.0-beta.38",
+    "@types/chrome": "^0.0.91",
+    "babel-loader": "^8.0.0-beta.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.41.5",
+    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-cli": "^3.3.10",
+    "webpack-merge": "^4.2.2"
   }
 }
