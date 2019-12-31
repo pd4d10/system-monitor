@@ -49,6 +49,7 @@ export async function getSystemInfo(status, cb, processorsOld = []) {
       modelName: cpu.modelName,
       usage: getCpuUsage(processors, processorsOld),
       temperatures: cpu.temperatures || [],
+      // temperatures: [40, 50],
     }
   }
   if (memory) data.memory = memory
