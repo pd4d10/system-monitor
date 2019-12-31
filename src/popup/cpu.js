@@ -33,7 +33,9 @@ const Icon = ({ color, text }) => (
 const CpuComponent = info => (
   <div>
     <Title>CPU</Title>
-    <Tip>{info.modelName}</Tip>
+    <Tip>
+      {info.modelName} | {info.temperatures.map(t => `${t}°C`).join(' ')}
+    </Tip>
     <div style={{ overflow: 'hidden', margin: '8px 0' }}>
       <Icon color={colors.kernel} text="Kernel" />
       <Icon color={colors.user} text="User" />

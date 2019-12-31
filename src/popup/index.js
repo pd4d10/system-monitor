@@ -18,6 +18,7 @@ class Container extends Component {
     cpu: {
       modelName: '',
       usage: [],
+      temperatures: [],
     },
     memory: {
       capacity: 1,
@@ -82,8 +83,9 @@ class Container extends Component {
       <div style={{ width: 230 }}>
         {state.status.cpu && <CpuComponent {...state.cpu} />}
         {state.status.memory && <MemoryComponent {...state.memory} />}
-        {state.status.battery &&
-          state.supportBatteryAPI && <BatteryComponent {...state.battery} />}
+        {state.status.battery && state.supportBatteryAPI && (
+          <BatteryComponent {...state.battery} />
+        )}
         {state.status.storage && <StorageComponent {...state.storage} />}
         {location.search === '' && (
           <div style={{ lineHeight: 1.5, marginTop: 8 }}>
