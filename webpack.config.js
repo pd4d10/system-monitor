@@ -32,9 +32,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['chrome/dist'],
-    }),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'System Monitor',
       filename: 'popup.html',
