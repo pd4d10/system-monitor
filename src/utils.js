@@ -9,6 +9,10 @@ function getCpuUsage(processors, processorsOld) {
   const usage = []
   for (let i = 0; i < processors.length; i++) {
     const processor = processors[i]
+
+    // https://github.com/pd4d10/system-monitor/issues/3
+    if (processor.total === 0) continue
+
     const processorOld = processorsOld[i]
     usage.push(
       processorOld
