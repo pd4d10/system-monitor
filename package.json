@@ -1,7 +1,7 @@
 {
   "name": "system-monitor",
   "private": true,
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Monitor system status like CPU, memory, battery",
   "scripts": {
     "start": "webpack",
