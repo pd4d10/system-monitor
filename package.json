@@ -4,7 +4,7 @@
   "version": "1.5.1",
   "description": "Monitor system status like CPU, memory, battery",
   "scripts": {
-    "dev": "vite build --watch",
+    "dev": "vite build --mode=dev",
     "build": "vite build",
     "icon": "node scripts/icon.js",
     "package": "cp LICENSE chrome; zip -r extension.zip ./chrome; rm chrome/LICENSE",
