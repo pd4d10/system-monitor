@@ -4,9 +4,7 @@ const SIZE = 19 // Icon size
 const BORDER_WIDTH = 2
 
 // Draw browser action icon with HTML5 canvas
-const canvas = document.createElement('canvas')
-canvas.width = SIZE
-canvas.height = SIZE
+const canvas = new OffscreenCanvas(SIZE, SIZE)
 const ctx = canvas.getContext('2d')
 
 // Color config
