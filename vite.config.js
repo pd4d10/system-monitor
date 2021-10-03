@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => {
   return {
     base: '/dist',
     build: {
+      polyfillModulePreload: false, // for service worker
       watch: prod ? null : {},
       minify: prod,
       rollupOptions: {
@@ -21,7 +22,7 @@ export default defineConfig(({ mode }) => {
           dir: 'chrome/dist',
         },
       },
-      sourcemap: 'inline',
+      sourcemap: prod ? false : 'inline',
     },
   }
 })
