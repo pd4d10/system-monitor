@@ -22,6 +22,7 @@
   "homepage": "https://github.com/pd4d10/system-monitor#readme",
   "devDependencies": {
     "@types/chrome": "^0.0.91",
+    "@types/offscreencanvas": "^2019.6.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "vite": "^2.6.2"
