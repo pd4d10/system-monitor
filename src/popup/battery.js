@@ -1,13 +1,12 @@
 import React from 'react'
 import { Tip, Title, Bar } from './styled'
 
-const BatteryComponent = info => (
+const BatteryComponent = (info) => (
   <div>
     <Title>Battery</Title>
     <Tip>
-      {(info.level * 100).toFixed(2)}% ({info.isCharging
-        ? 'Charging'
-        : 'Not charging'})
+      {(info.level * 100).toFixed(2)}% (
+      {info.isCharging ? 'Charging' : 'Not charging'})
     </Tip>
     <Bar
       usages={[

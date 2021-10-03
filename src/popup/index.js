@@ -55,7 +55,7 @@ class Container extends Component {
       'levelchange',
       'chargingtimechange',
       'dischargingtimechange',
-    ].forEach(event => {
+    ].forEach((event) => {
       _battery.addEventListener(event, handleBatteryChange)
     })
   }
@@ -92,7 +92,7 @@ class Container extends Component {
             <a
               href="#"
               style={{ outline: 'none', display: 'block' }}
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault()
                 const { clientWidth, clientHeight } = document.documentElement
                 window.open(
@@ -107,7 +107,7 @@ class Container extends Component {
             <a
               href="#"
               style={{ outline: 'none', display: 'block' }}
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault()
                 chrome.runtime.openOptionsPage()
               }}

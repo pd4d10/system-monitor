@@ -23,7 +23,7 @@ export const Title = ({ children }) => (
   </h2>
 )
 
-export const Bar = info => (
+export const Bar = (info) => (
   <div
     style={{
       display: 'block',

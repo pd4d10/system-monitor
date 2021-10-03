@@ -8,7 +8,7 @@ class Option extends React.Component {
     popup: {},
   }
 
-  setParams = params => {
+  setParams = (params) => {
     const result = { ...this.state.popup, ...params }
     this.setState({ popup: result }, () => {
       storage.setPopupStatus(result)
@@ -16,7 +16,7 @@ class Option extends React.Component {
   }
 
   componentDidMount() {
-    storage.getPopupStatus().then(popup => {
+    storage.getPopupStatus().then((popup) => {
       this.setState({ popup, ready: true })
     })
   }
@@ -31,13 +31,13 @@ class Option extends React.Component {
         <div style={{ lineHeight: 1.8 }}>
           <h2>Popup settings</h2>
           <div style={{ marginTop: 12, marginBottom: 12 }}>
-            {['cpu', 'memory', 'battery', 'storage'].map(item => (
+            {['cpu', 'memory', 'battery', 'storage'].map((item) => (
               <div key={item}>
                 <input
                   id={item}
                   type="checkbox"
                   checked={this.state.popup[item]}
-                  onChange={e => {
+                  onChange={(e) => {
                     this.setParams({ [item]: e.target.checked })
                   }}
                 />
