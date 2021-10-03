@@ -6,7 +6,7 @@
   "homepage_url": "https://github.com/pd4d10/system-monitor",
   "offline_enabled": true,
   "background": {
-    "scripts": ["dist/background.js"]
+    "page": "dist/background.html"
   },
   "permissions": ["system.cpu", "system.memory", "system.storage", "storage"],
   "browser_action": {
