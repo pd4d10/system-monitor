@@ -4,28 +4,22 @@ import { getSystemInfo, storage, toGiga } from './utils'
 
 const width = 220
 
-export const Tip: FC = ({ children }) => (
-  <p
-    style={{
-      fontSize: 14,
-      margin: '4px 0',
-    }}
-  >
-    {children}
-  </p>
+const Tip: FC = ({ children }) => (
+  <p style={{ fontSize: 14, margin: '4px 0' }}>{children}</p>
 )
 
-export const Title: FC = ({ children }) => (
-  <h2
-    style={{
-      margin: '8px 0',
-    }}
-  >
-    {children}
-  </h2>
+const Title: FC = ({ children }) => (
+  <h2 style={{ margin: '8px 0' }}>{children}</h2>
 )
 
-export const Bar: FC = (info) => (
+const Bar: FC<{
+  borderColor: string
+  usages: {
+    offset?: number
+    ratio: number
+    color: string
+  }[]
+}> = (info) => (
   <div
     style={{
       display: 'block',
@@ -59,7 +53,7 @@ export const Bar: FC = (info) => (
   </div>
 )
 
-const Icon = ({ color, text }) => (
+const Icon: FC<{ color: string; text: string }> = ({ color, text }) => (
   <div
     style={{
       lineHeight: '12px',
@@ -100,7 +94,7 @@ class Container extends Component {
       capacity: 1,
       availableCapacity: 1,
     },
-    storage: { storage: [] },
+    storage: [],
     battery: {
       isSupported: false,
       isCharging: false,
@@ -140,7 +134,10 @@ class Container extends Component {
     const status = await storage.getPopupStatus()
     this.setState({ status }, async () => {
       // Trigger CPU, memory and storage status update periodly
-      getSystemInfo(status, this.setState.bind(this))
+      getSystemInfo(status, (data) => {
+        console.log(data)
+        this.setState(data)
+      })
 
       // Battery
       if (typeof navigator.getBattery === 'function') {
@@ -235,7 +232,7 @@ class Container extends Component {
         {state.status.storage && (
           <div>
             <Title>Storage</Title>
-            {state.storage.storage.map(({ name, capacity, id }) => (
+            {state.storage.map(({ name, capacity, id }) => (
               <Tip key={id}>{`${name || 'Unknown'} / ${toGiga(
                 capacity,
               )}GB`}</Tip>
