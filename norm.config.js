@@ -2,7 +2,7 @@
 const { defineConfig } = require('@norm/cli')
 
 module.exports = defineConfig({
-  mode: 'web-extension',
+  type: 'extension',
   manifest: {
     manifest_version: 2,
     name: 'System Monitor',
@@ -11,14 +11,14 @@ module.exports = defineConfig({
     homepage_url: 'https://github.com/pd4d10/system-monitor',
     offline_enabled: true,
     background: {
-      page: 'background.html',
+      page: 'src/background.html',
     },
     permissions: ['system.cpu', 'system.memory', 'system.storage', 'storage'],
     browser_action: {
-      default_popup: 'popup.html',
+      default_popup: 'src/popup.html',
     },
     options_ui: {
-      page: 'options.html',
+      page: 'src/options.html',
       chrome_style: true,
     },
     icons: {
