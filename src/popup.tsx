@@ -234,7 +234,7 @@ class Container extends Component {
             <Title>Storage</Title>
             {state.storage.map(({ name, capacity, id }) => (
               <Tip key={id}>{`${name || 'Unknown'} / ${toGiga(
-                capacity,
+                capacity
               )}GB`}</Tip>
             ))}
           </div>
@@ -250,7 +250,7 @@ class Container extends Component {
                 window.open(
                   chrome.runtime.getURL('dist/popup.html?window=1'),
                   undefined,
-                  `width=${clientWidth},height=${clientHeight + 24}`,
+                  `width=${clientWidth},height=${clientHeight + 24}`
                 )
               }}
             >

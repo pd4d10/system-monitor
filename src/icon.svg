@@ -1,13 +1,7 @@
-<svg width="256" height="256" version="1.1" xmlns="http://www.w3.org/2000/svg">
-  <rect
-    width="256"
-    height="256"
-    fill="none"
-    stroke="#4876ff"
-    stroke-width="48"
-  />
-  <polyline
-    points="
+<svg width="256" height="256" version="1.1"
+  xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" fill="none" stroke="#4876ff" stroke-width="48" />
+  <polyline points="
     0, 128
     80, 128
     109, 64
@@ -15,9 +9,5 @@
     147, 192
     176, 128
     256, 128
-    "
-    fill="none"
-    stroke="#4876ff"
-    stroke-width="24"
-  />
+    " fill="none" stroke="#4876ff" stroke-width="24" />
 </svg>
