@@ -247,7 +247,7 @@ class Container extends Component {
                 e.preventDefault()
                 const { clientWidth, clientHeight } = document.documentElement
                 window.open(
-                  chrome.runtime.getURL('dist/popup.html?window=1'),
+                  chrome.runtime.getURL('popup.html?window=1'),
                   undefined,
                   `width=${clientWidth},height=${clientHeight + 24}`
                 )
