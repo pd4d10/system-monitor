@@ -1,3 +1,4 @@
+import './style.css'
 import React from 'react'
 import { storage } from './utils'
 
@@ -29,9 +30,9 @@ class Option extends React.Component {
   render() {
     return (
       this.state.ready && (
-        <div style={{ lineHeight: 1.8 }}>
+        <div className="leading-relaxed">
           <h2>Popup settings</h2>
-          <div style={{ marginTop: 12, marginBottom: 12 }}>
+          <div className="my-3">
             {['cpu', 'memory', 'battery', 'storage'].map((item) => (
               <div key={item}>
                 <input
@@ -42,13 +43,7 @@ class Option extends React.Component {
                     this.setParams({ [item]: e.target.checked })
                   }}
                 />
-                <label
-                  style={{
-                    userSelect: 'none',
-                    marginLeft: 2,
-                  }}
-                  htmlFor={item}
-                >
+                <label className="select-none" htmlFor={item}>
                   Show {this.textMap[item] || item}
                 </label>
               </div>

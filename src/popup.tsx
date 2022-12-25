@@ -1,15 +1,12 @@
+import './style.css'
 import React, { FC, Component } from 'react'
 import { getSystemInfo, storage, toGiga } from './utils'
 
 const width = 220
 
-const Tip: FC = ({ children }) => (
-  <p style={{ fontSize: 14, margin: '4px 0' }}>{children}</p>
-)
+const Tip: FC = ({ children }) => <p className="my-1 text-sm">{children}</p>
 
-const Title: FC = ({ children }) => (
-  <h2 style={{ margin: '8px 0' }}>{children}</h2>
-)
+const Title: FC = ({ children }) => <h2 className="my-2">{children}</h2>
 
 const Bar: FC<{
   borderColor: string
@@ -20,24 +17,16 @@ const Bar: FC<{
   }[]
 }> = (info) => (
   <div
+    className="block h-[10] w-[220] mb-1 relative"
     style={{
-      display: 'block',
-      width: `${width}px`,
-      height: '10px',
-      marginBottom: '4px',
       border: `1px solid ${info.borderColor}`,
-      position: 'relative',
     }}
   >
     {info.usages.map(({ ratio, offset, color }, index) => (
       <div
         key={index.toString()}
+        className="absolute left-0 top-0 w-full h-full"
         style={{
-          position: 'absolute',
-          left: 0,
-          top: 0,
-          width: '100%',
-          height: '100%',
           transition: 'transform 0.5s',
           backgroundColor: color,
           transformOrigin: 'left top',
@@ -53,23 +42,10 @@ const Bar: FC<{
 )
 
 const Icon: FC<{ color: string; text: string }> = ({ color, text }) => (
-  <div
-    style={{
-      lineHeight: '12px',
-      fontSize: 14,
-      float: 'left',
-      marginRight: 8,
-    }}
-  >
+  <div className="text-sm float-left mr-2 leading-none">
     <div
-      style={{
-        backgroundColor: color,
-        verticalAlign: 'top',
-        width: '12px',
-        height: '12px',
-        marginRight: '2px',
-        display: 'inline-block',
-      }}
+      className="align-top w-3 h-3 mr-0.5 inline-block"
+      style={{ backgroundColor: color }}
     />
     {text}
   </div>
@@ -159,7 +135,7 @@ class Container extends Component {
     }
 
     return (
-      <div style={{ width: 230 }}>
+      <div className="h-[230]">
         {state.status.cpu && (
           <div>
             <Title>CPU</Title>
@@ -168,7 +144,7 @@ class Container extends Component {
               {info.temperatures.length > 0 &&
                 ` | ${info.temperatures.map((t) => `${t}°C`).join(', ')}`}
             </Tip>
-            <div style={{ overflow: 'hidden', margin: '8px 0' }}>
+            <div className="overflow-hidden my-2">
               <Icon color={colors.kernel} text="Kernel" />
               <Icon color={colors.user} text="User" />
             </div>
@@ -239,10 +215,10 @@ class Container extends Component {
           </div>
         )}
         {location.search === '' && (
-          <div style={{ lineHeight: 1.5, marginTop: 8 }}>
+          <div className="leading-normal mt-2">
             <a
               href="#"
-              style={{ outline: 'none', display: 'block' }}
+              className="block"
               onClick={(e) => {
                 e.preventDefault()
                 const { clientWidth, clientHeight } = document.documentElement
@@ -257,7 +233,7 @@ class Container extends Component {
             </a>
             <a
               href="#"
-              style={{ outline: 'none', display: 'block' }}
+              className="block"
               onClick={(e) => {
                 e.preventDefault()
                 chrome.runtime.openOptionsPage()
