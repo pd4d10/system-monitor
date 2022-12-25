@@ -2,6 +2,8 @@ import React from 'react'
 import { render } from 'react-dom'
 import { storage } from './utils'
 
+// TODO: config chrome_style: true
+
 class Option extends React.Component {
   state = {
     ready: false,
