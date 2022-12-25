@@ -1,5 +1,4 @@
 import React from 'react'
-import { render } from 'react-dom'
 import { storage } from './utils'
 
 // TODO: config chrome_style: true
@@ -69,6 +68,4 @@ class Option extends React.Component {
   }
 }
 
-const root = document.createElement('div')
-document.body.appendChild(root)
-render(<Option />, root)
+export default Option

@@ -19,13 +19,15 @@
     "build": "plasmo build --target=firefox-mv2",
     "icon": "node scripts/icon.js"
   },
-  "devDependencies": {
+  "dependencies": {
     "@types/offscreencanvas": "^2019.7.0",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
-    "plasmo": "^0.60.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "plasmo": "^0.60.2"
   },
   "prettier": {
     "semi": false,

@@ -1,5 +1,4 @@
 import React, { FC, Component } from 'react'
-import { render } from 'react-dom'
 import { getSystemInfo, storage, toGiga } from './utils'
 
 const width = 220
@@ -273,6 +272,4 @@ class Container extends Component {
   }
 }
 
-const root = document.createElement('div')
-document.body.appendChild(root)
-render(<Container />, root)
+export default Container
