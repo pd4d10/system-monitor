@@ -1,6 +1,6 @@
-import './style.css'
-import React from 'react'
-import { storage } from './utils'
+import "./style.css";
+import React from "react";
+import { storage } from "./utils";
 
 // TODO: config chrome_style: true
 
@@ -8,24 +8,24 @@ class Option extends React.Component {
   state = {
     ready: false,
     popup: {},
-  }
+  };
 
   setParams = (params) => {
-    const result = { ...this.state.popup, ...params }
+    const result = { ...this.state.popup, ...params };
     this.setState({ popup: result }, () => {
-      storage.setPopupStatus(result)
-    })
-  }
+      storage.setPopupStatus(result);
+    });
+  };
 
   componentDidMount() {
     storage.getPopupStatus().then((popup) => {
-      this.setState({ popup, ready: true })
-    })
+      this.setState({ popup, ready: true });
+    });
   }
 
   textMap = {
-    cpu: 'CPU',
-  }
+    cpu: "CPU",
+  };
 
   render() {
     return (
@@ -33,14 +33,14 @@ class Option extends React.Component {
         <div className="leading-relaxed">
           <h2>Popup settings</h2>
           <div className="my-3">
-            {['cpu', 'memory', 'battery', 'storage'].map((item) => (
+            {["cpu", "memory", "battery", "storage"].map((item) => (
               <div key={item}>
                 <input
                   id={item}
                   type="checkbox"
                   checked={this.state.popup[item]}
                   onChange={(e) => {
-                    this.setParams({ [item]: e.target.checked })
+                    this.setParams({ [item]: e.target.checked });
                   }}
                 />
                 <label className="select-none" htmlFor={item}>
@@ -59,8 +59,8 @@ class Option extends React.Component {
           </footer>
         </div>
       )
-    )
+    );
   }
 }
 
-export default Option
+export default Option;

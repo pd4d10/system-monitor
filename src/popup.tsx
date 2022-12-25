@@ -1,20 +1,20 @@
-import './style.css'
-import React, { FC, Component } from 'react'
-import { getSystemInfo, storage, toGiga } from './utils'
+import "./style.css";
+import React, { FC, Component } from "react";
+import { getSystemInfo, storage, toGiga } from "./utils";
 
-const width = 220
+const width = 220;
 
-const Tip: FC = ({ children }) => <p className="my-1 text-sm">{children}</p>
+const Tip: FC = ({ children }) => <p className="my-1 text-sm">{children}</p>;
 
-const Title: FC = ({ children }) => <h2 className="my-2">{children}</h2>
+const Title: FC = ({ children }) => <h2 className="my-2">{children}</h2>;
 
 const Bar: FC<{
-  borderColor: string
+  borderColor: string;
   usages: {
-    offset?: number
-    ratio: number
-    color: string
-  }[]
+    offset?: number;
+    ratio: number;
+    color: string;
+  }[];
 }> = (info) => (
   <div
     className="block h-[10] w-[220] mb-1 relative"
@@ -27,19 +27,19 @@ const Bar: FC<{
         key={index.toString()}
         className="absolute left-0 top-0 w-full h-full"
         style={{
-          transition: 'transform 0.5s',
+          transition: "transform 0.5s",
           backgroundColor: color,
-          transformOrigin: 'left top',
+          transformOrigin: "left top",
           transform: `${
-            typeof offset === 'undefined'
-              ? ''
+            typeof offset === "undefined"
+              ? ""
               : `translateX(${offset * width}px) `
           }scaleX(${ratio})`,
         }}
       />
     ))}
   </div>
-)
+);
 
 const Icon: FC<{ color: string; text: string }> = ({ color, text }) => (
   <div className="text-sm float-left mr-2 leading-none">
@@ -49,7 +49,7 @@ const Icon: FC<{ color: string; text: string }> = ({ color, text }) => (
     />
     {text}
   </div>
-)
+);
 
 class Container extends Component {
   state = {
@@ -61,7 +61,7 @@ class Container extends Component {
     },
     supportBatteryAPI: false,
     cpu: {
-      modelName: '',
+      modelName: "",
       usage: [],
       temperatures: [],
     },
@@ -77,10 +77,10 @@ class Container extends Component {
       chargingtime: 0,
       dischargingTime: 0,
     },
-  }
+  };
 
   addBatteryListener = async () => {
-    const _battery = await navigator.getBattery()
+    const _battery = await navigator.getBattery();
 
     const handleBatteryChange = () => {
       this.setState({
@@ -91,48 +91,48 @@ class Container extends Component {
           chargingTime: _battery.chargingTime,
           dischargingTime: _battery.dischargingTime,
         },
-      })
-    }
+      });
+    };
 
-    handleBatteryChange()
-    ;[
-      'chargingchange',
-      'levelchange',
-      'chargingtimechange',
-      'dischargingtimechange',
+    handleBatteryChange();
+    [
+      "chargingchange",
+      "levelchange",
+      "chargingtimechange",
+      "dischargingtimechange",
     ].forEach((event) => {
-      _battery.addEventListener(event, handleBatteryChange)
-    })
-  }
+      _battery.addEventListener(event, handleBatteryChange);
+    });
+  };
 
   async componentDidMount() {
-    const status = await storage.getPopupStatus()
+    const status = await storage.getPopupStatus();
     this.setState({ status }, async () => {
       // Trigger CPU, memory and storage status update periodly
       getSystemInfo(status, (data) => {
-        console.log(data)
-        this.setState(data)
-      })
+        console.log(data);
+        this.setState(data);
+      });
 
       // Battery
-      if (typeof navigator.getBattery === 'function') {
+      if (typeof navigator.getBattery === "function") {
         this.setState({
           supportBatteryAPI: true,
-        })
-        this.addBatteryListener()
+        });
+        this.addBatteryListener();
       }
-    })
+    });
   }
 
   render() {
-    const { state } = this
-    const info = state.cpu
+    const { state } = this;
+    const info = state.cpu;
 
     const colors = {
-      kernel: '#3a5eca',
-      user: '#6687e7',
-      border: '#b3c3f3',
-    }
+      kernel: "#3a5eca",
+      user: "#6687e7",
+      border: "#b3c3f3",
+    };
 
     return (
       <div className="h-[230]">
@@ -142,7 +142,7 @@ class Container extends Component {
             <Tip>
               {info.modelName}
               {info.temperatures.length > 0 &&
-                ` | ${info.temperatures.map((t) => `${t}°C`).join(', ')}`}
+                ` | ${info.temperatures.map((t) => `${t}°C`).join(", ")}`}
             </Tip>
             <div className="overflow-hidden my-2">
               <Icon color={colors.kernel} text="Kernel" />
@@ -178,7 +178,7 @@ class Container extends Component {
               borderColor="#8fd8d4"
               usages={[
                 {
-                  color: '#198e88',
+                  color: "#198e88",
                   ratio:
                     1 - state.memory.availableCapacity / state.memory.capacity,
                 },
@@ -191,12 +191,12 @@ class Container extends Component {
             <Title>Battery</Title>
             <Tip>
               {(state.battery.level * 100).toFixed(2)}% (
-              {state.battery.isCharging ? 'Charging' : 'Not charging'})
+              {state.battery.isCharging ? "Charging" : "Not charging"})
             </Tip>
             <Bar
               usages={[
                 {
-                  color: '#B6C8F5',
+                  color: "#B6C8F5",
                   ratio: state.battery.level,
                 },
               ]}
@@ -208,25 +208,25 @@ class Container extends Component {
           <div>
             <Title>Storage</Title>
             {state.storage.map(({ name, capacity, id }) => (
-              <Tip key={id}>{`${name || 'Unknown'} / ${toGiga(
+              <Tip key={id}>{`${name || "Unknown"} / ${toGiga(
                 capacity
               )}GB`}</Tip>
             ))}
           </div>
         )}
-        {location.search === '' && (
+        {location.search === "" && (
           <div className="leading-normal mt-2">
             <a
               href="#"
               className="block"
               onClick={(e) => {
-                e.preventDefault()
-                const { clientWidth, clientHeight } = document.documentElement
+                e.preventDefault();
+                const { clientWidth, clientHeight } = document.documentElement;
                 window.open(
-                  chrome.runtime.getURL('popup.html?window=1'),
+                  chrome.runtime.getURL("popup.html?window=1"),
                   undefined,
                   `width=${clientWidth},height=${clientHeight + 24}`
-                )
+                );
               }}
             >
               Open as new window
@@ -235,8 +235,8 @@ class Container extends Component {
               href="#"
               className="block"
               onClick={(e) => {
-                e.preventDefault()
-                chrome.runtime.openOptionsPage()
+                e.preventDefault();
+                chrome.runtime.openOptionsPage();
               }}
             >
               Settings
@@ -244,8 +244,8 @@ class Container extends Component {
           </div>
         )}
       </div>
-    )
+    );
   }
 }
 
-export default Container
+export default Container;
