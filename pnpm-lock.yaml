@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@rescript/react': ^0.10.3
+  '@rescript/react': ^0.11.0
   plasmo: ^0.60.2
   postcss: ^8.4.20
   react: ^18.2.0
@@ -15,7 +15,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
 
 devDependencies:
-  '@rescript/react': 0.10.3_biqbaboplfbrettd7655fr4n2y
+  '@rescript/react': 0.11.0_biqbaboplfbrettd7655fr4n2y
   plasmo: 0.60.2_iyfpnomciillkc63qm7dtpmfru
   postcss: 8.4.20
   rescript: 10.1.0
@@ -1432,11 +1432,11 @@ packages:
       config-chain: 1.1.13
     dev: true
 
-  /@rescript/react/0.10.3_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-Lf9rzrR3bQPKJjOK3PBRa/B3xrJ7CqQ1HYr9VHPVxJidarIJJFZBhj0Dg1uZURX+Wg/xiP0PHFxXmdj2bK8Vxw==}
+  /@rescript/react/0.11.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-RzoAO+3cJwXE2D7yodMo4tBO2EkeDYCN/I/Sj/yRweI3S1CY1ZBOF/GMcVtjeIurJJt7KMveqQXTaRrqoGZBBg==}
     peerDependencies:
-      react: '>=16.8.1'
-      react-dom: '>=16.8.1'
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0

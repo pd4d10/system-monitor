@@ -24,7 +24,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@rescript/react": "^0.10.3",
+    "@rescript/react": "^0.11.0",
     "plasmo": "^0.60.2",
     "postcss": "^8.4.20",
     "rescript": "^10.1.0",
