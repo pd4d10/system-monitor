@@ -1,12 +1,16 @@
-import "./style.css";
-import React, { FC, Component } from "react";
-import { getSystemInfo, storage, toGiga } from "./utils";
+import "../style.css";
+import React, { FC, Component, PropsWithChildren } from "react";
+import { getSystemInfo, storage, toGiga } from "../utils";
 
 const width = 220;
 
-const Tip: FC = ({ children }) => <p className="my-1 text-sm">{children}</p>;
+const Tip: FC<PropsWithChildren<{}>> = ({ children }) => (
+  <p className="my-1 text-sm">{children}</p>
+);
 
-const Title: FC = ({ children }) => <h2 className="my-2">{children}</h2>;
+const Title: FC<PropsWithChildren<{}>> = ({ children }) => (
+  <h2 className="my-2">{children}</h2>
+);
 
 const Bar: FC<{
   borderColor: string;
