@@ -11,5 +11,5 @@
   "suffix": ".bs.js",
   "jsx": { "version": 4 },
   "bsc-flags": ["-open Belt"],
-  "bs-dependencies": ["@rescript/react", "rescript-webapi"]
+  "bs-dependencies": ["@rescript/react", "rescript-webapi", "rescript-webext"]
 }

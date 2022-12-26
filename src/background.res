@@ -55,7 +55,7 @@ getSystemInfo(.{"cpu": true}, data => {
       usage->Array.length->Int.toFloat
 
   let c = (100. *. (1. -. idle))->Js.Float.toFixed
-  Chrome.BrowserAction.setTitle({
+  let _ = Chrome.BrowserAction.setTitle({
     title: `${modelName}\nUsage: ${c}%`,
   })
 

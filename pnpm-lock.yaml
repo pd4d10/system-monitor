@@ -10,6 +10,7 @@ specifiers:
   react-dom: ^18.2.0
   rescript: ^10.1.0
   rescript-webapi: ^0.7.0
+  rescript-webext: ^0.1.0
   tailwindcss: ^3.2.4
 
 dependencies:
@@ -24,6 +25,7 @@ devDependencies:
   postcss: 8.4.20
   rescript: 10.1.0
   rescript-webapi: 0.7.0
+  rescript-webext: 0.1.0
   tailwindcss: 3.2.4_postcss@8.4.20
 
 packages:
@@ -3949,6 +3951,12 @@ packages:
 
   /rescript-webapi/0.7.0:
     resolution: {integrity: sha512-fA1LPXSmQY3HtcIStQ2sHu9Xye1XLxd4JvkGQMupux9Q6Tp/jbcdh7bnCaGwHW6aI1QFmTmA/xWxUMb6oPphsQ==}
+    dev: true
+
+  /rescript-webext/0.1.0:
+    resolution: {integrity: sha512-MFOxjj/4FZ3RtKXDKDOaCDsPKxbx6B59OhuqeA3iyAaR3Ofv9mxPA7yek/ysRxAj1J7n88rW8pUuTneGd/WMqw==}
+    dependencies:
+      rescript-webapi: 0.7.0
     dev: true
 
   /rescript/10.1.0:
