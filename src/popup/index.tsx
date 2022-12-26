@@ -1,6 +1,11 @@
 import "../style.css";
 import React, { FC, Component, PropsWithChildren } from "react";
-import { getSystemInfo, storage, toGiga } from "../utils";
+import { getSystemInfo, getPopupStatus } from "../utils.bs";
+
+// Convert byte to GB
+export function toGiga(byte: number) {
+  return (byte / (1024 * 1024 * 1024)).toFixed(2);
+}
 
 const width = 220;
 
@@ -66,7 +71,6 @@ class Container extends Component {
     supportBatteryAPI: false,
     cpu: {
       modelName: "",
-      usage: [],
       temperatures: [],
     },
     memory: {
@@ -74,6 +78,7 @@ class Container extends Component {
       availableCapacity: 1,
     },
     storage: [],
+    processors: [],
     battery: {
       isSupported: false,
       isCharging: false,
@@ -110,12 +115,17 @@ class Container extends Component {
   };
 
   async componentDidMount() {
-    const status = await storage.getPopupStatus();
+    const status = await getPopupStatus();
     this.setState({ status }, async () => {
       // Trigger CPU, memory and storage status update periodly
-      getSystemInfo(status, (data) => {
-        console.log(data);
-        this.setState(data);
+      getSystemInfo((cpu, memory, storage, processors) => {
+        console.log(cpu, memory, storage, processors);
+        this.setState({
+          cpu,
+          memory,
+          storage,
+          processors,
+        });
       });
 
       // Battery
@@ -152,7 +162,7 @@ class Container extends Component {
               <Icon color={colors.kernel} text="Kernel" />
               <Icon color={colors.user} text="User" />
             </div>
-            {info.usage.map(({ user, kernel, total }, index) => (
+            {state.processors.map(({ user, kernel, total }, index) => (
               <Bar
                 key={index}
                 borderColor={colors.border}

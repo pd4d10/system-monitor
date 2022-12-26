@@ -2,26 +2,13 @@
 import "./style.css"
 `)
 
-type popup = {
-  cpu?: bool,
-  memory?: bool,
-  battery?: bool,
-  storage?: bool,
-}
-
-@module("./utils")
-external storage: {
-  "getPopupStatus": unit => promise<popup>,
-  "setPopupStatus": popup => promise<unit>,
-} = "storage"
-
 @react.component
 let default = () => {
-  let initial: popup = {}
+  let initial: Utils.popup = {}
   let (popup, setPopup) = React.useState(_ => initial)
 
   React.useEffect0(() => {
-    let _ = storage["getPopupStatus"]()->Js.Promise2.then(({cpu, memory, battery, storage}) => {
+    let _ = Utils.getPopupStatus()->Js.Promise2.then(({cpu, memory, battery, storage}) => {
       setPopup(
         _ => {
           ...popup,
@@ -44,14 +31,14 @@ let default = () => {
         checked
         onChange={e => {
           let checked = (e->ReactEvent.Form.target)["checked"]
-          let v = {
+          let v: Utils.popup = {
             cpu: key == "cpu" ? checked : popup.cpu->Option.getWithDefault(true),
             memory: key == "memory" ? checked : popup.memory->Option.getWithDefault(true),
             battery: key == "battery" ? checked : popup.battery->Option.getWithDefault(true),
             storage: key == "storage" ? checked : popup.storage->Option.getWithDefault(true),
           }
           setPopup(_ => v)
-          let _ = storage["setPopupStatus"](v)
+          let _ = Utils.setPopupStatus(v)
         }}
       />
       <label className="select-none" htmlFor={key}>

@@ -1,6 +1,3 @@
-@module("./utils")
-external getSystemInfo: 'a = "getSystemInfo"
-
 module OffscreenCanvas = {
   type t
   @new external make: (float, float) => 'a = "OffscreenCanvas"
@@ -46,17 +43,14 @@ let drawBorder = (ctx, color) => {
 
 let cpuIdleArray = Array.make(size, 1.)
 
-getSystemInfo(.{"cpu": true}, data => {
-  let modelName = data["cpu"]["modelName"]
-  let usage = data["cpu"]["usage"]
-
+Utils.getSystemInfo(~callback=(cpu, memory, storage, usages) => {
   let idle =
-    usage->Array.reduce(0., (a, b) => a +. b["idle"] /. b["total"]) /.
-      usage->Array.length->Int.toFloat
+    usages->Array.reduce(0., (a, b) => a +. b.idle->Int.toFloat /. b.total->Int.toFloat) /.
+      usages->Array.length->Int.toFloat
 
   let c = (100. *. (1. -. idle))->Js.Float.toFixed
   let _ = Chrome.BrowserAction.setTitle({
-    title: `${modelName}\nUsage: ${c}%`,
+    title: `${cpu.modelName}\nUsage: ${c}%`,
   })
 
   cpuIdleArray->Array.push(idle)
@@ -69,4 +63,4 @@ getSystemInfo(.{"cpu": true}, data => {
   Chrome.BrowserAction.setIcon({
     imageData: ctx->Webapi.Canvas.Canvas2d.getImageData(~sx=0., ~sy=0., ~sw=sizef, ~sh=sizef),
   })
-})
+}, ())
