@@ -224,7 +224,7 @@ let default = () => {
               className="block"
               onClick={e => {
                 e->ReactEvent.Mouse.preventDefault
-                // TODO: chrome.runtime.openOptionsPage()
+                Chrome.Runtime.openOptionsPage()
               }}>
               {"Settings"->React.string}
             </a>
