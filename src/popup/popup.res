@@ -206,12 +206,14 @@ let default = () => {
                 let width = html->Element.clientWidth
                 let height = html->Element.clientHeight + 24
 
-                let _ =
-                  window->Window.open_(
-                    ~url=Chrome.Runtime.getURL("popup.html?window=1"),
-                    ~name="",
-                    ~features=`width=${width->Int.toString},height=${height->Int.toString}}`,
-                  )
+                window
+                ->Window.open_(
+                  ~url=Chrome.Runtime.getURL("popup.html?window=1"),
+                  ~name="",
+                  ~features=`width=${width->Int.toString},height=${height->Int.toString}}`,
+                  (),
+                )
+                ->ignore
               }}>
               {"Open as new window"->React.string}
             </a>
