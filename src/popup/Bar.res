@@ -20,12 +20,9 @@ let make = (~borderColor, ~usages) => {
           ~transition="transform 0.5s",
           ~backgroundColor=usage.color,
           ~transformOrigin="left top",
-          ~transform=switch usage.offset {
-          | None => ""
-          | Some(offset) => {
-              let px = offset *. width
-              `translateX(${px->Float.toString}px) scaleX(${usage.ratio->Float.toString})`
-            }
+          ~transform={
+            let px = usage.offset->Option.getWithDefault(0.) *. width
+            `translateX(${px->Float.toString}px) scaleX(${usage.ratio->Float.toString})`
           },
           (),
         )}
