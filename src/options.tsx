@@ -1,1 +1,1 @@
-export { default } from "./options.bs";
+export { default } from "/lib/es6/src/options";

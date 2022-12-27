@@ -1,1 +1,1 @@
-import "./background.bs";
+import "/lib/es6/src/background";
