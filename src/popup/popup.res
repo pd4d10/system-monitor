@@ -8,7 +8,10 @@ type batteryInfo = {
   dischargingTime: int,
   level: float,
 }
-external getBattery: option<(. unit) => promise<'a>> = "navigator.getBattery"
+
+type navigator
+external navigator: navigator = "navigator"
+@send external getBattery: navigator => promise<'a> = "getBattery"
 type batteryStatus = Idle | Unsupported | Fetched(batteryInfo)
 
 let useBattery = () => {
@@ -31,23 +34,21 @@ let useBattery = () => {
       }
     }
 
-    switch getBattery {
-    | None => setState(_ => Unsupported)
-    | Some(getBattery) => {
-        let _ = getBattery(.)->Js.Promise2.then(bm => {
-          bRef := bm->Some
-          handleChange()
+    let _ =
+      navigator
+      ->getBattery
+      ->Js.Promise2.then(bm => {
+        bRef := bm->Some
+        handleChange()
 
-          events->Array.forEach(
-            event => {
-              bm["addEventListener"](. event, handleChange)
-            },
-          )
+        events->Array.forEach(
+          event => {
+            bm["addEventListener"](. event, handleChange)
+          },
+        )
 
-          Js.Promise2.resolve()
-        })
-      }
-    }
+        Js.Promise2.resolve()
+      })
 
     Some(
       () => {
