@@ -71,7 +71,7 @@ let userColor = "#6687e7"
 let borderColor = "#b3c3f3"
 
 let toGiga = byte => {
-  (byte->Int.toFloat /. (1024. *. 1024. *. 1024.))->Js.Float.toFixed
+  (byte->Int.toFloat /. (1024. *. 1024. *. 1024.))->Js.Float.toFixedWithPrecision(~digits=2)
 }
 
 @react.component
@@ -144,8 +144,7 @@ let default = () => {
           <div>
             <Title> {"Memory"->React.string} </Title>
             <Tip>
-              {`Available: ${toGiga(memory.availableCapacity)}GB/
-              ${toGiga(memory.capacity)}GB`->React.string}
+              {`Available: ${memory.availableCapacity->toGiga}GB/${memory.capacity->toGiga}GB`->React.string}
             </Tip>
             <Bar
               borderColor="#8fd8d4"
@@ -165,8 +164,11 @@ let default = () => {
           <div>
             <Title> {"Battery"->React.string} </Title>
             <Tip>
-              {`${(info.level *. 100.)->Js.Float.toFixed}% (
-              ${info.charging ? "Charging" : "Not charging"})`->React.string}
+              {
+                let percent = (info.level *. 100.)->Js.Float.toFixedWithPrecision(~digits=2)
+                let status = info.charging ? "Charging" : "Not charging"
+                `${percent}% (${status})`->React.string
+              }
             </Tip>
             <Bar
               usages={[
