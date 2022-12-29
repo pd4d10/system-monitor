@@ -58,7 +58,7 @@ let rec getSystemInfo = (
 let getPopupStatus = () => {
   Js.Promise2.make((~resolve, ~reject as _) => {
     Chrome.Storage.Sync.getAll(items => {
-      let popup = items["popup"]
+      let popup = items["popup"]->Option.getWithDefault(Js.Dict.empty())
 
       resolve(. {
         cpu: popup->Js.Dict.get("cpu")->Belt.Option.getWithDefault(true),
