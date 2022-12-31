@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@rescript/react": "^0.11.0",
-    "plasmo": "^0.60.2",
+    "plasmo": "^0.61.0",
     "postcss": "^8.4.20",
     "rescript": "^10.1.0",
     "rescript-webapi": "^0.7.0",

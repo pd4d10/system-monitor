@@ -1,7 +1,3 @@
-%%raw(`
-import "/src/style.css"
-`)
-
 type batteryInfo = {
   charging: bool,
   chargingTime: int,

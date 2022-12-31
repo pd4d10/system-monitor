@@ -1,7 +1,3 @@
-%%raw(`
-import "/src/style.css"
-`)
-
 @react.component
 let default = () => {
   let initial: Utils.popup = {}
