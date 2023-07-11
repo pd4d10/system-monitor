@@ -390,7 +390,7 @@ packages:
       json5: 2.2.2
       msgpackr: 1.8.1
       nullthrows: 1.1.1
-      semver: 5.7.1
+      semver: 5.7.2
     dev: true
 
   /@parcel/css/1.14.0:
@@ -482,7 +482,7 @@ packages:
       '@parcel/diagnostic': 2.8.2
       '@parcel/utils': 2.8.2
       nullthrows: 1.1.1
-      semver: 5.7.1
+      semver: 5.7.2
     dev: true
 
   /@parcel/optimizer-css/2.8.2_@parcel+core@2.8.2:
@@ -584,7 +584,7 @@ packages:
       '@parcel/types': 2.8.2_@parcel+core@2.8.2
       '@parcel/utils': 2.8.2
       '@parcel/workers': 2.8.2_@parcel+core@2.8.2
-      semver: 5.7.1
+      semver: 5.7.2
     dev: true
 
   /@parcel/packager-css/2.8.2_@parcel+core@2.8.2:
@@ -748,7 +748,7 @@ packages:
       browserslist: 4.21.4
       json5: 2.2.2
       nullthrows: 1.1.1
-      semver: 5.7.1
+      semver: 5.7.2
     transitivePeerDependencies:
       - '@parcel/core'
     dev: true
@@ -790,7 +790,7 @@ packages:
       posthtml: 0.16.6
       posthtml-parser: 0.10.2
       posthtml-render: 3.0.0
-      semver: 5.7.1
+      semver: 5.7.2
     transitivePeerDependencies:
       - '@parcel/core'
     dev: true
@@ -834,7 +834,7 @@ packages:
       detect-libc: 1.0.3
       nullthrows: 1.1.1
       regenerator-runtime: 0.13.11
-      semver: 5.7.1
+      semver: 5.7.2
     dev: true
 
   /@parcel/transformer-json/2.8.2_@parcel+core@2.8.2:
@@ -870,7 +870,7 @@ packages:
       clone: 2.1.2
       nullthrows: 1.1.1
       postcss-value-parser: 4.2.0
-      semver: 5.7.1
+      semver: 5.7.2
     transitivePeerDependencies:
       - '@parcel/core'
     dev: true
@@ -885,7 +885,7 @@ packages:
       posthtml: 0.16.6
       posthtml-parser: 0.10.2
       posthtml-render: 3.0.0
-      semver: 5.7.1
+      semver: 5.7.2
     transitivePeerDependencies:
       - '@parcel/core'
     dev: true
@@ -932,7 +932,7 @@ packages:
       posthtml: 0.16.6
       posthtml-parser: 0.10.2
       posthtml-render: 3.0.0
-      semver: 5.7.1
+      semver: 5.7.2
     transitivePeerDependencies:
       - '@parcel/core'
     dev: true
@@ -3202,7 +3202,7 @@ packages:
     requiresBuild: true
     dependencies:
       pify: 4.0.1
-      semver: 5.7.1
+      semver: 5.7.2
     dev: true
     optional: true
 
@@ -4033,8 +4033,8 @@ packages:
     dependencies:
       loose-envify: 1.4.0
 
-  /semver/5.7.1:
-    resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}
+  /semver/5.7.2:
+    resolution: {integrity: sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==}
     hasBin: true
     dev: true
 
