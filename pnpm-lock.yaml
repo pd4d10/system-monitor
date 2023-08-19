@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@rescript/react': ^0.11.0
+  '@types/chrome': ^0.0.243
   plasmo: ^0.61.0
   postcss: ^8.4.20
   react: ^18.2.0
@@ -10,6 +11,7 @@ specifiers:
   rescript-webapi: ^0.7.0
   rescript-webext: ^0.3.0
   tailwindcss: ^3.2.4
+  typescript: ^5.1.6
 
 dependencies:
   react: 18.2.0
@@ -17,12 +19,14 @@ dependencies:
 
 devDependencies:
   '@rescript/react': 0.11.0_biqbaboplfbrettd7655fr4n2y
+  '@types/chrome': 0.0.243
   plasmo: 0.61.0_iyfpnomciillkc63qm7dtpmfru
   postcss: 8.4.20
   rescript: 10.1.0
   rescript-webapi: 0.7.0
   rescript-webext: 0.3.0
   tailwindcss: 3.2.4_postcss@8.4.20
+  typescript: 5.1.6
 
 packages:
 
@@ -1478,6 +1482,27 @@ packages:
   /@trysound/sax/0.2.0:
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
     engines: {node: '>=10.13.0'}
+    dev: true
+
+  /@types/chrome/0.0.243:
+    resolution: {integrity: sha512-4PHv0kxxxpZFHWPBiJJ9TWH8kbx0567j1b2djnhpJjpiSGNI7UKkz7dSEECBtQ0B3N5nQTMwSB/5IopkWGAbEA==}
+    dependencies:
+      '@types/filesystem': 0.0.32
+      '@types/har-format': 1.2.11
+    dev: true
+
+  /@types/filesystem/0.0.32:
+    resolution: {integrity: sha512-Yuf4jR5YYMR2DVgwuCiP11s0xuVRyPKmz8vo6HBY3CGdeMj8af93CFZX+T82+VD1+UqHOxTq31lO7MI7lepBtQ==}
+    dependencies:
+      '@types/filewriter': 0.0.29
+    dev: true
+
+  /@types/filewriter/0.0.29:
+    resolution: {integrity: sha512-BsPXH/irW0ht0Ji6iw/jJaK8Lj3FJemon2gvEqHKpCdDCeemHa+rI3WBGq5z7cDMZgoLjY40oninGxqk+8NzNQ==}
+    dev: true
+
+  /@types/har-format/1.2.11:
+    resolution: {integrity: sha512-T232/TneofqK30AD1LRrrf8KnjLvzrjWDp7eWST5KoiSzrBfRsLrWDPk4STQPW4NZG6v2MltnduBVmakbZOBIQ==}
     dev: true
 
   /@types/json-schema/7.0.11:
@@ -4455,6 +4480,12 @@ packages:
   /typescript/4.9.4:
     resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
     engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
+
+  /typescript/5.1.6:
+    resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
+    engines: {node: '>=14.17'}
     hasBin: true
     dev: true
 
