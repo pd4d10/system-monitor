@@ -17,6 +17,8 @@
   "devDependencies": {
     "@rescript/react": "^0.11.0",
     "@types/chrome": "^0.0.243",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
     "plasmo": "^0.61.0",
     "postcss": "^8.4.20",
     "rescript": "^10.1.0",
