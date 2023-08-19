@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./style.css";
-import * as Utils from "./Utils.js";
+import { getPopupStatus, setPopupStatus } from "./utils";
 
 interface Popup {
   cpu?: boolean;
@@ -13,7 +13,8 @@ export default function Options() {
   const [popup, setPopup] = useState<Popup>({});
 
   useEffect(() => {
-    Utils.getPopupStatus(({ cpu, memory, battery, storage }) => {
+    const init = async () => {
+      const { cpu, memory, battery, storage } = await getPopupStatus();
       setPopup({
         ...popup,
         cpu,
@@ -21,7 +22,7 @@ export default function Options() {
         battery,
         storage,
       });
-    });
+    };
   }, []);
 
   const select = (key: keyof Popup, checked: boolean) => {
@@ -31,7 +32,7 @@ export default function Options() {
           id={key}
           type="checkbox"
           checked={checked}
-          onChange={(e) => {
+          onChange={async (e) => {
             const v: Popup = {
               cpu: key == "cpu" ? e.target.checked : popup.cpu ?? true,
               memory: key == "memory" ? e.target.checked : popup.memory ?? true,
@@ -41,7 +42,7 @@ export default function Options() {
                 key == "storage" ? e.target.checked : popup.storage ?? true,
             };
             setPopup(v);
-            Utils.setPopupStatus(v);
+            await setPopupStatus(v);
           }}
         />
         <label className="select-none" htmlFor={key}>

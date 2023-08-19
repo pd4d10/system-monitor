@@ -1,6 +1,6 @@
 import "./style.css";
 import { FC, Component, PropsWithChildren } from "react";
-import { getSystemInfo, getPopupStatus } from "./utils.js";
+import { getSystemInfo, getPopupStatus } from "./utils";
 
 // Convert byte to GB
 export function toGiga(byte: number) {
@@ -118,13 +118,13 @@ export default class Container extends Component {
     const status = await getPopupStatus();
     this.setState({ status }, async () => {
       // Trigger CPU, memory and storage status update periodly
-      getSystemInfo((cpu, memory, storage, processors) => {
-        console.log(cpu, memory, storage, processors);
+      getSystemInfo(({ cpu, memory, storage }) => {
+        console.log(cpu, memory, storage, cpu.usage);
         this.setState({
           cpu,
           memory,
           storage,
-          processors,
+          processors: cpu.usage,
         });
       });
 
