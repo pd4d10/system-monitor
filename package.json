@@ -10,21 +10,15 @@
     "dev": "plasmo dev --target=firefox-mv2",
     "icon": "node scripts/icon.js"
   },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
   "devDependencies": {
-    "@rescript/react": "^0.11.0",
     "@types/chrome": "^0.0.243",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
-    "plasmo": "^0.61.0",
-    "postcss": "^8.4.20",
-    "rescript": "^10.1.0",
-    "rescript-webapi": "^0.7.0",
-    "rescript-webext": "^0.3.0",
-    "tailwindcss": "^3.2.4",
+    "plasmo": "^0.82.0",
+    "postcss": "^8.4.28",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.3",
     "typescript": "^5.1.6"
   },
   "packageManager": "pnpm@7.20.0",
