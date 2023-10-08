@@ -5,7 +5,7 @@ specifiers:
   '@types/react': ^18.2.20
   '@types/react-dom': ^18.2.7
   plasmo: ^0.82.0
-  postcss: ^8.4.28
+  postcss: ^8.4.31
   react: ^18.2.0
   react-dom: ^18.2.0
   tailwindcss: ^3.3.3
@@ -15,8 +15,8 @@ devDependencies:
   '@types/chrome': 0.0.243
   '@types/react': 18.2.20
   '@types/react-dom': 18.2.7
-  plasmo: 0.82.0_izm54qgw3if2uwlch7r6l27tda
-  postcss: 8.4.28
+  plasmo: 0.82.0_poqtzqfv7cpbstrerwgfoipufu
+  postcss: 8.4.31
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   tailwindcss: 3.3.3
@@ -649,7 +649,7 @@ packages:
       - '@parcel/core'
     dev: true
 
-  /@parcel/config-default/2.9.3_3sgemfq6ucm6cy4izgbqdeub3a:
+  /@parcel/config-default/2.9.3_amreciyvvhhkbq4jd4sqqdugoa:
     resolution: {integrity: sha512-tqN5tF7QnVABDZAu76co5E6N8mA9n8bxiWdK4xYyINYFIEHgX172oRTqXTnhEMjlMrdmASxvnGlbaPBaVnrCTw==}
     peerDependencies:
       '@parcel/core': ^2.9.3
@@ -659,7 +659,7 @@ packages:
       '@parcel/core': 2.9.3
       '@parcel/namer-default': 2.9.3_@parcel+core@2.9.3
       '@parcel/optimizer-css': 2.9.3_@parcel+core@2.9.3
-      '@parcel/optimizer-htmlnano': 2.9.3_3sgemfq6ucm6cy4izgbqdeub3a
+      '@parcel/optimizer-htmlnano': 2.9.3_amreciyvvhhkbq4jd4sqqdugoa
       '@parcel/optimizer-image': 2.9.3_@parcel+core@2.9.3
       '@parcel/optimizer-svgo': 2.9.3_@parcel+core@2.9.3
       '@parcel/optimizer-swc': 2.9.3_@parcel+core@2.9.3
@@ -840,12 +840,12 @@ packages:
       - '@parcel/core'
     dev: true
 
-  /@parcel/optimizer-htmlnano/2.9.3_3sgemfq6ucm6cy4izgbqdeub3a:
+  /@parcel/optimizer-htmlnano/2.9.3_amreciyvvhhkbq4jd4sqqdugoa:
     resolution: {integrity: sha512-9g/KBck3c6DokmJfvJ5zpHFBiCSolaGrcsTGx8C3YPdCTVTI9P1TDCwUxvAr4LjpcIRSa82wlLCI+nF6sSgxKA==}
     engines: {node: '>= 12.0.0', parcel: ^2.9.3}
     dependencies:
       '@parcel/plugin': 2.9.3_@parcel+core@2.9.3
-      htmlnano: 2.0.4_postcss@8.4.28+svgo@2.8.0
+      htmlnano: 2.0.4_postcss@8.4.31+svgo@2.8.0
       nullthrows: 1.1.1
       posthtml: 0.16.6
       svgo: 2.8.0
@@ -1645,11 +1645,11 @@ packages:
       - '@parcel/core'
     dev: true
 
-  /@plasmohq/parcel-config/0.39.0_izm54qgw3if2uwlch7r6l27tda:
+  /@plasmohq/parcel-config/0.39.0_poqtzqfv7cpbstrerwgfoipufu:
     resolution: {integrity: sha512-Pg5/f4QpB/KdtAyFNlzDdi/zjOEeHk9GnH6Ydoz0qqVcOmaxfTNMoMcdacD6GuB4u27PJsSMwq2jF2YTg7L3aw==}
     dependencies:
       '@parcel/compressor-raw': 2.9.3_@parcel+core@2.9.3
-      '@parcel/config-default': 2.9.3_3sgemfq6ucm6cy4izgbqdeub3a
+      '@parcel/config-default': 2.9.3_amreciyvvhhkbq4jd4sqqdugoa
       '@parcel/core': 2.9.3
       '@parcel/optimizer-data-url': 2.9.3_@parcel+core@2.9.3
       '@parcel/reporter-bundle-buddy': 2.9.3_@parcel+core@2.9.3
@@ -1676,7 +1676,7 @@ packages:
       '@plasmohq/parcel-optimizer-es': 0.3.5
       '@plasmohq/parcel-packager': 0.6.14
       '@plasmohq/parcel-resolver': 0.13.1
-      '@plasmohq/parcel-resolver-post': 0.4.0_postcss@8.4.28
+      '@plasmohq/parcel-resolver-post': 0.4.0_postcss@8.4.31
       '@plasmohq/parcel-runtime': 0.21.1
       '@plasmohq/parcel-transformer-inject-env': 0.2.11
       '@plasmohq/parcel-transformer-inline-css': 0.3.8
@@ -1811,7 +1811,7 @@ packages:
       nullthrows: 1.1.1
     dev: true
 
-  /@plasmohq/parcel-resolver-post/0.4.0_postcss@8.4.28:
+  /@plasmohq/parcel-resolver-post/0.4.0_postcss@8.4.31:
     resolution: {integrity: sha512-OxaOap00t3NBk4oiGZsiGJdcxPMc3S52/b1WuVgCKw+UODQj5ODMYcgX/c5ieb+VwmSjDY1eBdaL/U1FE6K57w==}
     engines: {parcel: '>= 2.7.0'}
     dependencies:
@@ -1820,7 +1820,7 @@ packages:
       '@parcel/plugin': 2.9.3_@parcel+core@2.9.3
       '@parcel/types': 2.9.3_@parcel+core@2.9.3
       '@parcel/utils': 2.9.3
-      tsup: 7.1.0_ee4alge3zmmop2ljwr3fatn3iu
+      tsup: 7.1.0_kglacbe5qla2eh5duv3676hjre
       typescript: 5.1.6
     transitivePeerDependencies:
       - '@swc/core'
@@ -2462,7 +2462,7 @@ packages:
       '@vue/shared': 3.3.4
       estree-walker: 2.0.2
       magic-string: 0.30.2
-      postcss: 8.4.28
+      postcss: 8.4.31
       source-map-js: 1.0.2
     dev: true
 
@@ -3525,7 +3525,7 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /htmlnano/2.0.4_postcss@8.4.28+svgo@2.8.0:
+  /htmlnano/2.0.4_postcss@8.4.31+svgo@2.8.0:
     resolution: {integrity: sha512-WGCkyGFwjKW1GeCBsPYacMvaMnZtFJ0zIRnC2NCddkA+IOEhTqskXrS7lep+3yYZw/nQ3dW1UAX4yA/GJyR8BA==}
     peerDependencies:
       cssnano: ^6.0.0
@@ -3555,7 +3555,7 @@ packages:
         optional: true
     dependencies:
       cosmiconfig: 8.2.0
-      postcss: 8.4.28
+      postcss: 8.4.31
       posthtml: 0.16.6
       svgo: 2.8.0
       timsort: 0.3.0
@@ -4517,7 +4517,7 @@ packages:
     engines: {node: '>= 6'}
     dev: true
 
-  /plasmo/0.82.0_izm54qgw3if2uwlch7r6l27tda:
+  /plasmo/0.82.0_poqtzqfv7cpbstrerwgfoipufu:
     resolution: {integrity: sha512-LorWjQx6uaQVqkibSidRHrVlcbSWosPAH+BWbKM2KvqMetDcBiApA4D4c4v3Y8a0KdKwNJxBc5La7AhTyaFotw==}
     hasBin: true
     dependencies:
@@ -4527,7 +4527,7 @@ packages:
       '@parcel/package-manager': 2.9.3_@parcel+core@2.9.3
       '@parcel/watcher': 2.2.0
       '@plasmohq/init': 0.7.0
-      '@plasmohq/parcel-config': 0.39.0_izm54qgw3if2uwlch7r6l27tda
+      '@plasmohq/parcel-config': 0.39.0_poqtzqfv7cpbstrerwgfoipufu
       '@plasmohq/parcel-core': 0.1.6
       buffer: 6.0.3
       chalk: 5.3.0
@@ -4611,29 +4611,29 @@ packages:
       - whiskers
     dev: true
 
-  /postcss-import/15.1.0_postcss@8.4.28:
+  /postcss-import/15.1.0_postcss@8.4.31:
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       postcss: ^8.0.0
     dependencies:
-      postcss: 8.4.28
+      postcss: 8.4.31
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.4
     dev: true
 
-  /postcss-js/4.0.1_postcss@8.4.28:
+  /postcss-js/4.0.1_postcss@8.4.31:
     resolution: {integrity: sha512-dDLF8pEO191hJMtlHFPRa8xsizHaM82MLfNkUHdUtVEV3tgTp5oj+8qbEqYM57SLfc74KSbw//4SeJma2LRVIw==}
     engines: {node: ^12 || ^14 || >= 16}
     peerDependencies:
       postcss: ^8.4.21
     dependencies:
       camelcase-css: 2.0.1
-      postcss: 8.4.28
+      postcss: 8.4.31
     dev: true
 
-  /postcss-load-config/4.0.1_postcss@8.4.28:
+  /postcss-load-config/4.0.1_postcss@8.4.31:
     resolution: {integrity: sha512-vEJIc8RdiBRu3oRAI0ymerOn+7rPuMvRXslTvZUKZonDHFIczxztIyJ1urxM1x9JXEikvpWWTUUqal5j/8QgvA==}
     engines: {node: '>= 14'}
     peerDependencies:
@@ -4646,17 +4646,17 @@ packages:
         optional: true
     dependencies:
       lilconfig: 2.1.0
-      postcss: 8.4.28
+      postcss: 8.4.31
       yaml: 2.3.1
     dev: true
 
-  /postcss-nested/6.0.1_postcss@8.4.28:
+  /postcss-nested/6.0.1_postcss@8.4.31:
     resolution: {integrity: sha512-mEp4xPMi5bSWiMbsgoPfcP74lsWLHkQbZc3sY+jWYd65CUwXrUaTp0fmNpa01ZcETKlIgUdFN/MpS2xZtqL9dQ==}
     engines: {node: '>=12.0'}
     peerDependencies:
       postcss: ^8.2.14
     dependencies:
-      postcss: 8.4.28
+      postcss: 8.4.31
       postcss-selector-parser: 6.0.13
     dev: true
 
@@ -4672,8 +4672,8 @@ packages:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
     dev: true
 
-  /postcss/8.4.28:
-    resolution: {integrity: sha512-Z7V5j0cq8oEKyejIKfpD8b4eBy9cwW2JWPk0+fB1HOAMsfHbnAXLLS+PfVWlzMSLQaWttKDt607I0XHmpE67Vw==}
+  /postcss/8.4.31:
+    resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.6
@@ -5193,11 +5193,11 @@ packages:
       normalize-path: 3.0.0
       object-hash: 3.0.0
       picocolors: 1.0.0
-      postcss: 8.4.28
-      postcss-import: 15.1.0_postcss@8.4.28
-      postcss-js: 4.0.1_postcss@8.4.28
-      postcss-load-config: 4.0.1_postcss@8.4.28
-      postcss-nested: 6.0.1_postcss@8.4.28
+      postcss: 8.4.31
+      postcss-import: 15.1.0_postcss@8.4.31
+      postcss-js: 4.0.1_postcss@8.4.31
+      postcss-load-config: 4.0.1_postcss@8.4.31
+      postcss-nested: 6.0.1_postcss@8.4.31
       postcss-selector-parser: 6.0.13
       resolve: 1.22.4
       sucrase: 3.34.0
@@ -5319,7 +5319,7 @@ packages:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
     dev: true
 
-  /tsup/7.1.0_ee4alge3zmmop2ljwr3fatn3iu:
+  /tsup/7.1.0_kglacbe5qla2eh5duv3676hjre:
     resolution: {integrity: sha512-mazl/GRAk70j8S43/AbSYXGgvRP54oQeX8Un4iZxzATHt0roW0t6HYDVZIXMw0ZQIpvr1nFMniIVnN5186lW7w==}
     engines: {node: '>=16.14'}
     hasBin: true
@@ -5343,8 +5343,8 @@ packages:
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
-      postcss: 8.4.28
-      postcss-load-config: 4.0.1_postcss@8.4.28
+      postcss: 8.4.31
+      postcss-load-config: 4.0.1_postcss@8.4.31
       resolve-from: 5.0.0
       rollup: 3.28.0
       source-map: 0.8.0-beta.0
