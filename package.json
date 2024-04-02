@@ -14,6 +14,7 @@
     "@types/chrome": "^0.0.263",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
+    "effect": "^2.4.15",
     "plasmo": "^0.85.2",
     "postcss": "^8.4.38",
     "react": "^18.2.0",

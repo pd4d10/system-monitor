@@ -1,34 +1,10 @@
+import { ReadonlyArray } from "effect";
+
 const TIMEOUT = 1000;
 
 // Convert byte to GB
 export function toGiga(byte: number) {
   return (byte / (1024 * 1024 * 1024)).toFixed(2);
-}
-
-function getCpuUsage(
-  processors: chrome.system.cpu.ProcessorUsage[],
-  processorsOld: chrome.system.cpu.ProcessorUsage[],
-) {
-  const usage = [];
-  for (let i = 0; i < processors.length; i++) {
-    const processor = processors[i];
-
-    // https://github.com/pd4d10/system-monitor/issues/3
-    if (processor.total === 0) continue;
-
-    const processorOld = processorsOld[i];
-    usage.push(
-      processorOld
-        ? {
-            user: processor.user - processorOld.user,
-            kernel: processor.kernel - processorOld.kernel,
-            idle: processor.idle - processorOld.idle,
-            total: processor.total - processorOld.total,
-          }
-        : processor,
-    );
-  }
-  return usage;
 }
 
 interface SystemInfoData {
@@ -48,6 +24,11 @@ interface UserSettings {
   storage?: boolean;
 }
 
+const isValid = (p: chrome.system.cpu.ProcessorUsage) => {
+  // https://github.com/pd4d10/system-monitor/issues/3
+  return p.total > 0;
+};
+
 export async function getSystemInfo(
   cb: (data: SystemInfoData) => void,
   processorsOld: chrome.system.cpu.ProcessorUsage[] = [],
@@ -65,10 +46,25 @@ export async function getSystemInfo(
   ]);
 
   const processors = cpu.processors.map(({ usage }) => usage);
+
   const data: SystemInfoData = {
     cpu: {
       modelName: cpu.modelName,
-      usage: getCpuUsage(processors, processorsOld),
+      usage: ReadonlyArray.zipWith(
+        ReadonlyArray.filter<chrome.system.cpu.ProcessorUsage>(
+          processors,
+          isValid,
+        ),
+        ReadonlyArray.filter(processorsOld, isValid),
+        (processor, processorOld) => {
+          return {
+            user: processor.user - processorOld.user,
+            kernel: processor.kernel - processorOld.kernel,
+            idle: processor.idle - processorOld.idle,
+            total: processor.total - processorOld.total,
+          };
+        },
+      ),
       temperatures: (cpu as any).temperatures ?? [], // chromeos only, https://developer.chrome.com/docs/extensions/reference/system_cpu/#type-CpuInfo
       // temperatures: [40, 50],
     },

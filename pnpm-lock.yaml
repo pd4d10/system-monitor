@@ -14,6 +14,9 @@ devDependencies:
   '@types/react-dom':
     specifier: ^18.2.23
     version: 18.2.23
+  effect:
+    specifier: ^2.4.15
+    version: 2.4.15
   plasmo:
     specifier: ^0.85.2
     version: 0.85.2(postcss@8.4.38)(react-dom@18.2.0)(react@18.2.0)
@@ -3422,6 +3425,10 @@ packages:
 
   /eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
+    dev: true
+
+  /effect@2.4.15:
+    resolution: {integrity: sha512-fwOeADUSbmlvbNpAlUlNhuCPHN08VKt53YbtSzNe9aZK3CclVJdq2gPgo1TCaGQsJpPf42xw7QrrTBQiH94few==}
     dev: true
 
   /electron-to-chromium@1.4.723:
