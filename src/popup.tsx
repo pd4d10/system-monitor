@@ -72,6 +72,7 @@ export default class Container extends Component {
     cpu: {
       modelName: "",
       temperatures: [],
+      // temperatures: [40, 50],
     },
     memory: {
       capacity: 1,
@@ -118,15 +119,10 @@ export default class Container extends Component {
     const status = await getPopupStatus();
     this.setState({ status }, async () => {
       // Trigger CPU, memory and storage status update periodly
-      getSystemInfo(({ cpu, memory, storage }) => {
-        console.log(cpu, memory, storage, cpu.usage);
-        this.setState({
-          cpu,
-          memory,
-          storage,
-          processors: cpu.usage,
-        });
-      });
+      getSystemInfo(({ cpu, memory, storage, processors }) => {
+        console.log(cpu, memory, storage, processors);
+        this.setState({ cpu, memory, storage, processors });
+      }, []);
 
       // Battery
       if (typeof navigator.getBattery === "function") {

@@ -7,16 +7,6 @@ export function toGiga(byte: number) {
   return (byte / (1024 * 1024 * 1024)).toFixed(2);
 }
 
-interface SystemInfoData {
-  cpu: {
-    modelName: chrome.system.cpu.CpuInfo["modelName"];
-    usage: chrome.system.cpu.ProcessorUsage[];
-    temperatures?: number[];
-  };
-  memory: chrome.system.memory.MemoryInfo;
-  storage: chrome.system.storage.StorageUnitInfo[];
-}
-
 interface UserSettings {
   cpu?: boolean;
   memory?: boolean;
@@ -24,14 +14,22 @@ interface UserSettings {
   storage?: boolean;
 }
 
-const isValid = (p: chrome.system.cpu.ProcessorUsage) => {
+const isValid = (p: chrome.system.cpu.ProcessorInfo) => {
   // https://github.com/pd4d10/system-monitor/issues/3
-  return p.total > 0;
+  return p.usage.total > 0;
 };
 
 export async function getSystemInfo(
-  cb: (data: SystemInfoData) => void,
-  processorsOld: chrome.system.cpu.ProcessorUsage[] = [],
+  cb: (data: {
+    cpu: chrome.system.cpu.CpuInfo & {
+      // chromeos only, https://developer.chrome.com/docs/extensions/reference/system_cpu/#type-CpuInfo
+      temperatures?: number[];
+    };
+    memory: chrome.system.memory.MemoryInfo;
+    storage: chrome.system.storage.StorageUnitInfo[];
+    processors: chrome.system.cpu.ProcessorInfo[];
+  }) => void,
+  lastProcessors: chrome.system.cpu.ProcessorInfo[] = [],
 ) {
   const [cpu, memory, storage] = await Promise.all([
     new Promise<chrome.system.cpu.CpuInfo>((resolve) => {
@@ -45,37 +43,30 @@ export async function getSystemInfo(
     }),
   ]);
 
-  const processors = cpu.processors.map(({ usage }) => usage);
-
-  const data: SystemInfoData = {
-    cpu: {
-      modelName: cpu.modelName,
-      usage: ReadonlyArray.zipWith(
-        ReadonlyArray.filter<chrome.system.cpu.ProcessorUsage>(
-          processors,
-          isValid,
-        ),
-        ReadonlyArray.filter(processorsOld, isValid),
-        (processor, processorOld) => {
-          return {
-            user: processor.user - processorOld.user,
-            kernel: processor.kernel - processorOld.kernel,
-            idle: processor.idle - processorOld.idle,
-            total: processor.total - processorOld.total,
-          };
+  const processors = ReadonlyArray.zipWith(
+    ReadonlyArray.filter<chrome.system.cpu.ProcessorInfo>(
+      cpu.processors,
+      isValid,
+    ),
+    ReadonlyArray.filter(lastProcessors, isValid),
+    (p, p0) => {
+      return {
+        usage: {
+          user: p.usage.user - p0.usage.user,
+          kernel: p.usage.kernel - p0.usage.kernel,
+          idle: p.usage.idle - p0.usage.idle,
+          total: p.usage.total - p0.usage.total,
         },
-      ),
-      temperatures: (cpu as any).temperatures ?? [], // chromeos only, https://developer.chrome.com/docs/extensions/reference/system_cpu/#type-CpuInfo
-      // temperatures: [40, 50],
+      };
     },
-    memory,
-    storage,
-  };
+  );
 
-  cb(data);
+  cb({ cpu, memory, storage, processors });
+
+  console.log(processors);
 
   setTimeout(() => {
-    getSystemInfo(cb, processors);
+    getSystemInfo(cb, cpu.processors);
   }, TIMEOUT);
 }
 

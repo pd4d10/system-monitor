@@ -1,14 +1,15 @@
 import { getSystemInfo } from "./utils";
+
 const canvas = new OffscreenCanvas(19, 19);
 const ctx = canvas.getContext("2d")!;
 
 const cpuIdleArray = Array.from(Array(19), () => 1);
 
-getSystemInfo(({ cpu, memory, storage }) => {
+getSystemInfo(({ cpu, processors }) => {
   const idle =
-    cpu.usage.reduce((a, b) => {
-      return a + b.idle / b.total;
-    }, 0) / cpu.usage.length;
+    processors.reduce((a, b) => {
+      return a + b.usage.idle / b.usage.total;
+    }, 0) / cpu.processors.length;
   const c = (100 * (1 - idle)).toFixed();
   chrome.browserAction.setTitle({
     title: "" + cpu.modelName + "\nUsage: " + c + "%",
