@@ -7,7 +7,7 @@ export function toGiga(byte: number) {
 
 function getCpuUsage(
   processors: chrome.system.cpu.ProcessorUsage[],
-  processorsOld: chrome.system.cpu.ProcessorUsage[]
+  processorsOld: chrome.system.cpu.ProcessorUsage[],
 ) {
   const usage = [];
   for (let i = 0; i < processors.length; i++) {
@@ -25,7 +25,7 @@ function getCpuUsage(
             idle: processor.idle - processorOld.idle,
             total: processor.total - processorOld.total,
           }
-        : processor
+        : processor,
     );
   }
   return usage;
@@ -50,7 +50,7 @@ interface UserSettings {
 
 export async function getSystemInfo(
   cb: (data: SystemInfoData) => void,
-  processorsOld: chrome.system.cpu.ProcessorUsage[] = []
+  processorsOld: chrome.system.cpu.ProcessorUsage[] = [],
 ) {
   const [cpu, memory, storage] = await Promise.all([
     new Promise<chrome.system.cpu.CpuInfo>((resolve) => {
