@@ -1,3 +1,4 @@
+import { Effect, Schedule } from "effect";
 import { getSystemInfo } from "./utils";
 
 const canvas = new OffscreenCanvas(19, 19);
@@ -5,7 +6,10 @@ const ctx = canvas.getContext("2d")!;
 
 const cpuIdleArray = Array.from(Array(19), () => 1);
 
-getSystemInfo(({ cpu, processors }) => {
+const draw = ({
+  processors,
+  cpu,
+}: Awaited<ReturnType<typeof getSystemInfo>>) => {
   const idle =
     processors.reduce((a, b) => {
       return a + b.usage.idle / b.usage.total;
@@ -45,4 +49,11 @@ getSystemInfo(({ cpu, processors }) => {
   chrome.browserAction.setIcon({
     imageData: ctx.getImageData(0, 0, 19, 19),
   });
-});
+};
+
+Effect.runPromise(
+  Effect.repeat(
+    Effect.promise(getSystemInfo).pipe(Effect.map(draw)),
+    Schedule.spaced(1000),
+  ),
+);

@@ -1,6 +1,4 @@
-import { ReadonlyArray } from "effect";
-
-const TIMEOUT = 1000;
+import { Effect, ReadonlyArray } from "effect";
 
 // Convert byte to GB
 export function toGiga(byte: number) {
@@ -19,18 +17,9 @@ const isValid = (p: chrome.system.cpu.ProcessorInfo) => {
   return p.usage.total > 0;
 };
 
-export async function getSystemInfo(
-  cb: (data: {
-    cpu: chrome.system.cpu.CpuInfo & {
-      // chromeos only, https://developer.chrome.com/docs/extensions/reference/system_cpu/#type-CpuInfo
-      temperatures?: number[];
-    };
-    memory: chrome.system.memory.MemoryInfo;
-    storage: chrome.system.storage.StorageUnitInfo[];
-    processors: chrome.system.cpu.ProcessorInfo[];
-  }) => void,
-  lastProcessors: chrome.system.cpu.ProcessorInfo[] = [],
-) {
+let lastProcessors: chrome.system.cpu.ProcessorInfo[] = [];
+
+export const getSystemInfo = async () => {
   const [cpu, memory, storage] = await Promise.all([
     new Promise<chrome.system.cpu.CpuInfo>((resolve) => {
       chrome.system.cpu.getInfo((v) => resolve(v));
@@ -61,14 +50,10 @@ export async function getSystemInfo(
     },
   );
 
-  cb({ cpu, memory, storage, processors });
+  lastProcessors = cpu.processors;
 
-  console.log(processors);
-
-  setTimeout(() => {
-    getSystemInfo(cb, cpu.processors);
-  }, TIMEOUT);
-}
+  return { cpu, memory, storage, processors };
+};
 
 export const getPopupStatus = () => {
   return new Promise<UserSettings>((resolve) => {
