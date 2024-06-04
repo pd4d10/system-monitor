@@ -1,4 +1,4 @@
-import { Effect, ReadonlyArray } from "effect";
+import { Effect, Array } from "effect";
 
 // Convert byte to GB
 export function toGiga(byte: number) {
@@ -32,12 +32,9 @@ export const getSystemInfo = async () => {
     }),
   ]);
 
-  const processors = ReadonlyArray.zipWith(
-    ReadonlyArray.filter<chrome.system.cpu.ProcessorInfo>(
-      cpu.processors,
-      isValid,
-    ),
-    ReadonlyArray.filter(lastProcessors, isValid),
+  const processors = Array.zipWith(
+    Array.filter<chrome.system.cpu.ProcessorInfo>(cpu.processors, isValid),
+    Array.filter(lastProcessors, isValid),
     (p, p0) => {
       return {
         usage: {

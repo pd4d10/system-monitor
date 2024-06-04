@@ -1,11 +1,11 @@
-import { Effect, ReadonlyArray, Schedule } from "effect";
+import { Effect, Array, Schedule } from "effect";
 import { getSystemInfo } from "./utils";
 
 const size = 19;
 const canvas = new OffscreenCanvas(size, size);
 const ctx = canvas.getContext("2d")!;
 
-const cpuIdleArray = ReadonlyArray.makeBy(size, () => 1);
+const cpuIdleArray = Array.makeBy(size, () => 1);
 
 const draw = ({
   processors,
