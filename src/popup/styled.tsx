@@ -1,58 +1,58 @@
-import React from 'react'
+import React from "react";
 
-const width = 220
+const width = 220;
 
 export const Tip = ({ children }) => (
   <p
     style={{
       fontSize: 14,
-      margin: '4px 0',
+      margin: "4px 0",
     }}
   >
     {children}
   </p>
-)
+);
 
 export const Title = ({ children }) => (
   <h2
     style={{
-      margin: '8px 0',
+      margin: "8px 0",
     }}
   >
     {children}
   </h2>
-)
+);
 
 export const Bar = (info) => (
   <div
     style={{
-      display: 'block',
+      display: "block",
       width: `${width}px`,
-      height: '10px',
-      marginBottom: '4px',
+      height: "10px",
+      marginBottom: "4px",
       border: `1px solid ${info.borderColor}`,
-      position: 'relative',
+      position: "relative",
     }}
   >
     {info.usages.map(({ ratio, offset, color }, index) => (
       <div
         key={index.toString()}
         style={{
-          position: 'absolute',
+          position: "absolute",
           left: 0,
           top: 0,
-          width: '100%',
-          height: '100%',
-          transition: 'transform 0.5s',
+          width: "100%",
+          height: "100%",
+          transition: "transform 0.5s",
           backgroundColor: color,
-          transformOrigin: 'left top',
+          transformOrigin: "left top",
           transform: `${
-            typeof offset === 'undefined'
-              ? ''
+            typeof offset === "undefined"
+              ? ""
               : `translateX(${offset * width}px) `
           }scaleX(${ratio})`,
         }}
       />
     ))}
   </div>
-)
+);

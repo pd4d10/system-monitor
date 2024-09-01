@@ -1,0 +1,23 @@
+{
+  "typescript": {
+  },
+  "json": {
+  },
+  "markdown": {
+  },
+  "malva": {
+  },
+  "markup": {
+  },
+  "excludes": [
+    "**/node_modules",
+    "**/*-lock.json"
+  ],
+  "plugins": [
+    "https://plugins.dprint.dev/typescript-0.91.7.wasm",
+    "https://plugins.dprint.dev/json-0.19.3.wasm",
+    "https://plugins.dprint.dev/markdown-0.17.8.wasm",
+    "https://plugins.dprint.dev/g-plane/malva-v0.10.1.wasm",
+    "https://plugins.dprint.dev/g-plane/markup_fmt-v0.12.0.wasm"
+  ]
+}

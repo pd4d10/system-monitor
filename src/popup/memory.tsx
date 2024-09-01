@@ -1,11 +1,11 @@
-import React from 'react'
-import { Tip, Title, Bar } from './styled'
-import { toGiga } from '../utils'
+import React from "react";
+import { toGiga } from "../utils";
+import { Bar, Tip, Title } from "./styled";
 
 const MemoryComponent = ({ capacity, availableCapacity }) => {
   const memoryStyle = {
     width: `${100 * (1 - availableCapacity / capacity)}%`,
-  }
+  };
   return (
     <div>
       <Title>Memory</Title>
@@ -16,13 +16,13 @@ const MemoryComponent = ({ capacity, availableCapacity }) => {
         borderColor="#8fd8d4"
         usages={[
           {
-            color: '#198e88',
+            color: "#198e88",
             ratio: 1 - availableCapacity / capacity,
           },
         ]}
       />
     </div>
-  )
-}
+  );
+};
 
-export default MemoryComponent
+export default MemoryComponent;
