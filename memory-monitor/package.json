@@ -1,0 +1,15 @@
+{
+  "name": "memory-monitor",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "package": "cp LICENSE dist; zip -r extension.zip ./dist; rm dist/LICENSE",
+    "test": "echo test"
+  },
+  "dependencies": {
+    "@types/chrome": "^0.0.270"
+  }
+}

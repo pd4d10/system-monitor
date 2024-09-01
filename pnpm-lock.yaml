@@ -21,6 +21,12 @@ importers:
         specifier: ^5.4.2
         version: 5.4.2
 
+  memory-monitor:
+    dependencies:
+      '@types/chrome':
+        specifier: ^0.0.270
+        version: 0.0.270
+
   system-monitor:
     dependencies:
       '@types/chrome':
