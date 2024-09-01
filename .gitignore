@@ -1,5 +1,3 @@
-node_modules
-.plasmo
-build
-lib
-src/**/*.js
+node_modules/
+*.log
+chrome/dist

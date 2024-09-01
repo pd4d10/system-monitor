@@ -1,60 +1,75 @@
-import { Effect, Array, Schedule } from "effect";
-import { getSystemInfo } from "./utils";
+import { getSystemInfo } from './utils'
 
-const size = 19;
-const canvas = new OffscreenCanvas(size, size);
-const ctx = canvas.getContext("2d")!;
+const SIZE = 19 // Icon size
+const BORDER_WIDTH = 2
 
-const cpuIdleArray = Array.makeBy(size, () => 1);
+// Draw browser action icon with HTML5 canvas
+const canvas = document.createElement('canvas')
+canvas.width = SIZE
+canvas.height = SIZE
+const ctx = canvas.getContext('2d')
 
-const draw = ({
-  processors,
-  cpu,
-}: Awaited<ReturnType<typeof getSystemInfo>>) => {
-  const idle =
-    processors.reduce((a, b) => {
-      return a + b.usage.idle / b.usage.total;
-    }, 0) / cpu.processors.length;
-  const c = (100 * (1 - idle)).toFixed();
+// Color config
+const config = {
+  cpu: {
+    border: '#1874cd',
+    background: '#4876ff',
+  },
+  memory: {
+    border: '#008744',
+    background: '#66cdaa',
+  },
+}
+
+// 3 => [1, 1, 1]
+function fill(count) {
+  const arr = []
+  for (let i = 0; i < count; i += 1) {
+    arr.push(1)
+  }
+  return arr
+}
+const cpuIdleArray = fill(SIZE)
+
+function clear() {
+  ctx.clearRect(0, 0, SIZE, SIZE)
+}
+
+function drawBorder(color) {
+  ctx.beginPath()
+  ctx.moveTo(0, 0)
+  ctx.lineTo(0, SIZE)
+  ctx.lineTo(SIZE, SIZE)
+  ctx.lineTo(SIZE, 0)
+  ctx.closePath()
+  ctx.lineWidth = BORDER_WIDTH
+  ctx.strokeStyle = color
+  ctx.stroke()
+}
+
+function drawBackground(color, arr) {
+  ctx.beginPath()
+  ctx.moveTo(0, SIZE)
+  arr.forEach((cpu, i) => {
+    ctx.lineTo(i, cpu * SIZE)
+  })
+  ctx.lineTo(SIZE, SIZE)
+  ctx.lineWidth = 2
+  ctx.fillStyle = color
+  ctx.fill()
+}
+
+getSystemInfo({ cpu: true }, ({ cpu: { modelName, usage } }) => {
+  const idle = usage.reduce((a, b) => a + b.idle / b.total, 0) / usage.length
+  cpuIdleArray.push(idle)
+  cpuIdleArray.shift()
   chrome.browserAction.setTitle({
-    title: "" + cpu.modelName + "\nUsage: " + c + "%",
-  });
-  cpuIdleArray.push(idle);
-  cpuIdleArray.shift();
-
-  // clear
-  ctx.clearRect(0, 0, size, size);
-
-  // background
-  ctx.beginPath();
-  ctx.moveTo(0, size);
-  cpuIdleArray.forEach((v, i) => {
-    ctx.lineTo(i, v * size);
-  });
-  ctx.lineTo(size, size);
-  ctx.lineWidth = 2;
-  ctx.fillStyle = "#4876ff";
-  ctx.fill();
-
-  // border
-  ctx.beginPath();
-  ctx.moveTo(0, 0);
-  ctx.lineTo(0, size);
-  ctx.lineTo(size, size);
-  ctx.lineTo(size, 0);
-  ctx.closePath();
-  ctx.lineWidth = 2;
-  ctx.strokeStyle = "#1874cd";
-  ctx.stroke();
-
+    title: `${modelName}\nUsage: ${(100 * (1 - idle)).toFixed(0)}%`,
+  })
+  clear()
+  drawBackground(config.cpu.background, cpuIdleArray)
+  drawBorder(config.cpu.border)
   chrome.browserAction.setIcon({
-    imageData: ctx.getImageData(0, 0, size, size),
-  });
-};
-
-Effect.runPromise(
-  Effect.repeat(
-    Effect.promise(getSystemInfo).pipe(Effect.map(draw)),
-    Schedule.spaced(1000),
-  ),
-);
+    imageData: ctx.getImageData(0, 0, SIZE, SIZE),
+  })
+})

@@ -1,76 +1,82 @@
-import { Effect, Array } from "effect";
+const TIMEOUT = 1000
 
 // Convert byte to GB
-export function toGiga(byte: number) {
-  return (byte / (1024 * 1024 * 1024)).toFixed(2);
+export function toGiga(byte) {
+  return (byte / (1024 * 1024 * 1024)).toFixed(2)
 }
 
-interface UserSettings {
-  cpu?: boolean;
-  memory?: boolean;
-  battery?: boolean;
-  storage?: boolean;
+function getCpuUsage(processors, processorsOld) {
+  const usage = []
+  for (let i = 0; i < processors.length; i++) {
+    const processor = processors[i]
+
+    // https://github.com/pd4d10/system-monitor/issues/3
+    if (processor.total === 0) continue
+
+    const processorOld = processorsOld[i]
+    usage.push(
+      processorOld
+        ? {
+            user: processor.user - processorOld.user,
+            kernel: processor.kernel - processorOld.kernel,
+            idle: processor.idle - processorOld.idle,
+            total: processor.total - processorOld.total,
+          }
+        : processor,
+    )
+  }
+  return usage
 }
 
-const isValid = (p: chrome.system.cpu.ProcessorInfo) => {
-  // https://github.com/pd4d10/system-monitor/issues/3
-  return p.usage.total > 0;
-};
-
-let lastProcessors: chrome.system.cpu.ProcessorInfo[] = [];
-
-export const getSystemInfo = async () => {
-  const [cpu, memory, storage] = await Promise.all([
-    new Promise<chrome.system.cpu.CpuInfo>((resolve) => {
-      chrome.system.cpu.getInfo((v) => resolve(v));
+export async function getSystemInfo(status, cb, processorsOld = []) {
+  const [cpu, memory, storage] = await Promise.all(
+    ['cpu', 'memory', 'storage'].map((item) => {
+      if (status[item]) {
+        return new Promise((resolve) => {
+          chrome.system[item].getInfo(resolve)
+        })
+      } else {
+        return Promise.resolve(null)
+      }
     }),
-    new Promise<chrome.system.memory.MemoryInfo>((resolve) => {
-      chrome.system.memory.getInfo((v) => resolve(v));
-    }),
-    new Promise<chrome.system.storage.StorageUnitInfo[]>((resolve) => {
-      chrome.system.storage.getInfo((v) => resolve(v));
-    }),
-  ]);
+  )
 
-  const processors = Array.zipWith(
-    Array.filter<chrome.system.cpu.ProcessorInfo>(cpu.processors, isValid),
-    Array.filter(lastProcessors, isValid),
-    (p, p0) => {
-      return {
-        usage: {
-          user: p.usage.user - p0.usage.user,
-          kernel: p.usage.kernel - p0.usage.kernel,
-          idle: p.usage.idle - p0.usage.idle,
-          total: p.usage.total - p0.usage.total,
-        },
-      };
-    },
-  );
+  const data = {}
+  let processors
+  if (cpu) {
+    processors = cpu.processors.map(({ usage }) => usage)
+    data.cpu = {
+      modelName: cpu.modelName,
+      usage: getCpuUsage(processors, processorsOld),
+      temperatures: cpu.temperatures || [],
+      // temperatures: [40, 50],
+    }
+  }
+  if (memory) data.memory = memory
+  if (storage) data.storage = { storage }
 
-  lastProcessors = cpu.processors;
+  cb(data)
+  setTimeout(() => getSystemInfo(status, cb, processors), TIMEOUT)
+}
 
-  return { cpu, memory, storage, processors };
-};
-
-export const getPopupStatus = () => {
-  return new Promise<UserSettings>((resolve) => {
-    chrome.storage.sync.get((res) => {
-      if (!res.popup) res.popup = {};
-      const {
-        cpu = true,
-        memory = true,
-        battery = true,
-        storage = true,
-      } = res.popup;
-      resolve({ cpu, memory, battery, storage });
-    });
-  });
-};
-
-export const setPopupStatus = (popup: UserSettings) => {
-  return new Promise<void>((resolve) => {
-    chrome.storage.sync.set({ popup }, () => {
-      resolve();
-    });
-  });
-};
+export const storage = {
+  getPopupStatus() {
+    return new Promise((resolve) => {
+      chrome.storage.sync.get((res) => {
+        if (!res.popup) res.popup = {}
+        const {
+          cpu = true,
+          memory = true,
+          battery = true,
+          storage = true,
+        } = res.popup
+        resolve({ cpu, memory, battery, storage })
+      })
+    })
+  },
+  setPopupStatus(popup) {
+    return new Promise((resolve) => {
+      chrome.storage.sync.set({ popup }, resolve)
+    })
+  },
+}
