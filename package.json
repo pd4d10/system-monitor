@@ -1,11 +1,12 @@
 {
   "name": "system-monitor",
   "private": true,
+  "type": "module",
   "version": "1.5.1",
   "description": "Monitor system status like CPU, memory, battery",
   "scripts": {
-    "start": "webpack",
-    "build": "webpack --config webpack.config.production.js",
+    "dev": "vite",
+    "build": "vite build",
     "icon": "node scripts/icon.js",
     "package": "cp LICENSE chrome; zip -r extension.zip ./chrome; rm chrome/LICENSE",
     "test": "echo test"
@@ -25,18 +26,11 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "@types/offscreencanvas": "^2019.6.4",
-    "@babel/core": "^7.0.0-beta.38",
-    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.47",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.38",
-    "@babel/preset-react": "^7.0.0-beta.38",
+    "@crxjs/vite-plugin": "^1.0.14",
     "@types/chrome": "^0.0.91",
-    "babel-loader": "^8.0.0-beta.0",
-    "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^5.1.1",
-    "html-webpack-plugin": "^3.2.0",
-    "webpack": "^4.41.5",
-    "webpack-bundle-analyzer": "^3.6.0",
-    "webpack-cli": "^3.3.10"
-  }
+    "@types/offscreencanvas": "^2019.6.4",
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.2"
+  },
+  "packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1"
 }
