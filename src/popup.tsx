@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { Bar, colors, Icon, Tip, Title } from "./styled";
 import { getSystemInfo, toGiga } from "./utils";
 
-type SetState<S> = (data: Partial<S>) => (s: S) => void;
+type SetState<S> = (data: Partial<S>) => void;
 
 const App: FC = () => {
   const [state, _setState] = useState({
@@ -26,11 +26,11 @@ const App: FC = () => {
       dischargingTime: 0,
     },
   });
-  const setState: SetState<typeof state> = (data) => (s) => {
-    _setState({
+  const setState: SetState<typeof state> = (data) => {
+    _setState(s => ({
       ...s,
       ...data,
-    });
+    }));
   };
 
   useEffect(() => {
