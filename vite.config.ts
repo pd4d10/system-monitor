@@ -20,9 +20,6 @@ export default defineConfig({
         "action": {
           "default_popup": "popup.html",
         },
-        "options_ui": {
-          "page": "options.html",
-        },
         "icons": {
           "128": "icon.png",
         },

@@ -1,8 +1,8 @@
-import React from "react";
+import { FC, PropsWithChildren } from "react";
 
 const width = 220;
 
-export const Tip = ({ children }) => (
+export const Tip: FC<PropsWithChildren> = ({ children }) => (
   <p
     style={{
       fontSize: 14,
@@ -13,7 +13,7 @@ export const Tip = ({ children }) => (
   </p>
 );
 
-export const Title = ({ children }) => (
+export const Title: FC<PropsWithChildren> = ({ children }) => (
   <h2
     style={{
       margin: "8px 0",
@@ -23,7 +23,14 @@ export const Title = ({ children }) => (
   </h2>
 );
 
-export const Bar = (info) => (
+export const Bar: FC<{
+  borderColor: string;
+  usages: {
+    ratio: number;
+    offset?: number;
+    color: string;
+  }[];
+}> = (info) => (
   <div
     style={{
       display: "block",

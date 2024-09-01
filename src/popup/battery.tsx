@@ -1,7 +1,7 @@
-import React from "react";
+import { FC } from "react";
 import { Bar, Tip, Title } from "./styled";
 
-const BatteryComponent = (info) => (
+const BatteryComponent: FC<{ level: number; isCharging: boolean }> = (info) => (
   <div>
     <Title>Battery</Title>
     <Tip>

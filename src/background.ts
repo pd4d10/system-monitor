@@ -5,7 +5,7 @@ const BORDER_WIDTH = 2;
 
 // Draw browser action icon with HTML5 canvas
 const canvas = new OffscreenCanvas(SIZE, SIZE);
-const ctx = canvas.getContext("2d");
+const ctx = canvas.getContext("2d")!;
 
 // Color config
 const config = {
@@ -20,7 +20,7 @@ const config = {
 };
 
 // 3 => [1, 1, 1]
-function fill(count) {
+function fill(count: number) {
   const arr = [];
   for (let i = 0; i < count; i += 1) {
     arr.push(1);
@@ -33,7 +33,7 @@ function clear() {
   ctx.clearRect(0, 0, SIZE, SIZE);
 }
 
-function drawBorder(color) {
+function drawBorder(color: string) {
   ctx.beginPath();
   ctx.moveTo(0, 0);
   ctx.lineTo(0, SIZE);
@@ -45,7 +45,7 @@ function drawBorder(color) {
   ctx.stroke();
 }
 
-function drawBackground(color, arr) {
+function drawBackground(color: string, arr: number[]) {
   ctx.beginPath();
   ctx.moveTo(0, SIZE);
   arr.forEach((cpu, i) => {
@@ -57,7 +57,12 @@ function drawBackground(color, arr) {
   ctx.fill();
 }
 
-getSystemInfo({ cpu: true }, ({ cpu: { modelName, usage } }) => {
+getSystemInfo({ cpu: true }, ({ cpu: { modelName, usage } }: {
+  cpu: {
+    modelName: string;
+    usage: chrome.system.cpu.ProcessorUsage[];
+  };
+}) => {
   const idle = usage.reduce((a, b) => a + b.idle / b.total, 0) / usage.length;
   cpuIdleArray.push(idle);
   cpuIdleArray.shift();

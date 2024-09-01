@@ -1,8 +1,11 @@
-import React from "react";
+import { FC } from "react";
 import { toGiga } from "../utils";
 import { Bar, Tip, Title } from "./styled";
 
-const MemoryComponent = ({ capacity, availableCapacity }) => {
+const MemoryComponent: FC<{
+  capacity: number;
+  availableCapacity: number;
+}> = ({ capacity, availableCapacity }) => {
   const memoryStyle = {
     width: `${100 * (1 - availableCapacity / capacity)}%`,
   };

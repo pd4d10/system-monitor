@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { Bar, Tip, Title } from "./styled";
 
 const colors = {
@@ -7,7 +7,7 @@ const colors = {
   border: "#b3c3f3",
 };
 
-const Icon = ({ color, text }) => (
+const Icon: FC<{ color: string; text: string }> = ({ color, text }) => (
   <div
     style={{
       lineHeight: "12px",
@@ -30,7 +30,11 @@ const Icon = ({ color, text }) => (
   </div>
 );
 
-const CpuComponent = (info) => (
+const CpuComponent: FC<{
+  modelName: string;
+  temperatures: number[];
+  usage: chrome.system.cpu.ProcessorUsage[];
+}> = (info) => (
   <div>
     <Title>CPU</Title>
     <Tip>
