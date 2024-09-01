@@ -61,13 +61,13 @@ getSystemInfo({ cpu: true }, ({ cpu: { modelName, usage } }) => {
   const idle = usage.reduce((a, b) => a + b.idle / b.total, 0) / usage.length
   cpuIdleArray.push(idle)
   cpuIdleArray.shift()
-  chrome.browserAction.setTitle({
+  chrome.action.setTitle({
     title: `${modelName}\nUsage: ${(100 * (1 - idle)).toFixed(0)}%`,
   })
   clear()
   drawBackground(config.cpu.background, cpuIdleArray)
   drawBorder(config.cpu.border)
-  chrome.browserAction.setIcon({
+  chrome.action.setIcon({
     imageData: ctx.getImageData(0, 0, SIZE, SIZE),
   })
 })
