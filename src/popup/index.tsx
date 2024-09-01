@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { getSystemInfo, storage } from "../utils";
+import { getSystemInfo } from "../utils";
 import BatteryComponent from "./battery";
 import CpuComponent from "./cpu";
 import MemoryComponent from "./memory";
@@ -10,12 +10,6 @@ type SetState<S> = (data: Partial<S>) => (s: S) => void;
 
 const Container: FC = () => {
   const [state, _setState] = useState({
-    status: {
-      cpu: false,
-      memory: false,
-      storage: false,
-      battery: false,
-    },
     supportBatteryAPI: false,
     cpu: {
       modelName: "",
@@ -71,12 +65,9 @@ const Container: FC = () => {
     };
 
     const init = async () => {
-      const status = await storage.getPopupStatus();
-      setState({ status });
-
       // Trigger CPU, memory and storage status update periodly
       // @ts-ignore TODO:
-      await getSystemInfo(status, setState);
+      await getSystemInfo(setState);
 
       // Battery
       // @ts-ignore types
@@ -93,10 +84,10 @@ const Container: FC = () => {
 
   return (
     <div style={{ width: 230 }}>
-      {state.status.cpu && <CpuComponent {...state.cpu} />}
-      {state.status.memory && <MemoryComponent {...state.memory} />}
-      {state.status.battery && state.supportBatteryAPI && <BatteryComponent {...state.battery} />}
-      {state.status.storage && <StorageComponent {...state.storage} />}
+      <CpuComponent {...state.cpu} />
+      <MemoryComponent {...state.memory} />
+      {state.supportBatteryAPI && <BatteryComponent {...state.battery} />}
+      <StorageComponent {...state.storage} />
       {location.search === "" && (
         <div style={{ lineHeight: 1.5, marginTop: 8 }}>
           <a

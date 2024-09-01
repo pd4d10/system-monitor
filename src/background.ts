@@ -57,7 +57,7 @@ function drawBackground(color: string, arr: number[]) {
   ctx.fill();
 }
 
-getSystemInfo({ cpu: true }, ({ cpu: { modelName, usage } }: {
+getSystemInfo(({ cpu: { modelName, usage } }: {
   cpu: {
     modelName: string;
     usage: chrome.system.cpu.ProcessorUsage[];

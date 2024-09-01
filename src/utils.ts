@@ -31,10 +31,7 @@ function getCpuUsage(
   return usage;
 }
 
-type Status = { cpu?: boolean; memory?: boolean; storage?: boolean; battery?: boolean };
-
 export async function getSystemInfo(
-  status: Status,
   cb: (data: {
     cpu: {
       modelName: string;
@@ -47,13 +44,9 @@ export async function getSystemInfo(
 ) {
   const items = await Promise.all(
     (["cpu", "memory", "storage"] as const).map((item) => {
-      if (status[item]) {
-        return new Promise((resolve) => {
-          chrome.system[item].getInfo(resolve);
-        });
-      } else {
-        return Promise.resolve(null);
-      }
+      return new Promise((resolve) => {
+        chrome.system[item].getInfo(resolve);
+      });
     }),
   );
 
@@ -80,29 +73,5 @@ export async function getSystemInfo(
   if (storage) data.storage = { storage };
 
   cb(data);
-  setTimeout(() => getSystemInfo(status, cb, processors), TIMEOUT);
+  setTimeout(() => getSystemInfo(cb, processors), TIMEOUT);
 }
-
-export const storage = {
-  getPopupStatus() {
-    return new Promise<Required<Status>>((resolve) => {
-      chrome.storage.sync.get((res) => {
-        if (!res.popup) res.popup = {};
-        const {
-          cpu = true,
-          memory = true,
-          battery = true,
-          storage = true,
-        } = res.popup;
-        resolve({ cpu, memory, battery, storage });
-      });
-    });
-  },
-  setPopupStatus(popup: Status) {
-    return new Promise<void>((resolve) => {
-      chrome.storage.sync.set({ popup }, () => {
-        resolve();
-      });
-    });
-  },
-};
