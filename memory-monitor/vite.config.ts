@@ -17,6 +17,7 @@ export default defineConfig({
         background: {
           service_worker: "src/background.ts",
         },
+        action: {},
         permissions: ["system.memory"],
         icons: {
           "128": "icon.png",

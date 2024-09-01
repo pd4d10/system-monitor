@@ -19,7 +19,7 @@ for (var i = availMem.length; i--;) {
     availMem.shift();
 
     // Show memory information on mouse over
-    chrome.browserAction.setTitle({
+    chrome.action.setTitle({
       title: "Total: " + (info.capacity / 1073741824).toFixed(2) + " GiB\n"
         + "Available: " + (info.availableCapacity / 1073741824).toFixed(2) + " GiB",
     });
@@ -48,7 +48,7 @@ for (var i = availMem.length; i--;) {
     c.strokeStyle = "#008744";
     c.stroke();
 
-    chrome.browserAction.setIcon({
+    chrome.action.setIcon({
       imageData: c.getImageData(0, 0, SIZE, SIZE),
     });
   });
