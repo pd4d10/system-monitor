@@ -1,6 +1,7 @@
 import { crx } from "@crxjs/vite-plugin";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 import pkg from "./package.json";
 
 export default defineConfig({
@@ -24,5 +25,6 @@ export default defineConfig({
         },
       },
     }),
+    viteStaticCopy({ targets: [{ src: "../LICENSE", dest: "." }] }),
   ],
 });

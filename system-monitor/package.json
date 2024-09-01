@@ -6,10 +6,7 @@
   "description": "Monitor system status like CPU, memory, battery",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "icon": "node scripts/icon.js",
-    "package": "cp LICENSE dist; zip -r extension.zip ./dist; rm dist/LICENSE",
-    "test": "echo test"
+    "build": "tsc && vite build"
   },
   "repository": {
     "type": "git",
