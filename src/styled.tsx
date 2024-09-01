@@ -2,34 +2,37 @@ import { FC, PropsWithChildren } from "react";
 
 const width = 220;
 
+export const colors = {
+  cpu: {
+    kernel: "#3a5eca",
+    user: "#6687e7",
+    border: "#b3c3f3",
+  },
+  memory: {
+    usage: "#198e88",
+    border: "#8fd8d4",
+  },
+  battery: {
+    usage: "#b6c8f5",
+    border: "#b6c8f5",
+  },
+};
+
 export const Tip: FC<PropsWithChildren> = ({ children }) => (
-  <p
-    style={{
-      fontSize: 14,
-      margin: "4px 0",
-    }}
-  >
+  <p style={{ fontSize: 14, margin: "4px 0" }}>
     {children}
   </p>
 );
 
 export const Title: FC<PropsWithChildren> = ({ children }) => (
-  <h2
-    style={{
-      margin: "8px 0",
-    }}
-  >
+  <h2 style={{ margin: "8px 0" }}>
     {children}
   </h2>
 );
 
 export const Bar: FC<{
   borderColor: string;
-  usages: {
-    ratio: number;
-    offset?: number;
-    color: string;
-  }[];
+  usages: { ratio: number; offset?: number; color: string }[];
 }> = (info) => (
   <div
     style={{
@@ -61,5 +64,21 @@ export const Bar: FC<{
         }}
       />
     ))}
+  </div>
+);
+
+export const Icon: FC<{ color: string; text: string }> = ({ color, text }) => (
+  <div style={{ lineHeight: "12px", fontSize: 14, float: "left", marginRight: 8 }}>
+    <div
+      style={{
+        backgroundColor: color,
+        verticalAlign: "top",
+        width: "12px",
+        height: "12px",
+        marginRight: "2px",
+        display: "inline-block",
+      }}
+    />
+    {text}
   </div>
 );

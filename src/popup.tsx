@@ -1,14 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { getSystemInfo } from "../utils";
-import BatteryComponent from "./battery";
-import CpuComponent from "./cpu";
-import MemoryComponent from "./memory";
-import StorageComponent from "./storage";
+import { Bar, colors, Icon, Tip, Title } from "./styled";
+import { getSystemInfo, toGiga } from "./utils";
 
 type SetState<S> = (data: Partial<S>) => (s: S) => void;
 
-const Container: FC = () => {
+const App: FC = () => {
   const [state, _setState] = useState({
     supportBatteryAPI: false,
     cpu: {
@@ -82,12 +79,70 @@ const Container: FC = () => {
     init();
   }, []);
 
+  const { cpu, memory, battery, storage } = state;
+
   return (
     <div style={{ width: 230 }}>
-      <CpuComponent {...state.cpu} />
-      <MemoryComponent {...state.memory} />
-      {state.supportBatteryAPI && <BatteryComponent {...state.battery} />}
-      <StorageComponent {...state.storage} />
+      {/* CPU */}
+      <div>
+        <Title>CPU</Title>
+        <Tip>
+          {cpu.modelName}
+          {cpu.temperatures.length > 0
+            && ` | ${cpu.temperatures.map((t) => `${t}°C`).join(", ")}`}
+        </Tip>
+        <div style={{ overflow: "hidden", margin: "8px 0" }}>
+          <Icon color={colors.cpu.kernel} text="Kernel" />
+          <Icon color={colors.cpu.user} text="User" />
+        </div>
+        {cpu.usage.map(({ user, kernel, total }, index) => (
+          <Bar
+            key={index}
+            borderColor={colors.cpu.border}
+            usages={[
+              { ratio: kernel / total, color: colors.cpu.kernel },
+              { offset: kernel / total, ratio: user / total, color: colors.cpu.user },
+            ]}
+          />
+        ))}
+      </div>
+
+      {/* memory */}
+      <div>
+        <Title>Memory</Title>
+        <Tip>
+          Available: {toGiga(memory.availableCapacity)}GB/{toGiga(memory.capacity)}GB
+        </Tip>
+        <Bar
+          borderColor={colors.memory.border}
+          usages={[{ color: colors.memory.usage, ratio: 1 - memory.availableCapacity / memory.capacity }]}
+        />
+      </div>
+
+      {/* battery */}
+      {state.supportBatteryAPI && (
+        <div>
+          <Title>Battery</Title>
+          <Tip>
+            {(battery.level * 100).toFixed(2)}% (
+            {battery.isCharging ? "Charging" : "Not charging"})
+          </Tip>
+          <Bar
+            usages={[{ color: colors.battery.usage, ratio: battery.level }]}
+            borderColor={colors.battery.border}
+          />
+        </div>
+      )}
+
+      {/* storage */}
+      <div>
+        <Title>Storage</Title>
+        {storage.storage.map(({ name, capacity, id }) => (
+          <Tip key={id}>{`${name || "Unknown"} / ${toGiga(capacity)}GB`}</Tip>
+        ))}
+      </div>
+
+      {/* new window */}
       {location.search === "" && (
         <div style={{ lineHeight: 1.5, marginTop: 8 }}>
           <a
@@ -105,16 +160,6 @@ const Container: FC = () => {
           >
             Open as new window
           </a>
-          <a
-            href="#"
-            style={{ outline: "none", display: "block" }}
-            onClick={(e) => {
-              e.preventDefault();
-              chrome.runtime.openOptionsPage();
-            }}
-          >
-            Settings
-          </a>
         </div>
       )}
     </div>
@@ -123,4 +168,4 @@ const Container: FC = () => {
 
 const root = document.createElement("div");
 document.body.appendChild(root);
-createRoot(root).render(<Container />);
+createRoot(root).render(<App />);
