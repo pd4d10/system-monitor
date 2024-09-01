@@ -1,0 +1,32 @@
+{
+  "name": "system-monitor",
+  "private": true,
+  "type": "module",
+  "version": "2.0.0",
+  "description": "Monitor system status like CPU, memory, battery",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "icon": "node scripts/icon.js",
+    "package": "cp LICENSE dist; zip -r extension.zip ./dist; rm dist/LICENSE",
+    "test": "echo test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pd4d10/system-monitor.git"
+  },
+  "author": "pd4d10 <pd4d10@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pd4d10/system-monitor/issues"
+  },
+  "homepage": "https://github.com/pd4d10/system-monitor#readme",
+  "dependencies": {
+    "@types/chrome": "^0.0.270",
+    "@types/offscreencanvas": "^2019.6.4",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

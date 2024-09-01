@@ -7,6 +7,21 @@ settings:
 importers:
 
   .:
+    devDependencies:
+      '@crxjs/vite-plugin':
+        specifier: ^1.0.14
+        version: 1.0.14(vite@5.4.2)
+      '@vitejs/plugin-react':
+        specifier: ^4.3.1
+        version: 4.3.1(vite@5.4.2)
+      typescript:
+        specifier: ^5.5.4
+        version: 5.5.4
+      vite:
+        specifier: ^5.4.2
+        version: 5.4.2
+
+  system-monitor:
     dependencies:
       '@types/chrome':
         specifier: ^0.0.270
@@ -26,19 +41,6 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
-    devDependencies:
-      '@crxjs/vite-plugin':
-        specifier: ^1.0.14
-        version: 1.0.14(vite@5.4.2)
-      '@vitejs/plugin-react':
-        specifier: ^4.3.1
-        version: 4.3.1(vite@5.4.2)
-      typescript:
-        specifier: ^5.5.4
-        version: 5.5.4
-      vite:
-        specifier: ^5.4.2
-        version: 5.4.2
 
 packages:
 
