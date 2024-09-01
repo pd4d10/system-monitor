@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from 'react'
-import { render } from 'react-dom'
+import { Component } from 'react'
 import { getSystemInfo, storage } from '../utils'
 import CpuComponent from './cpu'
 import MemoryComponent from './memory'
 import StorageComponent from './storage'
 import BatteryComponent from './battery'
+import { createRoot } from 'react-dom/client'
 
 class Container extends Component {
   state = {
@@ -123,4 +123,4 @@ class Container extends Component {
 
 const root = document.createElement('div')
 document.body.appendChild(root)
-render(<Container />, root)
+createRoot(root).render(<Container />)

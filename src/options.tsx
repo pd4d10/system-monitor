@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client';
 import { storage } from './utils'
 
 class Option extends React.Component {
@@ -69,4 +69,4 @@ class Option extends React.Component {
 
 const root = document.createElement('div')
 document.body.appendChild(root)
-render(<Option />, root)
+createRoot(root).render(<Option />)
