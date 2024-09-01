@@ -1,6 +1,7 @@
 import { crx } from "@crxjs/vite-plugin";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import pkg from "./package.json";
 
 export default defineConfig({
   plugins: [
@@ -9,7 +10,7 @@ export default defineConfig({
       manifest: {
         "manifest_version": 3,
         "name": "System Monitor",
-        "version": "1.5.1",
+        "version": pkg.version,
         "description": "Monitor system status like CPU, memory, battery",
         "homepage_url": "https://github.com/pd4d10/system-monitor",
         "offline_enabled": true,
