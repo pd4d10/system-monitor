@@ -5,7 +5,10 @@ const BORDER_WIDTH = 2;
 
 // Draw browser action icon with HTML5 canvas
 const canvas = new OffscreenCanvas(SIZE, SIZE);
-const ctx = canvas.getContext("2d")!;
+const ctx = canvas.getContext("2d", {
+  // https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+  willReadFrequently: true,
+})!;
 
 // Color config
 const config = {
