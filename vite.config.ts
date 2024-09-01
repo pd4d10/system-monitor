@@ -8,20 +8,20 @@ export default defineConfig({
     react(),
     crx({
       manifest: {
-        "manifest_version": 3,
-        "name": "System Monitor",
-        "version": pkg.version,
-        "description": "Monitor system status like CPU, memory, battery",
-        "homepage_url": "https://github.com/pd4d10/system-monitor",
-        "offline_enabled": true,
-        "background": {
-          "service_worker": "src/background.ts",
+        manifest_version: 3,
+        name: "System Monitor",
+        version: pkg.version,
+        description: "Monitor system status like CPU, memory, battery",
+        homepage_url: "https://github.com/pd4d10/system-monitor",
+        offline_enabled: true,
+        background: {
+          service_worker: "src/background.ts",
         },
-        "permissions": ["system.cpu", "system.memory", "system.storage", "storage"],
-        "action": {
-          "default_popup": "popup.html",
+        permissions: ["system.cpu", "system.memory", "system.storage", "storage"],
+        action: {
+          default_popup: "popup.html",
         },
-        "icons": {
+        icons: {
           "128": "icon.png",
         },
       },
