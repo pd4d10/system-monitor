@@ -22,6 +22,10 @@ export default defineConfig({
         action: {
           default_popup: "popup.html",
         },
+        options_ui: {
+          page: "options.html",
+          open_in_tab: false,
+        },
         icons: {
           "128": "icon.png",
         },
