@@ -1,4 +1,5 @@
 const TIMEOUT = 1000;
+export const storageKey = "popup";
 
 // Convert byte to GB
 export function toGiga(byte: number) {
@@ -75,3 +76,32 @@ export async function getSystemInfo(
   cb(data);
   setTimeout(() => getSystemInfo(cb, processors), TIMEOUT);
 }
+
+export type Status = {
+  cpu: boolean;
+  memory: boolean;
+  battery: boolean;
+  storage: boolean;
+};
+
+export const statusDefaults = {
+  cpu: true,
+  memory: true,
+  battery: true,
+  storage: true,
+};
+
+export const getStatus = () => {
+  return new Promise<Status>((resolve) => {
+    chrome.storage.sync.get(storageKey, (res) => {
+      resolve({
+        ...statusDefaults,
+        ...res[storageKey],
+      });
+    });
+  });
+};
+
+export const saveStatus = (data: Status) => {
+  return chrome.storage.sync.set({ [storageKey]: data });
+};

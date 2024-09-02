@@ -1,39 +1,25 @@
 import { FC, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-
-const storageKey = "popup";
-
-type Status = {
-  cpu: boolean;
-  memory: boolean;
-  battery: boolean;
-  storage: boolean;
-};
+import { getStatus, saveStatus, Status, statusDefaults } from "./utils";
 
 const App: FC = () => {
   const [status, setStatus] = useState<Status>();
   const mergeStatus = (data: Partial<Status>) => {
     setStatus(previous => ({
-      // defaults
-      cpu: true,
-      memory: true,
-      battery: true,
-      storage: true,
-
-      // overrides
+      ...statusDefaults,
       ...previous,
       ...data,
     }));
   };
 
   useEffect(() => {
-    chrome.storage.sync.get(storageKey, (res) => {
-      mergeStatus(res[storageKey]);
+    getStatus().then(data => {
+      mergeStatus(data);
     });
   }, []);
 
   useEffect(() => {
-    chrome.storage.sync.set({ [storageKey]: status });
+    if (status) saveStatus(status);
   }, [status]);
 
   return (
