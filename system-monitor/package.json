@@ -2,7 +2,7 @@
   "name": "system-monitor",
   "private": true,
   "type": "module",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Monitor system status like CPU, memory, battery",
   "scripts": {
     "dev": "vite",
