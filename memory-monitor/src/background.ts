@@ -12,7 +12,7 @@ for (var i = availMem.length; i--;) {
   availMem[i] = 1;
 }
 
-(function draw() {
+function draw() {
   // Get available memory percent
   chrome.system.memory.getInfo(function(info) {
     availMem.push(info.availableCapacity / info.capacity);
@@ -54,4 +54,6 @@ for (var i = availMem.length; i--;) {
   });
 
   setTimeout(draw, 1000);
-})();
+}
+
+chrome.runtime.onStartup.addListener(draw);

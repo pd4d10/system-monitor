@@ -60,22 +60,25 @@ function drawBackground(color: string, arr: number[]) {
   ctx.fill();
 }
 
-getSystemInfo(({ cpu: { modelName, usage } }: {
-  cpu: {
-    modelName: string;
-    usage: chrome.system.cpu.ProcessorUsage[];
-  };
-}) => {
-  const idle = usage.reduce((a, b) => a + b.idle / b.total, 0) / usage.length;
-  cpuIdleArray.push(idle);
-  cpuIdleArray.shift();
-  chrome.action.setTitle({
-    title: `${modelName}\nUsage: ${(100 * (1 - idle)).toFixed(0)}%`,
-  });
-  clear();
-  drawBackground(config.cpu.background, cpuIdleArray);
-  drawBorder(config.cpu.border);
-  chrome.action.setIcon({
-    imageData: ctx.getImageData(0, 0, SIZE, SIZE),
+// https://stackoverflow.com/questions/66618136/persistent-service-worker-in-chrome-extension
+chrome.runtime.onStartup.addListener(() => {
+  getSystemInfo(({ cpu: { modelName, usage } }: {
+    cpu: {
+      modelName: string;
+      usage: chrome.system.cpu.ProcessorUsage[];
+    };
+  }) => {
+    const idle = usage.reduce((a, b) => a + b.idle / b.total, 0) / usage.length;
+    cpuIdleArray.push(idle);
+    cpuIdleArray.shift();
+    chrome.action.setTitle({
+      title: `${modelName}\nUsage: ${(100 * (1 - idle)).toFixed(0)}%`,
+    });
+    clear();
+    drawBackground(config.cpu.background, cpuIdleArray);
+    drawBorder(config.cpu.border);
+    chrome.action.setIcon({
+      imageData: ctx.getImageData(0, 0, SIZE, SIZE),
+    });
   });
 });
