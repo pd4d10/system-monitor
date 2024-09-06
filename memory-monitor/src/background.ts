@@ -56,4 +56,13 @@ function draw() {
   setTimeout(draw, 1000);
 }
 
-chrome.runtime.onStartup.addListener(draw);
+let initialized = false;
+
+function init() {
+  if (initialized) return;
+  initialized = true;
+  draw();
+}
+
+chrome.runtime.onStartup.addListener(init);
+init();

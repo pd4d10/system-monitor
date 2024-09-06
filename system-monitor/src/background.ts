@@ -60,8 +60,12 @@ function drawBackground(color: string, arr: number[]) {
   ctx.fill();
 }
 
-// https://stackoverflow.com/questions/66618136/persistent-service-worker-in-chrome-extension
-chrome.runtime.onStartup.addListener(() => {
+let initialized = false;
+
+function init() {
+  if (initialized) return;
+  initialized = true;
+
   getSystemInfo(({ cpu: { modelName, usage } }: {
     cpu: {
       modelName: string;
@@ -81,4 +85,9 @@ chrome.runtime.onStartup.addListener(() => {
       imageData: ctx.getImageData(0, 0, SIZE, SIZE),
     });
   });
-});
+}
+
+// https://stackoverflow.com/questions/66618136/persistent-service-worker-in-chrome-extension
+chrome.runtime.onStartup.addListener(init);
+
+init();
