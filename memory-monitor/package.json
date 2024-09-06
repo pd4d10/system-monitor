@@ -8,6 +8,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@types/chrome": "^0.0.270"
+    "@types/chrome": "^0.0.270",
+    "utils": "workspace:*"
   }
 }

@@ -1,3 +1,4 @@
+import { runOnceOnStartup } from "utils";
 import { getSystemInfo } from "./utils";
 
 const SIZE = 19; // Icon size
@@ -60,12 +61,7 @@ function drawBackground(color: string, arr: number[]) {
   ctx.fill();
 }
 
-let initialized = false;
-
-function init() {
-  if (initialized) return;
-  initialized = true;
-
+runOnceOnStartup(() => {
   getSystemInfo(({ cpu: { modelName, usage } }: {
     cpu: {
       modelName: string;
@@ -85,9 +81,4 @@ function init() {
       imageData: ctx.getImageData(0, 0, SIZE, SIZE),
     });
   });
-}
-
-// https://stackoverflow.com/questions/66618136/persistent-service-worker-in-chrome-extension
-chrome.runtime.onStartup.addListener(init);
-
-init();
+});

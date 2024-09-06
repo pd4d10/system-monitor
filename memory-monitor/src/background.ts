@@ -1,3 +1,5 @@
+import { runOnceOnStartup } from "utils";
+
 var SIZE = 19; // Icon size
 
 const canvas = new OffscreenCanvas(SIZE, SIZE);
@@ -56,13 +58,4 @@ function draw() {
   setTimeout(draw, 1000);
 }
 
-let initialized = false;
-
-function init() {
-  if (initialized) return;
-  initialized = true;
-  draw();
-}
-
-chrome.runtime.onStartup.addListener(init);
-init();
+runOnceOnStartup(draw);

@@ -1,6 +1,8 @@
 {
   "files": [],
   "references": [
-    { "path": "./system-monitor" }
+    { "path": "./system-monitor" },
+    { "path": "./memory-monitor" },
+    { "path": "./utils" }
   ]
 }

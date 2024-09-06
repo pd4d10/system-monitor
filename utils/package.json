@@ -1,0 +1,10 @@
+{
+  "name": "utils",
+  "private": true,
+  "main": "./dist/index.js",
+  "dependencies": {
+    "@types/chrome": "^0.0.270",
+    "@types/lodash-es": "^4.17.12",
+    "lodash-es": "^4.17.21"
+  }
+}

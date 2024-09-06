@@ -2,10 +2,12 @@ import { crx } from "@crxjs/vite-plugin";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import { viteStaticCopy } from "vite-plugin-static-copy";
+import { vitePlugin as workspace } from "vite-workspace";
 import pkg from "./package.json";
 
 export default defineConfig({
   plugins: [
+    workspace(),
     react(),
     crx({
       manifest: {
