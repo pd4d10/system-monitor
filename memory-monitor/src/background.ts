@@ -1,12 +1,6 @@
-import { runOnceOnStartup } from "utils";
+import { runOnceOnStartup, setActionIcon } from "utils";
 
 var SIZE = 19; // Icon size
-
-const canvas = new OffscreenCanvas(SIZE, SIZE);
-const c = canvas.getContext("2d", {
-  // https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
-  willReadFrequently: true,
-})!;
 
 // Define an array to storage available memory percent
 var availMem = Array(SIZE);
@@ -26,32 +20,9 @@ function draw() {
         + "Available: " + (info.availableCapacity / 1073741824).toFixed(2) + " GiB",
     });
 
-    c.clearRect(0, 0, SIZE, SIZE);
-
-    // Draw memory usage change
-    c.beginPath();
-    c.moveTo(0, SIZE);
-    for (var i = 0; i < SIZE; i++) {
-      c.lineTo(i, availMem[i] * SIZE);
-    }
-    c.lineTo(SIZE, SIZE);
-    c.lineWidth = 2;
-    c.fillStyle = "#66cdaa";
-    c.fill();
-
-    // Draw border
-    c.beginPath();
-    c.moveTo(0, 0);
-    c.lineTo(0, SIZE);
-    c.lineTo(SIZE, SIZE);
-    c.lineTo(SIZE, 0);
-    c.closePath();
-    c.lineWidth = 2;
-    c.strokeStyle = "#008744";
-    c.stroke();
-
-    chrome.action.setIcon({
-      imageData: c.getImageData(0, 0, SIZE, SIZE),
+    setActionIcon(availMem, {
+      color: "#66cdaa",
+      borderColor: "#008744",
     });
   });
 
